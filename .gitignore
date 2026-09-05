@@ -1,0 +1,28 @@
+# Python environments and generated files
+**/.venv/
+**/__pycache__/
+**/*.py[cod]
+**/*.egg-info/
+.pytest_cache/
+
+# ROS 2 build output
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# Large raw recordings
+data/**/*.mcap
+data/**/*.db3
+
+# Large generated artifacts
+data/**/*.npz
+data/**/*.ply
+
+# Training artifacts
+checkpoints/
+runs/
+wandb/
+*.pt
+*.pth
+*.onnx
+*.engine

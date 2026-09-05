@@ -1,0 +1,34 @@
+[sampling]
+# Reference/calibration bags can be sampled because they contain millions of
+# repeated clean measurements. Target recordings retain every point.
+reference_point_stride = 2
+calibration_point_stride = 2
+target_point_stride = 1
+max_reference_points = 8000000
+max_calibration_points = 8000000
+max_target_points = 30000000
+
+[reference]
+angular_resolution_deg = 0.30
+min_returns_per_cell = 3
+max_cell_depth_spread_m = 0.12
+
+[calibration]
+# Independent clean-control quantiles create a deliberate uncertainty interval.
+normal_quantile = 0.99
+false_positive_quantile = 0.999
+minimum_normal_residual_m = 0.02
+minimum_early_return_m = 0.05
+maximum_usable_early_return_m = 0.25
+range_band_edges_m = [0.0, 2.0, 4.0, 6.0, 10.0, 20.0, 100.0]
+minimum_calibration_samples_per_band = 500
+
+[dataset]
+sequence_length = 5
+maximum_frame_gap_s = 0.25
+minimum_input_range_m = 0.10
+maximum_input_range_m = 30.0
+clean_control_calibration_fraction = 0.50
+
+[output]
+preview_max_points = 250000

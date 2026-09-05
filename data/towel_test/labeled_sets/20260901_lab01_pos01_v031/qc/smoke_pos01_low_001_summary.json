@@ -1,0 +1,27 @@
+{
+  "recording": "smoke_pos01_low_001",
+  "condition": "smoke",
+  "reader_backend": "livox_cdr_numpy",
+  "source_files": [
+    "/home/user/Smoke/smoke_dataset/raw_bags/20260901_lab01/smoke_pos01_low_001/smoke_pos01_low_001_0.mcap"
+  ],
+  "points": 18175584,
+  "frames": 907,
+  "time_span_s": 90.60003887,
+  "truncated_at_configured_point_limit": false,
+  "labels": {
+    "unaffected": 11286986,
+    "smoke_impacted": 304729,
+    "ignore": 6583869
+  },
+  "label_percent": {
+    "unaffected": 62.0997,
+    "smoke_impacted": 1.6766,
+    "ignore": 36.2237
+  },
+  "smoke_rate_among_nonignored_percent": 2.6289,
+  "windows": 903,
+  "windows_skipped_for_timing_gap": 0,
+  "data_file": "recordings/smoke_pos01_low_001.npz",
+  "preview_file": "qc/smoke_pos01_low_001_preview.ply"
+}

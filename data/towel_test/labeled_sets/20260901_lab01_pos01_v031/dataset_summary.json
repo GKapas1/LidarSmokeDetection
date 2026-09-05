@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "session_id": "20260901_lab01_pos01_pos01}",
+  "topic": "/livox/lidar",
+  "message_type": "livox_ros_driver2/msg/CustomMsg",
+  "clean_reference_source_files": [
+    "/home/user/Smoke/smoke_dataset/raw_bags/20260901_lab01/clean_pos01_ref_001/clean_pos01_ref_001_0.mcap"
+  ],
+  "sampled_clean_reference_points": 7999968,
+  "reference_cells": 202234,
+  "range_band_edges_m": [
+    0.0,
+    2.0,
+    4.0,
+    6.0,
+    10.0,
+    20.0,
+    100.0
+  ],
+  "normal_residual_threshold_m": [
+    0.022349698469042778,
+    0.04177878424525261,
+    0.035528019070625305,
+    0.060270968824625015,
+    0.08590807020664215,
+    null
+  ],
+  "smoke_early_return_threshold_m": [
+    0.05000000074505806,
+    0.07743161916732788,
+    0.07596808671951294,
+    2.8057749271392822,
+    7.638282299041748,
+    null
+  ],
+  "calibration_count": [
+    956793,
+    501517,
+    413435,
+    51067,
+    17592,
+    0
+  ],
+  "usable_band": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "sequence_length": 5,
+  "clean_control_calibration_fraction": 0.5,
+  "held_out_clean_validation": {
+    "starts_at_s": 28.199499827,
+    "points": 5660110,
+    "labels": {
+      "unaffected": 3641136,
+      "smoke_impacted": 3162,
+      "ignore": 2015812
+    },
+    "smoke_rate_total_percent": 0.0559,
+    "smoke_rate_among_nonignored_percent": 0.0868,
+    "ignore_rate_percent": 35.6144
+  },
+  "label_meaning": {
+    "0": "unaffected",
+    "1": "smoke_impacted",
+    "255": "ignore"
+  },
+  "recordings": [
+    {
+      "recording": "clean_pos01_control_001",
+      "condition": "clean_control",
+      "reader_backend": "livox_cdr_numpy",
+      "source_files": [
+        "/home/user/Smoke/smoke_dataset/raw_bags/20260901_lab01/clean_pos01_control_001/clean_pos01_control_001_0.mcap"
+      ],
+      "points": 11299872,
+      "frames": 565,
+      "time_span_s": 56.399633557,
+      "truncated_at_configured_point_limit": false,
+      "labels": {
+        "unaffected": 7266798,
+        "smoke_impacted": 6620,
+        "ignore": 4026454
+      },
+      "label_percent": {
+        "unaffected": 64.3087,
+        "smoke_impacted": 0.0586,
+        "ignore": 35.6327
+      },
+      "smoke_rate_among_nonignored_percent": 0.091,
+      "windows": 561,
+      "windows_skipped_for_timing_gap": 0,
+      "data_file": "recordings/clean_pos01_control_001.npz",
+      "preview_file": "qc/clean_pos01_control_001_preview.ply",
+      "held_out_clean_validation": {
+        "starts_at_s": 28.199499827,
+        "points": 5660110,
+        "labels": {
+          "unaffected": 3641136,
+          "smoke_impacted": 3162,
+          "ignore": 2015812
+        },
+        "smoke_rate_total_percent": 0.0559,
+        "smoke_rate_among_nonignored_percent": 0.0868,
+        "ignore_rate_percent": 35.6144
+      }
+    },
+    {
+      "recording": "smoke_pos01_low_001",
+      "condition": "smoke",
+      "reader_backend": "livox_cdr_numpy",
+      "source_files": [
+        "/home/user/Smoke/smoke_dataset/raw_bags/20260901_lab01/smoke_pos01_low_001/smoke_pos01_low_001_0.mcap"
+      ],
+      "points": 18175584,
+      "frames": 907,
+      "time_span_s": 90.60003887,
+      "truncated_at_configured_point_limit": false,
+      "labels": {
+        "unaffected": 11286986,
+        "smoke_impacted": 304729,
+        "ignore": 6583869
+      },
+      "label_percent": {
+        "unaffected": 62.0997,
+        "smoke_impacted": 1.6766,
+        "ignore": 36.2237
+      },
+      "smoke_rate_among_nonignored_percent": 2.6289,
+      "windows": 903,
+      "windows_skipped_for_timing_gap": 0,
+      "data_file": "recordings/smoke_pos01_low_001.npz",
+      "preview_file": "qc/smoke_pos01_low_001_preview.ply"
+    }
+  ],
+  "windows": 1464,
+  "warnings": [
+    "Clean reference reached max_reference_points; increase the limit if the retained time span is too short"
+  ]
+}

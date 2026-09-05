@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "description": "Frame-preserving raw Livox point-label dataset",
+  "model_input_arrays": {
+    "xyz": "float32 [P,3], original sensor-frame metres",
+    "range_m": "float32 [P]",
+    "reflectivity": "float32 [P], original Livox 0..255 values",
+    "tag": "uint8 [P]",
+    "line": "uint8 [P]",
+    "point_offset_s": "float32 [P], point time relative to its frame",
+    "frame_ptr": "int64 [F+1], point slice for each complete ROS message",
+    "frame_time_s": "float64 [F], relative recording time",
+    "input_valid": "bool [P], preprocessing range/finite mask"
+  },
+  "target_arrays": {
+    "label": {
+      "dtype": "uint8",
+      "0": "unaffected",
+      "1": "smoke_impacted",
+      "255": "ignore"
+    },
+    "label_confidence": "float32 [P]"
+  },
+  "window_manifest": {
+    "file": "windows.jsonl",
+    "sequence_length": 5,
+    "target": "Only points in target_frame contribute to the loss",
+    "split": "unassigned; assign whole sessions before training"
+  },
+  "teacher_only": "Clean-reference fields are stored only as sampled files under qc/ and must not be model inputs."
+}
