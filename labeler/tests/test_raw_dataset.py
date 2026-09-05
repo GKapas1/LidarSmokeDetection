@@ -82,6 +82,11 @@ class RawDatasetTests(unittest.TestCase):
             output = Path(directory)
             self.assertTrue((output / "dataset_summary.json").exists())
             self.assertTrue((output / "dataset_schema.json").exists())
+            self.assertEqual(json.loads((output / "effective_config.json").read_text()), config)
+            provenance = json.loads((output / "run_provenance.json").read_text())
+            self.assertEqual(provenance["invocation"]["session_id"], "lab01_pos01")
+            self.assertIn("core.py", provenance["source_sha256"])
+            self.assertEqual(summary["run_provenance_file"], "run_provenance.json")
             self.assertTrue((output / "windows.jsonl").exists())
             smoke_file = output / "recordings/smoke_low.npz"
             self.assertTrue(smoke_file.exists())

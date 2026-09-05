@@ -20,6 +20,7 @@ from .core import (
     query_reference,
 )
 from .pipeline import _write_preview
+from .provenance import write_run_provenance
 
 
 def _recording_name(value: str | Path) -> str:
@@ -301,6 +302,15 @@ def run_raw_dataset(
     cal_cfg = config["calibration"]
     selected_topic = topic.strip() if topic else None
 
+    write_run_provenance(output_dir, config, {
+        "session_id": session_id,
+        "requested_topic": selected_topic,
+        "clean_reference": str(Path(clean_reference_path).expanduser().resolve()),
+        "clean_control": str(Path(clean_control_path).expanduser().resolve()),
+        "smoke": [str(Path(path).expanduser().resolve()) for path in smoke_paths],
+        "output": str(output_dir),
+    })
+
     print(f"Reading clean reference: {clean_reference_path}")
     clean_reference = read_bag_points(
         clean_reference_path,
@@ -425,6 +435,8 @@ def run_raw_dataset(
 
     dataset_summary = {
         "schema_version": "1.0",
+        "effective_config_file": "effective_config.json",
+        "run_provenance_file": "run_provenance.json",
         "session_id": session_id,
         "topic": selected_topic,
         "message_type": clean_message_type,

@@ -36,9 +36,9 @@ Run these commands in the same terminal. Set `DATA_ROOT` to the directory contai
 REPO="$HOME/Smoke/LidarSmokeDetection"
 cd "$REPO/labeler"
 
-DATA_ROOT="$REPO/data/test_data/smoke_dataset/raw_bags/20260901_lab01"
+DATA_ROOT="$REPO/data/towel_test/raw_bags/20260901_lab01"
 SESSION_ID="20260901_lab01_pos01_v040"
-OUTPUT="$REPO/data/test_data/labeled_sets/$SESSION_ID"
+OUTPUT="$REPO/data/towel_test/labeled_sets/$SESSION_ID"
 
 .venv/bin/smoke-label inspect \
   "$DATA_ROOT/clean_pos01_ref_001" --topic /livox/lidar
@@ -88,12 +88,16 @@ Change the preview filename to match your recording.
 | `windows.jsonl` | Five consecutive input frames, with supervision on the newest frame |
 | `dataset_schema.json` | Array names, types, shapes, and semantics |
 | `dataset_summary.json` | Counts, thresholds, validation results, and warnings |
+| `effective_config.json` | Exact merged configuration, including defaults |
+| `run_provenance.json` | Run arguments, UTC start time, code revision/hashes, and dependency versions |
 | `clean_reference.npz` | Reference and calibration used by the labeler |
 | `qc/` | Sampled previews, recording summaries, and teacher diagnostics |
 
 Each frame is stored once. Slice its arrays using `frame_ptr[k]:frame_ptr[k+1]`. A single-frame model can use the target frame alone; temporal models use the window indices. Windows crossing invalid timing gaps are skipped.
 
 Use sensor-available features such as XYZ, reflectivity, and relative point timing as model inputs. Clean-reference values, residuals, labels, and teacher confidence must not become input features. The live predictor will not require a clean reference.
+
+Split by complete sessions or positions, not random points or overlapping windows. The generated split assignments remain unassigned until you choose them.
 
 ## Configuration and maintenance
 
