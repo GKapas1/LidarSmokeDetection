@@ -13,10 +13,16 @@ ros2_ws/log/
 # Large raw recordings
 data/**/*.mcap
 data/**/*.db3
+data/**/*.bag
 
 # Large generated artifacts
 data/**/*.npz
 data/**/*.ply
+
+# Local GrandTour downloads, previews, manifests, and training exports
+data/grandtour/arc*/
+data/grandtour/prepared/
+data/grandtour/training/
 
 # Training artifacts
 checkpoints/

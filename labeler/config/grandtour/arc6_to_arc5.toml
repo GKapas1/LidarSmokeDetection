@@ -1,0 +1,45 @@
+schema_version = "1.0"
+source_session = "2024-11-18-17-13-09"
+target_session = "2024-11-18-16-59-23"
+transform_convention = "T_arc5_dlio_map_arc6_dlio_map"
+method = "CloudCompare manual rigid alignment"
+validated = true
+scale = 1.0
+
+# p_arc5 = R * p_arc6 + t. Recovered by rigid least-squares fitting of the
+# original ARC-6 preview to the CloudCompare-aligned preview. CloudCompare's
+# ASCII precision leaves a 0.0092 mm RMS reconstruction residual.
+translation_m = [0.6411141814, 1.6986282910, -0.0144214019]
+quaternion_xyzw = [-0.0005705463, -0.0005087848, -0.0051113708, 0.9999866447]
+matrix_row_major = [
+  0.9999472301,  0.0102231857, -0.0010117236,  0.6411141814,
+ -0.0102220246,  0.9999470967,  0.0011462785,  1.6986282910,
+  0.0010233886, -0.0011358761,  0.9999988312, -0.0144214019,
+  0.0000000000,  0.0000000000,  0.0000000000,  1.0000000000,
+]
+
+[source_artifacts]
+arc5_preview_sha256 = "f984bd02023665db5fd7c72291558afa543ed0a74a45f95a8ac2607d52ee4213"
+arc6_preview_sha256 = "dd987c2470f8b9a3dac2db4d7083d4c7c9451d83e86929ec2725634b9ec6783b"
+arc6_aligned_preview_sha256 = "80848d5b323911230dc6ca51d0288a342982d5a2cc2edbdb64b8cbd3cb9f6eeb"
+frame_stride = 10
+point_stride = 20
+minimum_range_m = 0.1
+maximum_range_m = 30.0
+
+[validation]
+rotation_degrees = 0.5922370120
+translation_norm_m = 1.8156468383
+cloudcompare_recovery_rms_m = 0.0000091633
+arc6_points_within_0_08_m_fraction = 0.9441995694
+arc6_points_within_0_15_m_fraction = 0.9759099463
+arc6_points_within_0_25_m_fraction = 0.9876116771
+per_frame_median_residual_min_m = 0.0123297866
+per_frame_median_residual_median_m = 0.0217899200
+per_frame_median_residual_max_m = 0.0474349876
+per_frame_q90_residual_95th_percentile_m = 0.1124121200
+worst_frame_fraction_within_0_15_m = 0.9070100143
+
+# These intervals have the highest residuals in the 1 Hz preview sample. Keep
+# them visible in pilot diagnostics; do not compensate them scan by scan.
+diagnostic_intervals_arc6_seconds = [27.0, 31.0, 156.0, 162.0, 259.0, 263.0]

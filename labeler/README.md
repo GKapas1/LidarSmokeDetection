@@ -1,123 +1,227 @@
 # Smoke LiDAR Labeler
 
-Offline pseudo-labeling for Livox MID-360 recordings. Produces per-point labels and preserves ROS frame boundaries for training a single-frame or temporal smoke detector.
+Offline per-point pseudo-labeling for Livox MID-360 recordings. The package keeps
+original frame boundaries and produces final labels suitable for point-cloud model
+training.
 
-**Python:** 3.11+ · **Input:** MCAP bags containing `/livox/lidar` as `livox_ros_driver2/msg/CustomMsg`.
+It provides two independent workflows:
 
-## Recording requirements
+- stationary ROS 2 MCAP recordings containing
+  `livox_ros_driver2/msg/CustomMsg` on `/livox/lidar`;
+- moving-sensor GrandTour ROS 1 sessions containing MID-360 `PointCloud2`, DLIO
+  poses, and mission calibration.
 
-Keep the LiDAR pose and room geometry unchanged throughout a recording group. Record the clean bags before introducing smoke; avoid people or moved objects in the scene.
+Python 3.11 or newer is required.
 
-| Bag name | Purpose |
-| --- | --- |
-| `clean_pos01_ref_001` | Clean directional reference |
-| `clean_pos01_control_001` | Separate clean recording for calibration and validation |
-| `smoke_pos01_low_001` | Smoke recording to label |
-| `smoke_pos01_*` | Additional smoke conditions, processed automatically |
-
-Each bag directory contains its `.mcap` file(s) and `metadata.yaml`. Change `pos01` consistently for another position.
-
-## Install
-
-Keep `pyproject.toml` inside `labeler/`. Run:
+## Installation
 
 ```bash
 cd ~/Smoke/LidarSmokeDetection/labeler
 python3.11 -m venv .venv
 .venv/bin/python -m pip install -e .
-chmod +x scripts/run_raw_session.sh
 ```
 
-## Generate a dataset
-
-Run these commands in the same terminal. Set `DATA_ROOT` to the directory containing your recording group and use a new output name for each run.
+Run the tests with:
 
 ```bash
-REPO="$HOME/Smoke/LidarSmokeDetection"
-cd "$REPO/labeler"
+.venv/bin/python -m unittest discover -s tests -v
+```
 
-DATA_ROOT="$REPO/data/towel_test/raw_bags/20260901_lab01"
-SESSION_ID="20260901_lab01_pos01_v040"
-OUTPUT="$REPO/data/towel_test/labeled_sets/$SESSION_ID"
+## Labels
+
+| Value | Name | Training meaning |
+| ---: | --- | --- |
+| `0` | Unimpacted | Include as the negative class |
+| `1` | Smoke impacted | Include as the positive class |
+| `254` | Excluded | Internal review code; converted to `255` by the training exporter |
+| `255` | Unknown | Ignore in the training loss |
+
+The derived labeling files retain `automatic_label` and final `label` separately.
+The final label includes accepted human-review corrections. A model trains against
+`label`; `automatic_label` is teacher metadata and must not be a model input.
+
+## Stationary ROS 2 workflow
+
+A stationary recording group consists of a clean reference, an independent clean
+control, and one or more smoke recordings. The LiDAR pose and room geometry must
+remain fixed within a group.
+
+| Bag name | Purpose |
+| --- | --- |
+| `clean_pos01_ref_001` | Build the directional clean reference |
+| `clean_pos01_control_001` | Calibrate thresholds and measure clean false positives |
+| `smoke_pos01_*` | Generate smoke-impact labels |
+
+From `labeler/`, inspect and process a recording group with:
+
+```bash
+DATA_ROOT="$HOME/Smoke/LidarSmokeDetection/data/towel_test/raw_bags/20260901_lab01"
+OUTPUT="$HOME/Smoke/LidarSmokeDetection/data/towel_test/labeled_sets/20260901_lab01_pos01"
 
 .venv/bin/smoke-label inspect \
   "$DATA_ROOT/clean_pos01_ref_001" --topic /livox/lidar
 
 ./scripts/run_raw_session.sh \
-  "$DATA_ROOT" pos01 "$SESSION_ID" "$OUTPUT"
+  "$DATA_ROOT" pos01 20260901_lab01_pos01 "$OUTPUT"
 ```
 
-The script processes the clean control and every `smoke_pos01_*` bag. Arguments are `DATA_DIR POSITION SESSION_ID OUTPUT_DIR`. Set `OUTPUT` to another destination, such as `data/towel_test/labeled_sets/$SESSION_ID`, when needed; no script edit is necessary.
+The stationary algorithm builds stable angular clean-range cells, calibrates
+range-dependent thresholds on the independent control recording, and labels target
+returns by their early-return residual. Its outputs include frame-preserving NPZ
+recordings, temporal-window metadata, schemas, provenance, summaries, and sampled
+CloudCompare previews.
 
-Run the script itself—do not paste its internal `$1` or `BASH_SOURCE` setup into the terminal. After opening a new terminal, define `OUTPUT` again before using the review commands below.
+## GrandTour input contract
 
-## Check the result
+Place these four bags together under each of `data/grandtour/arc5` and
+`data/grandtour/arc6`:
+
+- `*_livox.bag`
+- `*_livox_undist.bag`
+- `*_dlio.bag`
+- `*_tf_minimal.bag`
+
+The implemented sessions are ARC-5 `2024-11-18-16-59-23` and ARC-6
+`2024-11-18-17-13-09`. The recordings originate from the
+[GrandTour dataset](https://grand-tour.leggedrobotics.com/); raw and derived data
+remain local and are excluded from Git.
+
+The reader uses:
+
+| Source | Topic/frame | Use |
+| --- | --- | --- |
+| Raw MID-360 | `/boxi/livox/points`, `livox_lidar` | Model inputs and original point identity |
+| Deskewed MID-360 | `/boxi/livox/points_undistorted` | Offline reference geometry |
+| DLIO odometry | `/boxi/dlio/lidar_map_odometry` | Scan positioning |
+| Minimal TF | `box_base`, `hesai_lidar`, `livox_lidar` | Hesai-to-MID-360 transform chain |
+
+Raw and deskewed clouds are required to have identical message timestamps, point
+counts, ordering, intensity, tag, line, and per-point timestamps. Only deskewed XYZ
+may differ. The loader rejects a mismatch instead of guessing correspondences.
+
+Published Hesai/IMU-derived poses are used only for positioning MID-360 scans. All
+reference points, labels, and exported model features remain MID-360 observations.
+
+## GrandTour workflow
+
+Run these commands from `labeler/`.
+
+Inspect the source schema and paired-cloud identity:
 
 ```bash
-.venv/bin/python -m json.tool "$OUTPUT/dataset_summary.json"
-
-QT_QPA_PLATFORM=xcb CloudCompare \
-  "$OUTPUT/qc/smoke_pos01_low_001_preview.ply"
+.venv/bin/smoke-label grandtour-inspect \
+  ../data/grandtour/arc5 --sample-frames 5
 ```
 
-Change the preview filename to match your recording.
-
-- Check `usable_band`: unsupported ranges receive no training labels.
-- Inspect the held-out clean false-positive and ignore rates together.
-- Check warnings and `truncated_at_configured_point_limit`. Increase limits if required data was omitted.
-- Preview colors: green = unaffected, red = smoke impacted, grey = ignore. Investigate red points on unrelated surfaces or in clean-control data.
-
-## How labeling works
-
-1. Sample the clean reference and group returns into angular cells. Store the median range in stable cells; reject sparse cells and cells with excessive depth variation.
-2. Use the first half of the separate clean control to calibrate range-dependent thresholds: the 99th percentile of absolute residuals for normal variation and the 99.9th percentile of early-return residuals for smoke candidates, subject to configured minimums.
-3. Compare each target point with its expected clean range. Disable bands with insufficient calibration or smoke thresholds above 0.25 m. Use the second half of the clean control for held-out validation.
-4. Save point labels with original frame boundaries and timestamps, then create temporal-window metadata. Computation is vectorized across recordings; five-frame windows do not determine the labels.
-
-| Label | Meaning |
-| ---: | --- |
-| `0` | Consistent with normal clean-range variation |
-| `1` | Significantly closer than the expected clean surface: smoke-impact candidate |
-| `255` | Invalid, unsupported, or uncertain; exclude from training loss |
-
-## Outputs and training
-
-| Output | Use |
-| --- | --- |
-| `recordings/*.npz` | Point features, labels, validity masks, confidence, and frame indexing |
-| `windows.jsonl` | Five consecutive input frames, with supervision on the newest frame |
-| `dataset_schema.json` | Array names, types, shapes, and semantics |
-| `dataset_summary.json` | Counts, thresholds, validation results, and warnings |
-| `effective_config.json` | Exact merged configuration, including defaults |
-| `run_provenance.json` | Run arguments, UTC start time, code revision/hashes, and dependency versions |
-| `clean_reference.npz` | Reference and calibration used by the labeler |
-| `qc/` | Sampled previews, recording summaries, and teacher diagnostics |
-
-Each frame is stored once. Slice its arrays using `frame_ptr[k]:frame_ptr[k+1]`. A single-frame model can use the target frame alone; temporal models use the window indices. Windows crossing invalid timing gaps are skipped.
-
-Use sensor-available features such as XYZ, reflectivity, and relative point timing as model inputs. Clean-reference values, residuals, labels, and teacher confidence must not become input features. The live predictor will not require a clean reference.
-
-Split by complete sessions or positions, not random points or overlapping windows. The generated split assignments remain unassigned until you choose them.
-
-## Configuration and maintenance
-
-Edit `config/raw_dataset.toml`:
-
-| Setting | Default |
-| --- | --- |
-| Reference / calibration point stride | `2` / `2` |
-| Reference / calibration point cap | `8,000,000` each |
-| Target stride / point cap | `1` / `30,000,000` |
-| Angular cell size | `0.30°` |
-| Valid input range | `0.10–30.0 m` |
-| Window length / maximum frame gap | `5` / `0.25 s` |
-
-Sampling reduces reference/calibration cost. To use more clean data, reduce its stride and raise its cap. Target points are retained at stride 1 up to the configured cap, keeping complete frames. Decoding, reference construction, and compressed output can take minutes on a laptop.
-
-Source roles: `bag.py` reads MCAP; `core.py` builds references and labels; `raw_dataset.py` exports recordings and windows; `pipeline.py` supplies configuration, inspection, and previews; `cli.py` exposes commands.
-
-Run tests from `labeler/`:
+Create optional map previews for CloudCompare alignment checks:
 
 ```bash
-.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/smoke-label grandtour-preview \
+  ../data/grandtour/arc5 \
+  --output ../data/grandtour/prepared/arc5_preview.ply
 ```
+
+Build the stable ARC-5 clean reference. Frames before 300 seconds build the map;
+the later interval remains disjoint for clean validation.
+
+```bash
+.venv/bin/smoke-label grandtour-reference \
+  ../data/grandtour/arc5 \
+  --config config/grandtour/arc5_reference.toml \
+  --output ../data/grandtour/prepared/reference
+```
+
+The reviewed rigid ARC-6-to-ARC-5 transform is stored in
+`config/grandtour/arc6_to_arc5.toml`. Generate a 60-second review pilot and then
+the complete session:
+
+```bash
+.venv/bin/smoke-label grandtour-pilot \
+  ../data/grandtour/arc6 \
+  --config config/grandtour/arc6_pilot.toml \
+  --reference ../data/grandtour/prepared/reference/arc5_clean_reference.npz \
+  --output ../data/grandtour/prepared/pilot
+
+.venv/bin/smoke-label grandtour-session \
+  ../data/grandtour/arc6 \
+  --config config/grandtour/arc6_full.toml \
+  --reference ../data/grandtour/prepared/reference/arc5_clean_reference.npz \
+  --output ../data/grandtour/prepared/arc6_full_complete
+```
+
+The full run is divided into seven bounded time chunks. Each chunk contains its
+labeling NPZ, summary, combined CloudCompare preview, smoke-only preview, hard
+negatives, and isolated returns. Preview colors are green for unimpacted, red for
+smoke impacted, grey for unknown, and purple for explicit exclusions.
+
+The ARC-6 review configuration records the accepted hallway smoke region, the
+person at the smoke source as an unimpacted hard negative, the expanded room crop,
+and a 0.5 m same-frame isolation rule for solitary sensor errors.
+
+## Clean validation
+
+Validate the final rule against the ARC-5 interval excluded from reference-map
+construction:
+
+```bash
+.venv/bin/smoke-label grandtour-validate-clean \
+  ../data/grandtour/arc5 \
+  --reference-config config/grandtour/arc5_reference.toml \
+  --label-config config/grandtour/arc6_full.toml \
+  --reference ../data/grandtour/prepared/reference/arc5_clean_reference.npz \
+  --output ../data/grandtour/prepared/validation
+```
+
+The current result covers 13,490,744 points in 1,033 clean frames. The effective
+reviewed rule produces 316 false-positive points, or 0.00234%. The output directory
+contains the JSON report and CloudCompare PLYs for both the effective reviewed rule
+and the broader automatic-distance diagnostic.
+
+## Training export
+
+Export the reviewed labels without teacher-only features:
+
+```bash
+.venv/bin/smoke-label grandtour-export-training \
+  ../data/grandtour/prepared/arc6_full_complete/arc6_full_manifest.json \
+  --output ../data/grandtour/training/arc6_reviewed_v1
+```
+
+The export contains seven NPZ chunks with 3,609 frames and 47,306,636 points:
+
+| Label | Points |
+| --- | ---: |
+| Unimpacted (`0`) | 47,061,035 |
+| Smoke impacted (`1`) | 221,980 |
+| Ignore (`255`) | 23,621 |
+
+Model input arrays are `xyz`, `intensity`, `tag`, `line`, and `relative_time_ns`.
+`xyz` remains in the original `livox_lidar` sensor frame. Frame reconstruction uses
+`frame_ptr`, `frame_index`, and `frame_time_ns`.
+
+The exporter deliberately omits `world_xyz`, nearest-reference distance, automatic
+labels, clean-map identifiers, and review metadata. These fields are useful for
+offline auditing but would leak information unavailable to a live predictor.
+
+## Implementation map
+
+| Module | Responsibility |
+| --- | --- |
+| `bag.py` | Stationary ROS 2 MCAP decoding |
+| `core.py` | Stationary directional references and labels |
+| `raw_dataset.py` | Stationary dataset and temporal-window export |
+| `geometry.py` | Pose construction, interpolation, and point transforms |
+| `grandtour.py` | ROS 1 PointCloud2 decoding, paired MID-360 loading, TF, and DLIO poses |
+| `grandtour_pipeline.py` | GrandTour reference building, labeling, validation, QC, and training export |
+| `cli.py` | Command-line interface |
+
+See [GRANDTOUR_IMPLEMENTATION.md](GRANDTOUR_IMPLEMENTATION.md) for the exact
+implemented geometry, review decisions, and artifact contract.
+
+## Scope of the labels
+
+These labels identify anomalous returned points consistent with smoke impact. They
+do not reconstruct the full smoke volume or directly label missing returns. A
+structure-matching return also does not prove that its beam experienced no smoke
+attenuation. The training export is therefore per-return pseudo-ground truth for
+the detector defined by this project.

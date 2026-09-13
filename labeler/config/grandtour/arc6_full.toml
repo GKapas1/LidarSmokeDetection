@@ -1,0 +1,40 @@
+schema_version = "1.0"
+session_id = "2024-11-18-17-13-09"
+reference_session_id = "2024-11-18-16-59-23"
+alignment_config = "arc6_to_arc5.toml"
+reference_config = "arc5_reference.toml"
+
+[time]
+start_s = 0.0
+# The local Livox bag spans 361.599921226 seconds from its first frame.
+end_s = 362.0
+
+[input]
+minimum_range_m = 0.1
+maximum_range_m = 30.0
+coverage_margin_m = 0.0
+maximum_isolated_neighbor_distance_m = 0.5
+
+[labeling]
+structure_max_distance_m = 0.08
+smoke_min_distance_m = 0.25
+
+[human_review]
+label_background_unimpacted = true
+
+[output]
+preview_max_points = 500000
+chunk_duration_s = 60.0
+
+[[confirmed_smoke_regions]]
+name = "hallway_smoke_band"
+enabled = true
+min_m = [-0.4, 1.5, 0.0]
+max_m = [3.3, 4.0, 1.6]
+minimum_distance_m = 0.08
+
+[[hard_negative_regions]]
+name = "person_at_smoke_source"
+enabled = true
+min_m = [-0.9, 0.9, -0.5]
+max_m = [0.1, 1.75, 1.9]

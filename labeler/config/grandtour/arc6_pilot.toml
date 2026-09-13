@@ -1,0 +1,49 @@
+schema_version = "1.0"
+session_id = "2024-11-18-17-13-09"
+reference_session_id = "2024-11-18-16-59-23"
+alignment_config = "arc6_to_arc5.toml"
+reference_config = "arc5_reference.toml"
+
+[time]
+start_s = 0.0
+end_s = 60.0
+
+[input]
+minimum_range_m = 0.1
+maximum_range_m = 30.0
+# Human review confirmed that the end walls are ordinary structure. The reviewed
+# smoke allowlist prevents boundary differences from becoming false positives.
+coverage_margin_m = 0.0
+# A valid return with no other return this close in the same scan is treated as
+# a sensor outlier. Dense walls remain valid regardless of reference distance.
+maximum_isolated_neighbor_distance_m = 0.5
+
+[labeling]
+structure_max_distance_m = 0.08
+smoke_min_distance_m = 0.25
+
+[human_review]
+# The reviewer confirmed that the smoke band is the only smoke-like change in
+# this pilot. Valid background points are therefore useful negative examples.
+label_background_unimpacted = true
+
+[output]
+preview_max_points = 500000
+
+[[confirmed_smoke_regions]]
+name = "hallway_smoke_band"
+enabled = true
+# Human-confirmed connected band. The bounds are padded around the observed
+# component so the selection does not cut through the plume.
+min_m = [-0.4, 1.5, 0.0]
+max_m = [3.3, 4.0, 1.6]
+# Human review confirms this plume, so use the clean/uncertain boundary here to
+# recover the sparse beginning and end instead of the conservative global cutoff.
+minimum_distance_m = 0.08
+
+[[hard_negative_regions]]
+name = "person_at_smoke_source"
+enabled = true
+# Confirmed by human review and deliberately retained as an unimpacted example.
+min_m = [-0.9, 0.9, -0.5]
+max_m = [0.1, 1.75, 1.9]
