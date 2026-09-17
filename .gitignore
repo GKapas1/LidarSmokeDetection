@@ -33,3 +33,5 @@ wandb/
 *.pth
 *.onnx
 *.engine
+
+docs/
