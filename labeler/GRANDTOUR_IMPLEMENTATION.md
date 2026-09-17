@@ -114,9 +114,16 @@ inputs. The schema and hashes are recorded in
 `data/grandtour/training/arc6_reviewed_v1/training_manifest.json` and
 `dataset_schema.json`.
 
+For model training, `unified-export` converts this intermediate GrandTour
+contract and the stationary ROS 2 labeled set into the repository's canonical
+schema. Both domains then expose `xyz`, `intensity`, `tag`, `line`,
+`point_offset_s`, `label`, `frame_index`, `frame_ptr`, and `frame_time_s` with
+identical dtypes and units. The canonical manifest is
+`data/training/unified_v1/dataset_manifest.json`.
+
 ## Current boundary
 
 The repository implements offline source inspection, reference construction,
 alignment loading, reviewed labeling, clean validation, CloudCompare QC export,
-and model-safe NPZ export. It does not yet contain neural-network training code or
-a live ROS 2 inference node.
+model-safe NPZ export, and canonical multi-domain conversion. It does not yet
+contain neural-network training code or a live ROS 2 inference node.

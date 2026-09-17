@@ -42,6 +42,8 @@ data/grandtour/
 │   └── arc6_full_complete/      # reviewed labels, QC PLYs, and full manifest
 └── training/
     └── arc6_reviewed_v1/        # model-safe NPZ chunks and schema
+data/training/
+└── unified_v1/                  # canonical stationary + GrandTour trainer input
 ```
 
 The authoritative training export is described by
@@ -64,3 +66,27 @@ only the adapter, reviewed configuration, and documentation.
 
 See the [labeler README](../labeler/README.md) for the complete reproduction
 commands and validation procedure.
+
+## Unified trainer input
+
+`data/training/unified_v1/dataset_manifest.json` is the entry point for training.
+It lists nine independent chunks: the stationary clean-control and smoke
+recordings, followed by seven ARC-6 chunks. Every NPZ uses exactly this contract:
+
+- `xyz` (`float32 [P,3]`) in the original LiDAR sensor frame;
+- `intensity` (`float32 [P]`), mapped from stationary `reflectivity` without scaling;
+- `tag`, `line` (`uint8 [P]`);
+- `point_offset_s` (`float32 [P]`), relative to the containing frame;
+- `label` (`uint8 [P]`): `0`, `1`, or `255`;
+- `frame_index`, `frame_ptr`, and relative `frame_time_s`.
+
+The manifest retains each chunk's source domain, session, recording, condition,
+source path, checksum, point counts, and frame counts. Splits are marked
+`unassigned`; assign whole recordings or sessions to splits before training so
+frames from one recording cannot leak between training and validation.
+
+The stationary clean-control condition has known clean ground truth. Its valid
+pseudo-label false positives are exported as class `0`, while existing invalid or
+unsupported points remain `255`. Smoke-recording and ARC-6 final labels are
+preserved. No normalization is baked into the files; preprocessing statistics must
+be fitted on the eventual training split.

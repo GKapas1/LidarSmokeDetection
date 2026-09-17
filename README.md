@@ -10,7 +10,7 @@ neural network and publishing the result in ROS 2.
 | [Offline labeler](labeler/README.md) | Supports stationary ROS 2 Livox recordings and moving-sensor GrandTour ROS 1 sessions |
 | ARC-5 clean reference | Built from pose-aligned MID-360 scans, with a disjoint clean interval reserved for validation |
 | ARC-6 labeled dataset | Complete: 3,609 frames and 47,306,636 points with reviewed per-point labels |
-| [Training export](data/README.md) | Complete: seven frame-preserving, sensor-frame NPZ chunks with model-safe inputs |
+| [Unified training dataset](data/README.md) | Complete: stationary ROS 2 and ARC-6 data share one validated, model-safe NPZ contract |
 | Neural network and ROS 2 predictor | Not implemented in this repository yet |
 
 The finalized ARC-6 labels contain 47,061,035 unimpacted points, 221,980
@@ -26,10 +26,13 @@ out of 13,490,744 covered points (0.00234%).
 | `1` | Smoke-impacted return accepted by the reviewed labeling rule |
 | `255` | Invalid, isolated, outside verified coverage, or otherwise ignored by the training loss |
 
-The labeler retains automatic geometric labels and review metadata in its derived
-labeling artifacts. The training export contains only the corrected final `label`
-and sensor-available MID-360 inputs. This prevents clean-map and alignment data from
-leaking into a model that must operate from live sensor measurements.
+The canonical training dataset combines both current acquisition domains without
+mixing their recording boundaries. Every chunk has the same array names, dtypes,
+time units, and label meanings. The labeler retains automatic geometric labels and
+review metadata only in its derived labeling artifacts; the unified export contains
+the corrected final `label` and sensor-available MID-360 inputs.
+The current unified dataset contains 5,081 frames and 76,782,092 points across
+nine independently loadable chunks.
 
 ## Repository layout
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smoke-labeler"
-version = "0.5.0"
+version = "0.6.0"
 description = "Frame-preserving Livox MID-360 smoke pseudo-labeling for ROS and GrandTour data"
 readme = "README.md"
 requires-python = ">=3.11"

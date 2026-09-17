@@ -79,6 +79,24 @@ def _parser() -> argparse.ArgumentParser:
     grandtour_export.add_argument("source_manifest")
     grandtour_export.add_argument("--output", required=True)
 
+    unified_export = sub.add_parser(
+        "unified-export",
+        help="Convert stationary and GrandTour labels to one trainer-facing schema",
+    )
+    unified_export.add_argument(
+        "--stationary",
+        action="append",
+        default=[],
+        help="Stationary labeled-set directory; repeatable",
+    )
+    unified_export.add_argument(
+        "--grandtour",
+        action="append",
+        default=[],
+        help="GrandTour training_manifest.json; repeatable",
+    )
+    unified_export.add_argument("--output", required=True)
+
     dataset = sub.add_parser(
         "dataset",
         help="Build a frame-preserving raw Livox training dataset using independent clean reference/control bags",
@@ -161,6 +179,12 @@ def main() -> None:
             from .grandtour_pipeline import export_grandtour_training_dataset
 
             result = export_grandtour_training_dataset(args.source_manifest, args.output)
+            print(json.dumps(result, indent=2))
+            return
+        if args.command == "unified-export":
+            from .unified_dataset import export_unified_dataset
+
+            result = export_unified_dataset(args.stationary, args.grandtour, args.output)
             print(json.dumps(result, indent=2))
             return
         if args.command == "dataset":

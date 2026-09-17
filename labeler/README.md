@@ -203,6 +203,46 @@ The exporter deliberately omits `world_xyz`, nearest-reference distance, automat
 labels, clean-map identifiers, and review metadata. These fields are useful for
 offline auditing but would leak information unavailable to a live predictor.
 
+### Canonical stationary + GrandTour export
+
+Convert both current datasets to the exact same trainer-facing contract:
+
+```bash
+.venv/bin/smoke-label unified-export \
+  --stationary ../data/towel_test/labeled_sets/20260901_lab01_pos01_v040 \
+  --grandtour ../data/grandtour/training/arc6_reviewed_v1/training_manifest.json \
+  --output ../data/training/unified_v1
+```
+
+The command preserves every source recording or GrandTour chunk as a separate
+file and writes `dataset_manifest.json` plus `dataset_schema.json`. It standardizes
+stationary `reflectivity` and GrandTour `intensity` as raw `float32` `intensity`,
+and standardizes all point timing as `float32` seconds in `point_offset_s`.
+
+Use the same validated loader for every chunk:
+
+```python
+import json
+from pathlib import Path
+
+from smoke_labeler.unified_dataset import load_unified_chunk
+
+root = Path("../data/training/unified_v1")
+manifest = json.loads((root / "dataset_manifest.json").read_text())
+for item in manifest["chunks"]:
+    chunk = load_unified_chunk(root / item["path"])
+    train_inputs = (
+        chunk["xyz"], chunk["intensity"], chunk["tag"],
+        chunk["line"], chunk["point_offset_s"],
+    )
+    target = chunk["label"]
+    loss_mask = target != 255
+```
+
+Metadata such as `source_domain` and `condition` supports auditing and split
+construction but is forbidden as a network input. Splits remain unassigned so a
+training implementation can choose and record a group-safe split policy.
+
 ## Implementation map
 
 | Module | Responsibility |
@@ -213,6 +253,7 @@ offline auditing but would leak information unavailable to a live predictor.
 | `geometry.py` | Pose construction, interpolation, and point transforms |
 | `grandtour.py` | ROS 1 PointCloud2 decoding, paired MID-360 loading, TF, and DLIO poses |
 | `grandtour_pipeline.py` | GrandTour reference building, labeling, validation, QC, and training export |
+| `unified_dataset.py` | Canonical conversion, schema validation, and shared training loader |
 | `cli.py` | Command-line interface |
 
 See [GRANDTOUR_IMPLEMENTATION.md](GRANDTOUR_IMPLEMENTATION.md) for the exact
