@@ -11,7 +11,8 @@ neural network and publishing the result in ROS 2.
 | ARC-5 clean reference | Built from pose-aligned MID-360 scans, with a disjoint clean interval reserved for validation |
 | ARC-6 labeled dataset | Complete: 3,609 frames and 47,306,636 points with reviewed per-point labels |
 | [Unified training dataset](data/README.md) | Complete: stationary ROS 2 and ARC-6 data share one validated, model-safe NPZ contract |
-| Neural network and ROS 2 predictor | Not implemented in this repository yet |
+| Neural network trainer | Local voxel-MLP pipeline implemented; global and temporal models remain planned |
+| ROS 2 predictor | Not implemented yet |
 
 The finalized ARC-6 labels contain 47,061,035 unimpacted points, 221,980
 smoke-impacted points, and 23,621 points ignored during training. Validation on
@@ -39,6 +40,7 @@ nine independently loadable chunks.
 | Path | Contents |
 | --- | --- |
 | `labeler/` | Python package, commands, configuration, tests, and labeler documentation |
+| `trainer/` | Portable trainer, evaluation, calibration, prediction, configuration, and tests |
 | `data/` | Local raw/derived-data layout and artifact documentation |
 | `GKapas_ThesisProposal.pdf` | Thesis proposal and research context |
 

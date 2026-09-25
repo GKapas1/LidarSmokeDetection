@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "protocol": "pilot_temporal_v1",
+  "manifest": "dataset_manifest.json",
+  "manifest_sha256": "e66d83f60ac7ad99e385639b9cc1d26cb65d97ccc345844c0043ae98f7de1604",
+  "fractions": {
+    "train": 0.55,
+    "selection": 0.15,
+    "calibration": 0.15,
+    "test": 0.15
+  },
+  "purge_frames_each_side": 20,
+  "chunks": [
+    {
+      "index": 0,
+      "path": "chunks/stationary_ros2__20260901_lab01_pos01_v040__clean_pos01_control_001.npz",
+      "sha256": "c8ac177fac29646a995011464e2aa1c55e89d8d2972289cac784f584c262406f",
+      "frames": 565,
+      "stream_id": "stationary_ros2/20260901_lab01_pos01_v040/clean_pos01_control_001"
+    },
+    {
+      "index": 1,
+      "path": "chunks/stationary_ros2__20260901_lab01_pos01_v040__smoke_pos01_low_001.npz",
+      "sha256": "72f21d636a574a41dca9318893c81b0d34487c0f7f5ddf9a96dc1b3fb56bbb2d",
+      "frames": 907,
+      "stream_id": "stationary_ros2/20260901_lab01_pos01_v040/smoke_pos01_low_001"
+    },
+    {
+      "index": 2,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_000.npz",
+      "sha256": "0def432e70afef1a590103217df40f1294333f63d081326b6123ed99e43c76ad",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 3,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_001.npz",
+      "sha256": "af8f59f5356868be2ff48d2f3bb1af7a39b9473a3e19a5e421e3f07064a16a6f",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 4,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_002.npz",
+      "sha256": "947a149db259b457d787f7dac68fbeb07bf17cc8e8aaee1c6728288ae73ab23a",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 5,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_003.npz",
+      "sha256": "da5fa092f5c2710f7f8c1d2400182cf9e5df985de10f8485341a29ce4ffb7a5e",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 6,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_004.npz",
+      "sha256": "812d664fb15d8168dd621a634c70bbcc8b1f8cba463710000e2f2bd55fb40c46",
+      "frames": 599,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 7,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_005.npz",
+      "sha256": "2284f0bda7e3f3608fe34cde8f0d9f013783fb46befdf1d7337cd7f8e8f82fae",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 8,
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_006.npz",
+      "sha256": "3daf49af0ca24f52b9686dc5bdc71b06682b8c99ac4736478d1786984c9444a5",
+      "frames": 10,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    }
+  ],
+  "streams": [
+    {
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09",
+      "chunk_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "frames": 3609,
+      "boundaries": [
+        1984,
+        2526,
+        3067,
+        3609
+      ]
+    },
+    {
+      "stream_id": "stationary_ros2/20260901_lab01_pos01_v040/clean_pos01_control_001",
+      "chunk_indices": [
+        0
+      ],
+      "frames": 565,
+      "boundaries": [
+        310,
+        395,
+        480,
+        565
+      ]
+    },
+    {
+      "stream_id": "stationary_ros2/20260901_lab01_pos01_v040/smoke_pos01_low_001",
+      "chunk_indices": [
+        1
+      ],
+      "frames": 907,
+      "boundaries": [
+        498,
+        634,
+        770,
+        907
+      ]
+    }
+  ],
+  "roles": {
+    "train": [
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            0,
+            290
+          ]
+        ]
+      },
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            0,
+            478
+          ]
+        ]
+      },
+      {
+        "chunk_index": 2,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 3,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 4,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            0,
+            164
+          ]
+        ]
+      }
+    ],
+    "selection": [
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            330,
+            375
+          ]
+        ]
+      },
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            518,
+            614
+          ]
+        ]
+      },
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            204,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            0,
+            106
+          ]
+        ]
+      }
+    ],
+    "calibration": [
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            415,
+            460
+          ]
+        ]
+      },
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            654,
+            750
+          ]
+        ]
+      },
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            146,
+            599
+          ]
+        ]
+      },
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            0,
+            48
+          ]
+        ]
+      }
+    ],
+    "test": [
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            500,
+            565
+          ]
+        ]
+      },
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            790,
+            907
+          ]
+        ]
+      },
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            88,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 8,
+        "ranges": [
+          [
+            0,
+            10
+          ]
+        ]
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "chunk_index": 0,
+      "ranges": [
+        [
+          290,
+          330
+        ],
+        [
+          375,
+          415
+        ],
+        [
+          460,
+          500
+        ]
+      ]
+    },
+    {
+      "chunk_index": 1,
+      "ranges": [
+        [
+          478,
+          518
+        ],
+        [
+          614,
+          654
+        ],
+        [
+          750,
+          790
+        ]
+      ]
+    },
+    {
+      "chunk_index": 5,
+      "ranges": [
+        [
+          164,
+          204
+        ]
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "ranges": [
+        [
+          106,
+          146
+        ]
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "ranges": [
+        [
+          48,
+          88
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "train": {
+      "frames": 2732,
+      "points": 41551355,
+      "unimpacted": 35677739,
+      "smoke_impacted": 316574,
+      "ignore": 5557042
+    },
+    "selection": {
+      "frames": 643,
+      "points": 9391346,
+      "unimpacted": 8322780,
+      "smoke_impacted": 49751,
+      "ignore": 1018815
+    },
+    "calibration": {
+      "frames": 642,
+      "points": 9091908,
+      "unimpacted": 7987169,
+      "smoke_impacted": 83973,
+      "ignore": 1020766
+    },
+    "test": {
+      "frames": 704,
+      "points": 10370796,
+      "unimpacted": 9020674,
+      "smoke_impacted": 39054,
+      "ignore": 1311068
+    }
+  },
+  "split_sha256": "817c6b258b62941713743b70affd6794481c6df1383bd306198c271d857d67cd"
+}
