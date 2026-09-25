@@ -1,0 +1,66 @@
+{
+  "frames": 643,
+  "calibration": {
+    "slope": 0.33779178731475745,
+    "bias": -3.5230663103742077
+  },
+  "metrics": {
+    "overall": {
+      "points": 8372531,
+      "positives": 49751,
+      "prevalence": 0.005942169697550239,
+      "average_precision": 0.19864260511611903,
+      "roc_auc": 0.9461336866325518,
+      "brier_score": 0.005416156978819053,
+      "threshold": 0.08221089094877243,
+      "true_positive": 20278,
+      "false_positive": 60251,
+      "true_negative": 8262529,
+      "false_negative": 29473,
+      "precision": 0.2518099069900284,
+      "recall": 0.4075897971900062,
+      "f1": 0.31129874117285844,
+      "false_positive_rate": 0.007239287834113121
+    },
+    "stationary_ros2": {
+      "points": 1806952,
+      "positives": 30056,
+      "prevalence": 0.016633535367845963,
+      "average_precision": 0.9601917633923859,
+      "roc_auc": 0.9910565387924593,
+      "brier_score": 0.013912703684814717,
+      "threshold": 0.08221089094877243,
+      "true_positive": 17109,
+      "false_positive": 13,
+      "true_negative": 1776883,
+      "false_negative": 12947,
+      "precision": 0.9992407429038663,
+      "recall": 0.5692374234761778,
+      "f1": 0.7252956886684471,
+      "false_positive_rate": 7.316128799884743e-06
+    },
+    "grandtour_ros1": {
+      "points": 6565579,
+      "positives": 19695,
+      "prevalence": 0.0029997354384129716,
+      "average_precision": 0.028431781098882204,
+      "roc_auc": 0.8811526219500853,
+      "brier_score": 0.0030777718853654086,
+      "threshold": 0.08221089094877243,
+      "true_positive": 3169,
+      "false_positive": 60238,
+      "true_negative": 6485646,
+      "false_negative": 16526,
+      "precision": 0.04997870897534973,
+      "recall": 0.1609037826859609,
+      "f1": 0.07626771918846718,
+      "false_positive_rate": 0.00920242399651445
+    }
+  },
+  "run_name": "local-default",
+  "device": "cuda",
+  "best_epoch": 1,
+  "best_selection_mean_domain_ap": 0.4943117650474717,
+  "split_sha256": "e2e770a61f0e2ee61f23bc583b953d8f99df4a786aff4eec749b14f5b14f16f8",
+  "partition": "selection"
+}

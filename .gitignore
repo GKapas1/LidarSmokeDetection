@@ -34,4 +34,8 @@ wandb/
 *.onnx
 *.engine
 
+# Curated, small training exports intended for version control.
+!artifacts/
+!artifacts/**
+
 docs/
