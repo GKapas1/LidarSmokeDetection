@@ -100,9 +100,18 @@ def train_local_model(
         verify_checksums=bool(config["data"].get("verify_checksums", False)),
     )
     split_path = Path(config["data"]["split"])
+    requested_domains = config["data"].get("source_domains")
     if not split_path.exists():
-        create_split_plan(dataset, split_path)
+        create_split_plan(dataset, split_path, source_domains=requested_domains)
     split = load_split_plan(dataset, split_path)
+    if requested_domains is not None:
+        expected_domains = {str(value) for value in requested_domains}
+        actual_domains = {str(value) for value in split.get("source_domains", ())}
+        if actual_domains != expected_domains:
+            raise ValueError(
+                "split source domains do not match the training configuration; "
+                "rebuild the split before training"
+            )
 
     if run_name is None:
         run_name = datetime.now(timezone.utc).strftime("local-%Y%m%dT%H%M%SZ")

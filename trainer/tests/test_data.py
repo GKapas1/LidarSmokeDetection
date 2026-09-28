@@ -51,6 +51,26 @@ class DatasetTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "frame total"):
                 UnifiedDataset(manifest)
 
+    def test_split_can_be_limited_to_a_source_domain(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            dataset = UnifiedDataset(make_dataset(root))
+            plan = create_split_plan(
+                dataset,
+                root / "stationary.json",
+                purge_frames=1,
+                source_domains=("stationary_ros2",),
+            )
+            self.assertEqual(plan["source_domains"], ["stationary_ros2"])
+            self.assertEqual(len(plan["chunks"]), 1)
+            self.assertEqual(load_split_plan(dataset, root / "stationary.json"), plan)
+            with self.assertRaisesRegex(ValueError, "no dataset chunks"):
+                create_split_plan(
+                    dataset,
+                    root / "missing.json",
+                    source_domains=("grandtour_ros1",),
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

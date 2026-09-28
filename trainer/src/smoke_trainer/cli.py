@@ -19,6 +19,12 @@ def _parser() -> argparse.ArgumentParser:
     split.add_argument("--manifest", required=True)
     split.add_argument("--output", required=True)
     split.add_argument("--purge-frames", type=int, default=20)
+    split.add_argument(
+        "--source-domain",
+        action="append",
+        dest="source_domains",
+        help="include only this source domain; repeat to include more than one",
+    )
     split.add_argument("--verify-checksums", action="store_true")
 
     train = commands.add_parser("train", help="train and package the local voxel MLP")
@@ -66,7 +72,12 @@ def _split(args: argparse.Namespace) -> None:
     from .data import UnifiedDataset, create_split_plan
 
     dataset = UnifiedDataset(args.manifest, verify_checksums=args.verify_checksums)
-    plan = create_split_plan(dataset, args.output, purge_frames=args.purge_frames)
+    plan = create_split_plan(
+        dataset,
+        args.output,
+        purge_frames=args.purge_frames,
+        source_domains=args.source_domains,
+    )
     print(json.dumps({"output": str(Path(args.output).resolve()), "summary": plan["summary"]}, indent=2))
 
 
@@ -143,4 +154,3 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -138,9 +138,9 @@ class UnifiedDataset:
         )
 
 
-def _stream_chunks(dataset: UnifiedDataset) -> dict[str, list[ChunkInfo]]:
+def _stream_chunks(chunks: Sequence[ChunkInfo]) -> dict[str, list[ChunkInfo]]:
     streams: dict[str, list[ChunkInfo]] = defaultdict(list)
-    for chunk in dataset.chunks:
+    for chunk in chunks:
         streams[chunk.stream_id].append(chunk)
     for chunks in streams.values():
         if chunks[0].source_domain == "grandtour_ros1":
@@ -187,6 +187,7 @@ def create_split_plan(
     *,
     fractions: Sequence[float] = DEFAULT_FRACTIONS,
     purge_frames: int = 20,
+    source_domains: Sequence[str] | None = None,
 ) -> dict:
     if len(fractions) != len(ROLES) or any(value <= 0 for value in fractions):
         raise ValueError("fractions must contain four positive values")
@@ -195,13 +196,27 @@ def create_split_plan(
     if purge_frames < 0:
         raise ValueError("purge_frames must be nonnegative")
 
+    requested_domains = None
+    if source_domains is not None:
+        requested_domains = {str(value) for value in source_domains}
+        if not requested_domains:
+            raise ValueError("source_domains must not be empty")
+    selected_chunks = tuple(
+        chunk
+        for chunk in dataset.chunks
+        if requested_domains is None or chunk.source_domain in requested_domains
+    )
+    if not selected_chunks:
+        names = ", ".join(sorted(requested_domains or ()))
+        raise ValueError(f"no dataset chunks match source domain(s): {names}")
+
     members: dict[str, dict[int, list[int]]] = {
         role: defaultdict(list) for role in ROLES
     }
     excluded: dict[int, list[int]] = defaultdict(list)
     stream_rows: list[dict] = []
 
-    for stream_id, chunks in sorted(_stream_chunks(dataset).items()):
+    for stream_id, chunks in sorted(_stream_chunks(selected_chunks).items()):
         frame_count = sum(chunk.frames for chunk in chunks)
         cumulative = np.cumsum(np.asarray(fractions, dtype=np.float64))
         boundaries = [int(np.floor(value * frame_count)) for value in cumulative[:-1]]
@@ -250,7 +265,7 @@ def create_split_plan(
                 "frames": chunk.frames,
                 "stream_id": chunk.stream_id,
             }
-            for chunk in dataset.chunks
+            for chunk in selected_chunks
         ],
         "streams": stream_rows,
         "roles": role_rows,
@@ -260,6 +275,8 @@ def create_split_plan(
             if indices
         ],
     }
+    if requested_domains is not None:
+        plan["source_domains"] = sorted(requested_domains)
     plan["summary"] = split_summary(dataset, plan)
     canonical = json.dumps(plan, sort_keys=True, separators=(",", ":")).encode()
     plan["split_sha256"] = hashlib.sha256(canonical).hexdigest()

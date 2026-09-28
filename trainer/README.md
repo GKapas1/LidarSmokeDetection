@@ -56,6 +56,25 @@ powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_windows.ps1 `
   -RunName local-default
 ```
 
+## GrandTour-only experiment
+
+To measure the moving-sensor baseline without stationary ROS 2 frames, use the
+dedicated Windows wrapper after copying `data/training/unified_v1/`. It rebuilds a
+chronological split containing only `grandtour_ros1`, trains the local MLP, and
+then evaluates the previously untouched GrandTour test partition. The resulting
+files are written under `runs/<RunName>/`, including `test_metrics.json`.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_grandtour_windows.ps1 `
+  -RunName grandtour-local-v1
+```
+
+For a manual run on any platform, add `--source-domain grandtour_ros1` to the
+`smoke-train split` command and use `trainer/configs/grandtour_local.toml` for
+training. The configuration rejects a split that was not created for
+`grandtour_ros1`. The split leaves twenty frames on each side of every
+chronological partition boundary unused to reduce temporal leakage.
+
 ## First run
 
 From the repository root:
