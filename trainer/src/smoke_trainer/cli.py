@@ -30,6 +30,15 @@ def _parser() -> argparse.ArgumentParser:
     train = commands.add_parser("train", help="train and package the local voxel MLP")
     train.add_argument("--config", required=True)
     train.add_argument("--run-name")
+    train.add_argument(
+        "--resume-run",
+        help="existing run directory whose last.pt checkpoint should be resumed",
+    )
+    train.add_argument(
+        "--device",
+        choices=("auto", "cpu", "cuda"),
+        help="override the training device from the configuration",
+    )
     train.add_argument("--max-train-frames", type=int)
     train.add_argument("--max-eval-frames", type=int)
 
@@ -85,9 +94,13 @@ def _train(args: argparse.Namespace) -> None:
     from .config import load_config
     from .train import train_local_model
 
+    config = load_config(args.config)
+    if args.device is not None:
+        config["training"]["device"] = args.device
     run_dir = train_local_model(
-        load_config(args.config),
+        config,
         run_name=args.run_name,
+        resume_run=args.resume_run,
         max_train_frames=args.max_train_frames,
         max_eval_frames=args.max_eval_frames,
     )

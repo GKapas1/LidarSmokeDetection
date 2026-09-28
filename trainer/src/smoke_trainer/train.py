@@ -88,6 +88,7 @@ def train_local_model(
     config: dict,
     *,
     run_name: str | None = None,
+    resume_run: str | Path | None = None,
     max_train_frames: int | None = None,
     max_eval_frames: int | None = None,
 ) -> Path:
@@ -113,24 +114,47 @@ def train_local_model(
                 "rebuild the split before training"
             )
 
-    if run_name is None:
-        run_name = datetime.now(timezone.utc).strftime("local-%Y%m%dT%H%M%SZ")
-    run_dir = Path(config["output"]["root"]) / run_name
-    run_dir.mkdir(parents=True, exist_ok=False)
-    (run_dir / "config.json").write_text(
-        json.dumps(public_config(config), indent=2) + "\n", encoding="utf-8"
-    )
-    (run_dir / "split.json").write_text(
-        json.dumps(split, indent=2) + "\n", encoding="utf-8"
-    )
-
     voxel_size = float(config["data"]["voxel_size_m"])
-    normalizer = fit_normalizer(
-        iter_frames(dataset, split, "train", max_frames=max_train_frames), voxel_size
-    )
-    (run_dir / "normalizer.json").write_text(
-        json.dumps(normalizer.to_dict(), indent=2) + "\n", encoding="utf-8"
-    )
+    if resume_run is None:
+        if run_name is None:
+            run_name = datetime.now(timezone.utc).strftime("local-%Y%m%dT%H%M%SZ")
+        run_dir = Path(config["output"]["root"]) / run_name
+        run_dir.mkdir(parents=True, exist_ok=False)
+        (run_dir / "config.json").write_text(
+            json.dumps(public_config(config), indent=2) + "\n", encoding="utf-8"
+        )
+        (run_dir / "split.json").write_text(
+            json.dumps(split, indent=2) + "\n", encoding="utf-8"
+        )
+        normalizer = fit_normalizer(
+            iter_frames(dataset, split, "train", max_frames=max_train_frames), voxel_size
+        )
+        (run_dir / "normalizer.json").write_text(
+            json.dumps(normalizer.to_dict(), indent=2) + "\n", encoding="utf-8"
+        )
+        checkpoint = None
+        history: list[dict] = []
+        start_epoch = 1
+        best_ap = -np.inf
+        best_epoch = 0
+    else:
+        run_dir = Path(resume_run).expanduser().resolve()
+        checkpoint_path = run_dir / "last.pt"
+        history_path = run_dir / "history.json"
+        if not checkpoint_path.is_file() or not history_path.is_file():
+            raise FileNotFoundError("resume run requires last.pt and history.json")
+        checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+        if checkpoint["model_parameters"] != config["model"]:
+            raise ValueError("resume checkpoint model parameters do not match the configuration")
+        if float(checkpoint["voxel_size_m"]) != voxel_size:
+            raise ValueError("resume checkpoint voxel size does not match the configuration")
+        normalizer = FeatureNormalizer.from_dict(checkpoint["normalizer"])
+        history = json.loads(history_path.read_text(encoding="utf-8"))
+        if not history or int(history[-1]["epoch"]) != int(checkpoint["epoch"]):
+            raise ValueError("resume history does not match the last checkpoint")
+        start_epoch = int(checkpoint["epoch"]) + 1
+        best_epoch = int(max(history, key=lambda row: row["selection_mean_domain_ap"])["epoch"])
+        best_ap = float(checkpoint["best_selection_ap"])
 
     model = create_model(config["model"]["name"], len(FEATURE_NAMES), config["model"]).to(device)
     optimizer = torch.optim.AdamW(
@@ -138,16 +162,16 @@ def train_local_model(
         lr=float(training["learning_rate"]),
         weight_decay=float(training["weight_decay"]),
     )
+    if checkpoint is not None:
+        model.load_state_dict(checkpoint["model_state"])
+        optimizer.load_state_dict(checkpoint["optimizer_state"])
     positive_weight = torch.tensor(float(training["positive_weight"]), device=device)
     epochs = int(training["epochs"])
     patience = int(training["patience"])
     deadline = time.monotonic() + float(training["max_hours"]) * 3600.0
-    history: list[dict] = []
-    best_ap = -np.inf
-    best_epoch = 0
     stop_for_budget = False
 
-    for epoch in range(1, epochs + 1):
+    for epoch in range(start_epoch, epochs + 1):
         model.train()
         epoch_loss = 0.0
         supervised_points = 0

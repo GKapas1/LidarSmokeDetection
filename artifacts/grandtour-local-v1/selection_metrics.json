@@ -1,0 +1,49 @@
+{
+  "frames": 502,
+  "calibration": {
+    "slope": 0.4488213473446004,
+    "bias": -1.9407215354353315
+  },
+  "metrics": {
+    "overall": {
+      "points": 6565579,
+      "positives": 19695,
+      "prevalence": 0.0029997354384129716,
+      "average_precision": 0.7216089378271472,
+      "roc_auc": 0.9976090817999271,
+      "brier_score": 0.0019285542146055996,
+      "threshold": 0.32436603307724,
+      "true_positive": 12835,
+      "false_positive": 6028,
+      "true_negative": 6539856,
+      "false_negative": 6860,
+      "precision": 0.6804325929067486,
+      "recall": 0.6516882457476517,
+      "f1": 0.6657502982519841,
+      "false_positive_rate": 0.0009208840242204109
+    },
+    "grandtour_ros1": {
+      "points": 6565579,
+      "positives": 19695,
+      "prevalence": 0.0029997354384129716,
+      "average_precision": 0.7216089378271472,
+      "roc_auc": 0.9976090817999271,
+      "brier_score": 0.0019285542146055996,
+      "threshold": 0.32436603307724,
+      "true_positive": 12835,
+      "false_positive": 6028,
+      "true_negative": 6539856,
+      "false_negative": 6860,
+      "precision": 0.6804325929067486,
+      "recall": 0.6516882457476517,
+      "f1": 0.6657502982519841,
+      "false_positive_rate": 0.0009208840242204109
+    }
+  },
+  "run_name": null,
+  "device": "cpu",
+  "best_epoch": 8,
+  "best_selection_mean_domain_ap": 0.7216089308468319,
+  "split_sha256": "616e12632d078c40f257e2883c7debeecaf9596b0d7f15a66f194ffaa6e645f9",
+  "partition": "selection"
+}

@@ -59,6 +59,11 @@ class TrainPipelineTests(unittest.TestCase):
             timing = predictor.benchmark(source, repeats=2)
             self.assertEqual(timing["points"], len(source.xyz))
 
+            resumed = train_local_model(config, resume_run=run)
+            self.assertEqual(resumed.resolve(), run.resolve())
+            history = __import__("json").loads((run / "history.json").read_text())
+            self.assertEqual([row["epoch"] for row in history], [1, 2])
+
 
 if __name__ == "__main__":
     unittest.main()
