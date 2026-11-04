@@ -56,6 +56,19 @@ class Frame:
     label: np.ndarray
 
 
+@dataclass(frozen=True)
+class TemporalWindow:
+    """Ordered same-chunk frames, with the final frame as the prediction target."""
+
+    frames: tuple[Frame, ...]
+
+    @property
+    def target(self) -> Frame:
+        if not self.frames:
+            raise ValueError("temporal window must contain at least one frame")
+        return self.frames[-1]
+
+
 class UnifiedDataset:
     def __init__(self, manifest_path: str | Path, *, verify_checksums: bool = False):
         self.manifest_path = Path(manifest_path).expanduser().resolve()
@@ -355,6 +368,70 @@ def iter_frames(
             if max_frames is not None and emitted >= max_frames:
                 return
             yield dataset.frame(chunk, arrays, frame_index)
+            emitted += 1
+
+
+def iter_temporal_windows(
+    dataset: UnifiedDataset,
+    plan: dict,
+    role: str,
+    *,
+    history_length: int,
+    maximum_time_gap_s: float,
+    shuffle: bool = False,
+    seed: int = 0,
+    max_windows: int | None = None,
+) -> Iterator[TemporalWindow]:
+    """Yield bounded past-only windows without crossing a split or chunk boundary."""
+
+    if role not in ROLES:
+        raise ValueError(f"unknown role: {role}")
+    if history_length <= 0:
+        raise ValueError("history_length must be positive")
+    if maximum_time_gap_s <= 0:
+        raise ValueError("maximum_time_gap_s must be positive")
+    grouped: dict[int, list[int]] = defaultdict(list)
+    for ref in frame_refs(plan, role):
+        grouped[ref.chunk_index].append(ref.frame_index)
+    chunk_indices = list(grouped)
+    rng = random.Random(seed)
+    if shuffle:
+        rng.shuffle(chunk_indices)
+
+    emitted = 0
+    for chunk_index in chunk_indices:
+        chunk = dataset.chunks[chunk_index]
+        arrays = dataset.load_chunk(chunk_index)
+        window_indices: list[tuple[int, ...]] = []
+        history: list[int] = []
+        previous_index: int | None = None
+        previous_time: float | None = None
+        for frame_index in sorted(grouped[chunk_index]):
+            timestamp = float(arrays["frame_time_s"][frame_index])
+            contiguous = (
+                previous_index is not None
+                and frame_index == previous_index + 1
+                and previous_time is not None
+                and timestamp > previous_time
+                and timestamp - previous_time <= maximum_time_gap_s
+            )
+            if not contiguous:
+                history.clear()
+            history.append(frame_index)
+            if len(history) > history_length:
+                history.pop(0)
+            if len(history) == history_length:
+                window_indices.append(tuple(history))
+            previous_index = frame_index
+            previous_time = timestamp
+        if shuffle:
+            rng.shuffle(window_indices)
+        for indices in window_indices:
+            if max_windows is not None and emitted >= max_windows:
+                return
+            yield TemporalWindow(
+                tuple(dataset.frame(chunk, arrays, frame_index) for frame_index in indices)
+            )
             emitted += 1
 
 

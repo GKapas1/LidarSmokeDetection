@@ -27,7 +27,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     split.add_argument("--verify-checksums", action="store_true")
 
-    train = commands.add_parser("train", help="train and package the local voxel MLP")
+    train = commands.add_parser("train", help="train and package a configured smoke model")
     train.add_argument("--config", required=True)
     train.add_argument("--run-name")
     train.add_argument(
@@ -41,6 +41,11 @@ def _parser() -> argparse.ArgumentParser:
     )
     train.add_argument("--max-train-frames", type=int)
     train.add_argument("--max-eval-frames", type=int)
+    train.add_argument(
+        "--max-epochs",
+        type=int,
+        help="cap epochs for a diagnostic run; the resolved run config records the cap",
+    )
 
     evaluate = commands.add_parser("evaluate", help="evaluate a bundle on a saved split")
     evaluate.add_argument("--bundle", required=True)
@@ -92,12 +97,18 @@ def _split(args: argparse.Namespace) -> None:
 
 def _train(args: argparse.Namespace) -> None:
     from .config import load_config
-    from .train import train_local_model
+    from .train import train_model
 
     config = load_config(args.config)
     if args.device is not None:
         config["training"]["device"] = args.device
-    run_dir = train_local_model(
+    if args.max_epochs is not None:
+        if args.max_epochs <= 0:
+            raise ValueError("--max-epochs must be positive")
+        config["training"]["epochs"] = min(
+            int(config["training"]["epochs"]), args.max_epochs
+        )
+    run_dir = train_model(
         config,
         run_name=args.run_name,
         resume_run=args.resume_run,
@@ -108,20 +119,44 @@ def _train(args: argparse.Namespace) -> None:
 
 
 def _evaluate(args: argparse.Namespace) -> None:
-    from .data import UnifiedDataset, iter_frames, load_split_plan
-    from .evaluate import collect_predictions, evaluation_report, save_report
-    from .predict import LocalPredictor
+    from .adapters import GlobalTemporalAdapter
+    from .data import UnifiedDataset, iter_frames, iter_temporal_windows, load_split_plan
+    from .evaluate import (
+        collect_predictions,
+        collect_temporal_predictions,
+        evaluation_report,
+        save_report,
+    )
+    from .predict import SmokePredictor
 
-    predictor = LocalPredictor.load(args.bundle, device=args.device)
+    predictor = SmokePredictor.load(args.bundle, device=args.device)
     dataset = UnifiedDataset(args.manifest)
     split = load_split_plan(dataset, args.split)
-    predictions = collect_predictions(
-        predictor.model,
-        iter_frames(dataset, split, args.partition, max_frames=args.max_frames),
-        predictor.normalizer,
-        predictor.voxel_size_m,
-        predictor.device,
-    )
+    if isinstance(predictor.adapter, GlobalTemporalAdapter):
+        predictions = collect_temporal_predictions(
+            predictor.model,
+            iter_temporal_windows(
+                dataset,
+                split,
+                args.partition,
+                history_length=int(predictor.preprocessing["history_length"]),
+                maximum_time_gap_s=float(predictor.preprocessing["maximum_time_gap_s"]),
+                max_windows=args.max_frames,
+            ),
+            predictor.normalizer,
+            predictor.adapter,
+            predictor.preprocessing,
+            predictor.device,
+        )
+    else:
+        predictions = collect_predictions(
+            predictor.model,
+            iter_frames(dataset, split, args.partition, max_frames=args.max_frames),
+            predictor.normalizer,
+            predictor.adapter,
+            predictor.preprocessing,
+            predictor.device,
+        )
     report = evaluation_report(predictions, predictor.calibration, predictor.threshold)
     report["partition"] = args.partition
     save_report(report, args.output)
@@ -130,14 +165,23 @@ def _evaluate(args: argparse.Namespace) -> None:
 
 def _predict(args: argparse.Namespace) -> None:
     from .data import UnifiedDataset
-    from .predict import LocalPredictor
+    from .predict import GlobalTemporalPredictor, SmokePredictor
 
-    predictor = LocalPredictor.load(args.bundle, device=args.device)
+    predictor = SmokePredictor.load(args.bundle, device=args.device)
     dataset = UnifiedDataset(args.manifest)
     chunk = dataset.chunks[args.chunk]
     arrays = dataset.load_chunk(args.chunk)
     frame = dataset.frame(chunk, arrays, args.frame)
-    probabilities, valid = predictor.predict(frame)
+    if isinstance(predictor, GlobalTemporalPredictor):
+        # The CLI has random-access input, but GT is a streaming model. Warm its
+        # bounded cache from the immediately preceding frames in this chunk so a
+        # one-frame request matches normal online operation where possible.
+        start = max(0, args.frame - predictor.temporal_model.history_length + 1)
+        for index in range(start, args.frame + 1):
+            candidate = dataset.frame(chunk, arrays, index)
+            probabilities, valid = predictor.predict(candidate)
+    else:
+        probabilities, valid = predictor.predict(frame)
     benchmark = predictor.benchmark(frame, repeats=args.repeats)
     output = Path(args.output).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -150,7 +194,10 @@ def _predict(args: argparse.Namespace) -> None:
         valid=valid,
         source_label=frame.label,
     )
-    print(json.dumps({"output": str(output), "benchmark": benchmark}, indent=2))
+    result = {"output": str(output), "benchmark": benchmark}
+    if isinstance(predictor, GlobalTemporalPredictor):
+        result["temporal_history_scans"] = predictor.last_history_length
+    print(json.dumps(result, indent=2))
 
 
 def main(argv: list[str] | None = None) -> None:

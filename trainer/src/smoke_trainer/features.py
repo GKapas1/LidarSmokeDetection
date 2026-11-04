@@ -33,16 +33,19 @@ class VoxelizedFrame:
 
 @dataclass(frozen=True)
 class FeatureNormalizer:
+    feature_names: tuple[str, ...]
     mean: np.ndarray
     scale: np.ndarray
     count: int
 
     def transform(self, features: np.ndarray) -> np.ndarray:
+        if features.ndim != 2 or features.shape[1] != len(self.feature_names):
+            raise ValueError("features are incompatible with this normalizer")
         return ((features - self.mean) / self.scale).astype(np.float32, copy=False)
 
     def to_dict(self) -> dict:
         return {
-            "feature_names": list(FEATURE_NAMES),
+            "feature_names": list(self.feature_names),
             "mean": self.mean.tolist(),
             "scale": self.scale.tolist(),
             "count": self.count,
@@ -50,20 +53,31 @@ class FeatureNormalizer:
 
     @classmethod
     def from_dict(cls, value: dict) -> "FeatureNormalizer":
-        if tuple(value["feature_names"]) != FEATURE_NAMES:
-            raise ValueError("normalizer feature order is incompatible")
+        feature_names = tuple(str(name) for name in value["feature_names"])
+        mean = np.asarray(value["mean"], dtype=np.float32)
+        scale = np.asarray(value["scale"], dtype=np.float32)
+        if not feature_names or mean.ndim != 1 or scale.shape != mean.shape:
+            raise ValueError("normalizer feature schema is invalid")
+        if len(feature_names) != len(mean):
+            raise ValueError("normalizer feature count is invalid")
+        if not np.isfinite(mean).all() or not np.isfinite(scale).all() or np.any(scale <= 0):
+            raise ValueError("normalizer values are invalid")
         return cls(
-            mean=np.asarray(value["mean"], dtype=np.float32),
-            scale=np.asarray(value["scale"], dtype=np.float32),
+            feature_names=feature_names,
+            mean=mean,
+            scale=scale,
             count=int(value["count"]),
         )
 
 
 class NormalizerAccumulator:
-    def __init__(self, feature_count: int):
+    def __init__(self, feature_names: tuple[str, ...]):
+        if not feature_names:
+            raise ValueError("feature_names must not be empty")
+        self.feature_names = feature_names
         self.count = 0
-        self.mean = np.zeros(feature_count, dtype=np.float64)
-        self.m2 = np.zeros(feature_count, dtype=np.float64)
+        self.mean = np.zeros(len(feature_names), dtype=np.float64)
+        self.m2 = np.zeros(len(feature_names), dtype=np.float64)
 
     def update(self, values: np.ndarray) -> None:
         if values.ndim != 2 or values.shape[1] != len(self.mean):
@@ -87,6 +101,7 @@ class NormalizerAccumulator:
         scale = np.sqrt(np.maximum(variance, 0.0))
         scale[scale < 1.0e-6] = 1.0
         return FeatureNormalizer(
+            feature_names=self.feature_names,
             mean=self.mean.astype(np.float32),
             scale=scale.astype(np.float32),
             count=self.count,
@@ -155,9 +170,26 @@ def voxelize_frame(frame: Frame, voxel_size_m: float) -> VoxelizedFrame:
     )
 
 
-def fit_normalizer(frames: Iterable[Frame], voxel_size_m: float) -> FeatureNormalizer:
-    accumulator = NormalizerAccumulator(len(FEATURE_NAMES))
-    for frame in frames:
-        accumulator.update(voxelize_frame(frame, voxel_size_m).features)
+def fit_feature_normalizer(
+    feature_rows: Iterable[np.ndarray], feature_names: tuple[str, ...]
+) -> FeatureNormalizer:
+    """Fit a named feature schema from streaming 2D arrays without retaining them."""
+
+    accumulator = NormalizerAccumulator(tuple(feature_names))
+    for features in feature_rows:
+        accumulator.update(features)
     return accumulator.finalize()
 
+
+def fit_normalizer(
+    frames: Iterable[Frame],
+    voxel_size_m: float,
+    *,
+    feature_names: tuple[str, ...] = FEATURE_NAMES,
+) -> FeatureNormalizer:
+    if tuple(feature_names) != FEATURE_NAMES:
+        raise ValueError("voxel normalization requires the local voxel feature schema")
+    return fit_feature_normalizer(
+        (voxelize_frame(frame, voxel_size_m).features for frame in frames),
+        tuple(feature_names),
+    )

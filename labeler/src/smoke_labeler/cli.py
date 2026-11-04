@@ -18,6 +18,19 @@ def _parser() -> argparse.ArgumentParser:
     inspect.add_argument("bag")
     inspect.add_argument("--topic", default=None)
 
+    raw_preview = sub.add_parser(
+        "raw-preview",
+        help="Export a sampled raw Livox bag to a CloudCompare-friendly PLY",
+    )
+    raw_preview.add_argument("bag")
+    raw_preview.add_argument("--output", required=True)
+    raw_preview.add_argument("--topic", default="/livox/lidar")
+    raw_preview.add_argument("--frame-stride", type=int, default=20)
+    raw_preview.add_argument("--point-stride", type=int, default=4)
+    raw_preview.add_argument("--max-points", type=int, default=300_000)
+    raw_preview.add_argument("--minimum-range-m", type=float, default=0.1)
+    raw_preview.add_argument("--maximum-range-m", type=float, default=30.0)
+
     grandtour_inspect = sub.add_parser(
         "grandtour-inspect",
         help="Inspect a GrandTour session and verify raw/undistorted Livox point identity",
@@ -122,6 +135,21 @@ def main() -> None:
     try:
         if args.command == "inspect":
             inspect_bag(args.bag, args.topic)
+            return
+        if args.command == "raw-preview":
+            from .bag import write_raw_preview
+
+            result = write_raw_preview(
+                args.bag,
+                args.output,
+                topic=args.topic,
+                frame_stride=args.frame_stride,
+                point_stride=args.point_stride,
+                max_points=args.max_points,
+                minimum_range_m=args.minimum_range_m,
+                maximum_range_m=args.maximum_range_m,
+            )
+            print(json.dumps(result, indent=2))
             return
         if args.command == "grandtour-inspect":
             from .grandtour import inspect_grandtour_session

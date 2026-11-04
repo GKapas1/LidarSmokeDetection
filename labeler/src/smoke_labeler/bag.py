@@ -251,3 +251,76 @@ def frame_layout(points: BagPoints) -> tuple[np.ndarray, np.ndarray]:
         start, end = int(ptr[frame]), int(ptr[frame + 1])
         times[frame] = float(np.min(points.time_s[start:end])) if end > start else np.nan
     return ptr, times
+
+
+def write_raw_preview(
+    value: str | Path,
+    output: str | Path,
+    *,
+    topic: str | None = "/livox/lidar",
+    frame_stride: int = 20,
+    point_stride: int = 4,
+    max_points: int = 300_000,
+    minimum_range_m: float = 0.1,
+    maximum_range_m: float = 30.0,
+) -> dict[str, object]:
+    """Export a sampled raw Livox bag as a CloudCompare-friendly ASCII PLY.
+
+    This intentionally does not use odometry to align frames: it is a quick
+    sensor-signal inspection export, so it remains useful before calibration.
+    """
+    if frame_stride < 1 or point_stride < 1 or max_points < 1:
+        raise ValueError("frame_stride, point_stride, and max_points must be positive")
+    if minimum_range_m < 0 or maximum_range_m <= minimum_range_m:
+        raise ValueError("range limits must satisfy 0 <= minimum < maximum")
+
+    # Decode enough sampled points to make a useful preview, without making an
+    # unnecessarily huge ASCII file. The later even sampling keeps every part
+    # of a drive represented if this cap is reached.
+    decode_cap = max(max_points * frame_stride * 2, max_points)
+    points = read_bag_points(
+        value, topic=topic, point_stride=point_stride, max_points=decode_cap
+    )
+    ranges = np.linalg.norm(points.xyz, axis=1)
+    selected = (
+        (points.frame_index % frame_stride == 0)
+        & np.isfinite(points.xyz).all(axis=1)
+        & (ranges >= minimum_range_m)
+        & (ranges <= maximum_range_m)
+    )
+    xyz = points.xyz[selected]
+    reflectivity = points.reflectivity[selected]
+    frames = np.unique(points.frame_index[selected])
+    if len(xyz) == 0:
+        raise RuntimeError("No points remain after the frame and range filters")
+    if len(xyz) > max_points:
+        indices = np.linspace(0, len(xyz) - 1, max_points, dtype=np.int64)
+        xyz = xyz[indices]
+        reflectivity = reflectivity[indices]
+
+    output_path = Path(output).expanduser().resolve()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    intensity = np.clip(np.rint(reflectivity), 0, 255).astype(np.uint8)
+    with output_path.open("w", encoding="ascii") as stream:
+        stream.write("ply\nformat ascii 1.0\n")
+        stream.write(f"element vertex {len(xyz)}\n")
+        stream.write("property float x\nproperty float y\nproperty float z\n")
+        stream.write("property uchar red\nproperty uchar green\nproperty uchar blue\n")
+        stream.write("property uchar intensity\nend_header\n")
+        for point, value in zip(xyz, intensity):
+            channel = int(value)
+            stream.write(
+                f"{point[0]:.5f} {point[1]:.5f} {point[2]:.5f} "
+                f"{channel} {channel} {channel} {channel}\n"
+            )
+    return {
+        "output": str(output_path),
+        "selected_topic": points.topic,
+        "message_type": points.message_type,
+        "points": int(len(xyz)),
+        "source_frames": int(len(points.frame_time_s)) if points.frame_time_s is not None else 0,
+        "exported_frames": int(len(frames)),
+        "frame_stride": frame_stride,
+        "point_stride": point_stride,
+        "range_m": [minimum_range_m, maximum_range_m],
+    }

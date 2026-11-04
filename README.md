@@ -46,4 +46,5 @@ nine independently loadable chunks.
 
 Large bags, point clouds, derived arrays, and training artifacts remain local and
 are excluded from Git. Start with the [labeler workflow](labeler/README.md) and
-[data layout](data/README.md).
+[data layout](data/README.md). For the RC-car acquisition procedure, see the
+[car and MID-360 recording guide](docs/CAR_RECORDING_GUIDE.md).

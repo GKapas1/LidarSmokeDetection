@@ -1,12 +1,13 @@
 # Smoke trainer
 
-This package provides the first end-to-end training milestone for the LiDAR smoke
-thesis: canonical dataset validation, a reproducible chronological split, local
-voxel features, a compact MLP, checkpointing, calibration, full-frame evaluation,
-portable inference, and end-to-end timing.
+This package provides the first three end-to-end training milestones for the LiDAR
+smoke thesis: canonical dataset validation, a reproducible chronological split,
+local voxel and global point features, compact local and PointNet-style models,
+checkpointing, calibration, full-frame evaluation, portable inference, and
+end-to-end timing.
 
-The current model is the local single-scan baseline. Global PointNet and temporal
-models will use the same split, evaluation, checkpoint, and predictor contracts.
+The current models are the L1 local voxel baseline, G1 global single-scan
+PointNet-style classifier, and GT global temporal PointNet-GRU classifier.
 
 ## Environment
 
@@ -56,6 +57,54 @@ powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_windows.ps1 `
   -RunName local-default
 ```
 
+## Windows GPU setup for GT
+
+On the Windows machine, copy the repository code and the existing dataset so this
+layout is present (the original ROS bags are not needed):
+
+```text
+LidarSmokeDetection\
+  data\training\unified_v1\
+    chunks\
+    dataset_manifest.json
+    dataset_schema.json
+```
+
+Install the NVIDIA driver first. Then select the CUDA wheel index matching that
+driver from the official PyTorch selector and run this once from the repository
+root in PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\trainer\scripts\setup_windows.ps1 `
+  -TorchIndexUrl https://download.pytorch.org/whl/<CUDA-VARIANT>
+```
+
+The setup verifies that PyTorch can see the GPU. Start the complete GT run with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_global_temporal_windows.ps1 `
+  -RunName global-temporal-v1
+```
+
+The script checks the expected dataset files, verifies the manifest and chunk hashes,
+recreates the chronological split for this exact dataset copy, trains GT on CUDA, and
+writes the held-out test report to `runs\global-temporal-v1\test_metrics.json`.
+For a local copy whose checksums have already been verified, add `-SkipChecksums` to
+avoid the extra file-hash pass. Do not use that option after moving or changing data.
+
+To train and compare all three models on one identical chronological split, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_all_models_windows.ps1 `
+  -ExperimentName comparison-v1
+```
+
+This runs L1 (local voxel MLP), G1 (single-scan global PointNet), and GT (five-scan
+global PointNet-GRU), evaluates each only on the shared held-out test partition, and
+writes both `runs\comparison-v1-comparison.json` and
+`runs\comparison-v1-comparison.csv`. The PowerShell output also displays the primary
+comparison table: average precision, ROC-AUC, F1, recall, and false-positive rate.
+
 ## GrandTour-only experiment
 
 To measure the moving-sensor baseline without stationary ROS 2 frames, use the
@@ -90,6 +139,47 @@ smoke-train split \
 smoke-train train --config trainer/configs/local.toml --run-name local-default
 ```
 
+## G1 global PointNet-style model
+
+G1 consumes every finite point in a scan as `[x, y, z, range, intensity]`. A shared
+point MLP forms per-point embeddings, global max pooling forms a scan summary, and a
+small head predicts one smoke logit per original point. Its default configuration is:
+
+```bash
+smoke-train train \
+  --config trainer/configs/global_pointnet.toml \
+  --run-name global-pointnet-default
+```
+
+The canonical G1 configuration enables a compact, identity-initialized PointNet
+input transform over XYZ. Its orthogonality penalty discourages non-rigid learned
+warps. Training also applies random yaw rotations, reflecting changes in vehicle
+heading; pitch and roll augmentation are deliberately disabled until their real
+operating range has been measured. Neither mechanism registers scans across time or
+makes smoke deformation disappear; those are temporal-model questions.
+
+## GT global temporal model
+
+GT encodes each of five consecutive scans with a shared G1-style PointNet encoder,
+then feeds their global scan summaries into a causal GRU. Its segmentation head uses
+the current point embedding, current scan summary, and GRU state to predict only the
+final scan's points. It never consumes future frames, crosses a chunk or split
+boundary, or carries state over a timestamp gap larger than `maximum_time_gap_s`.
+
+```bash
+smoke-train train \
+  --config trainer/configs/global_temporal.toml \
+  --run-name global-temporal-default
+```
+
+GT uses the same direct `[x, y, z, range, intensity]` point inputs as G1, with an
+identity-initialized per-scan PointNet input transform. Its default training
+augmentation applies one shared random yaw rotation to the whole five-scan window,
+preserving real inter-scan motion. Online inference maintains a bounded cache and
+resets automatically at stream/chunk changes, non-increasing timestamps, and time
+gaps over the configured maximum. A one-frame `smoke-train predict` request warms
+that cache from immediately preceding frames in the selected chunk.
+
 The split command reads each chunk once to record exact class counts. Add
 `--verify-checksums` when the data have been copied to another computer.
 
@@ -117,9 +207,10 @@ smoke-train predict \
   --output runs/local-default/example-prediction.npz
 ```
 
-For a quick pipeline check, `train` accepts `--max-train-frames` and
-`--max-eval-frames`. Such a run is diagnostic only because the limited prefixes may
-not contain both classes. Normal experiments use complete split partitions.
+For a quick pipeline check, `train` accepts `--max-train-frames`,
+`--max-eval-frames`, and `--max-epochs`. Such a run is diagnostic only because the
+limited prefixes may not contain both classes. Normal experiments use complete split
+partitions.
 
 Run the test suite with:
 

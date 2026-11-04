@@ -5,7 +5,12 @@ import unittest
 import numpy as np
 
 from smoke_trainer.data import Frame, FrameRef
-from smoke_trainer.features import FEATURE_NAMES, fit_normalizer, voxelize_frame
+from smoke_trainer.features import (
+    FEATURE_NAMES,
+    fit_feature_normalizer,
+    fit_normalizer,
+    voxelize_frame,
+)
 
 
 def frame(xyz, intensity, labels) -> Frame:
@@ -43,7 +48,14 @@ class FeatureTests(unittest.TestCase):
         transformed = normalizer.transform(voxelize_frame(outlier, 0.1).features)
         self.assertGreater(float(transformed[0, 1]), 1000.0)
 
+    def test_named_normalizer_accepts_another_feature_schema(self):
+        normalizer = fit_feature_normalizer(
+            [np.asarray([[1.0, 10.0], [3.0, 14.0]], dtype=np.float32)],
+            ("x_m", "intensity"),
+        )
+        self.assertEqual(normalizer.feature_names, ("x_m", "intensity"))
+        np.testing.assert_allclose(normalizer.transform(np.asarray([[2.0, 12.0]])), [[0, 0]])
+
 
 if __name__ == "__main__":
     unittest.main()
-

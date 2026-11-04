@@ -10,6 +10,7 @@ from smoke_trainer.data import (
     UnifiedDataset,
     create_split_plan,
     frame_refs,
+    iter_temporal_windows,
     load_split_plan,
 )
 
@@ -70,6 +71,42 @@ class DatasetTests(unittest.TestCase):
                     root / "missing.json",
                     source_domains=("grandtour_ros1",),
                 )
+
+    def test_temporal_windows_are_same_role_consecutive_and_gap_bounded(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            dataset = UnifiedDataset(make_dataset(root))
+            plan = create_split_plan(dataset, root / "split.json", purge_frames=1)
+            windows = list(
+                iter_temporal_windows(
+                    dataset,
+                    plan,
+                    "train",
+                    history_length=3,
+                    maximum_time_gap_s=0.25,
+                )
+            )
+            self.assertEqual(len(windows), 19)
+            allowed = set(frame_refs(plan, "train"))
+            for window in windows:
+                self.assertEqual(len(window.frames), 3)
+                self.assertTrue(all(frame.ref in allowed for frame in window.frames))
+                self.assertEqual(
+                    [frame.ref.frame_index for frame in window.frames],
+                    list(range(window.target.ref.frame_index - 2, window.target.ref.frame_index + 1)),
+                )
+            self.assertEqual(
+                list(
+                    iter_temporal_windows(
+                        dataset,
+                        plan,
+                        "train",
+                        history_length=3,
+                        maximum_time_gap_s=0.05,
+                    )
+                ),
+                [],
+            )
 
 
 if __name__ == "__main__":

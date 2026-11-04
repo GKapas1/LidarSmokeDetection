@@ -38,4 +38,7 @@ wandb/
 !artifacts/
 !artifacts/**
 
-docs/
+# Keep the car acquisition guide with the repository while leaving local notes
+# in docs/ untracked.
+docs/*
+!docs/CAR_RECORDING_GUIDE.md

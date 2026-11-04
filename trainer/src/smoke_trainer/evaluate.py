@@ -10,8 +10,9 @@ import numpy as np
 from scipy.optimize import minimize
 import torch
 
-from .data import Frame
-from .features import FeatureNormalizer, voxelize_frame
+from .adapters import FrameAdapter, GlobalTemporalAdapter, LocalVoxelAdapter
+from .data import Frame, TemporalWindow
+from .features import FeatureNormalizer
 from .metrics import best_f1_threshold, metric_summary
 
 
@@ -82,6 +83,27 @@ def fit_calibration(logits: np.ndarray, labels: np.ndarray) -> Calibration:
     )
 
 
+def adapter_frame_logits(
+    model: torch.nn.Module,
+    frame: Frame,
+    normalizer: FeatureNormalizer,
+    adapter: FrameAdapter,
+    data_config: dict,
+    device: torch.device,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    prepared = adapter.prepare(frame, data_config)
+    if not len(prepared.features):
+        return np.zeros(len(prepared.labels), dtype=np.float32), prepared.labels, prepared.valid
+    features = torch.from_numpy(normalizer.transform(prepared.features)).to(device)
+    with torch.inference_mode():
+        point_logits = adapter.expand_logits(model(features), prepared)
+    return (
+        point_logits.detach().cpu().numpy().astype(np.float32),
+        prepared.labels,
+        prepared.valid,
+    )
+
+
 def frame_logits(
     model: torch.nn.Module,
     frame: Frame,
@@ -89,22 +111,25 @@ def frame_logits(
     voxel_size_m: float,
     device: torch.device,
 ) -> tuple[np.ndarray, np.ndarray]:
-    voxelized = voxelize_frame(frame, voxel_size_m)
-    if not len(voxelized.features):
-        return np.empty(0, dtype=np.float32), voxelized.labels
-    features = torch.from_numpy(normalizer.transform(voxelized.features)).to(device)
-    inverse = torch.from_numpy(voxelized.inverse).to(device)
-    with torch.inference_mode():
-        voxel_logits = model(features)
-        point_logits = voxel_logits[inverse]
-    return point_logits.detach().cpu().numpy().astype(np.float32), voxelized.labels
+    """Backward-compatible L1 helper retained for existing callers."""
+
+    logits, labels, _ = adapter_frame_logits(
+        model,
+        frame,
+        normalizer,
+        LocalVoxelAdapter(),
+        {"voxel_size_m": voxel_size_m},
+        device,
+    )
+    return logits, labels
 
 
 def collect_predictions(
     model: torch.nn.Module,
     frames: Iterable[Frame],
     normalizer: FeatureNormalizer,
-    voxel_size_m: float,
+    adapter: FrameAdapter,
+    data_config: dict,
     device: torch.device,
 ) -> PredictionCollection:
     logits: list[np.ndarray] = []
@@ -114,10 +139,10 @@ def collect_predictions(
     frame_count = 0
     model.eval()
     for frame in frames:
-        frame_output, frame_labels = frame_logits(
-            model, frame, normalizer, voxel_size_m, device
+        frame_output, frame_labels, valid = adapter_frame_logits(
+            model, frame, normalizer, adapter, data_config, device
         )
-        mask = frame_labels != 255
+        mask = valid & (frame_labels != 255)
         if np.any(mask):
             code = domain_codes.setdefault(frame.source_domain, len(domain_codes))
             if code > np.iinfo(np.uint8).max:
@@ -134,6 +159,69 @@ def collect_predictions(
         domains=np.concatenate(domains),
         domain_names=tuple(domain_codes),
         frames=frame_count,
+    )
+
+
+def temporal_window_logits(
+    model: torch.nn.Module,
+    window: TemporalWindow,
+    normalizer: FeatureNormalizer,
+    adapter: GlobalTemporalAdapter,
+    data_config: dict,
+    device: torch.device,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    prepared = adapter.prepare_window(window, data_config)
+    target = prepared.target
+    if not len(target.features):
+        return np.zeros(len(target.labels), dtype=np.float32), target.labels, target.valid
+    feature_tensors = tuple(
+        torch.from_numpy(normalizer.transform(frame.features)).to(device)
+        for frame in prepared.frames
+    )
+    with torch.inference_mode():
+        point_logits = adapter.expand_logits(model(feature_tensors), target)
+    return (
+        point_logits.detach().cpu().numpy().astype(np.float32),
+        target.labels,
+        target.valid,
+    )
+
+
+def collect_temporal_predictions(
+    model: torch.nn.Module,
+    windows: Iterable[TemporalWindow],
+    normalizer: FeatureNormalizer,
+    adapter: GlobalTemporalAdapter,
+    data_config: dict,
+    device: torch.device,
+) -> PredictionCollection:
+    logits: list[np.ndarray] = []
+    labels: list[np.ndarray] = []
+    domains: list[np.ndarray] = []
+    domain_codes: dict[str, int] = {}
+    window_count = 0
+    model.eval()
+    for window in windows:
+        frame_output, frame_labels, valid = temporal_window_logits(
+            model, window, normalizer, adapter, data_config, device
+        )
+        mask = valid & (frame_labels != 255)
+        if np.any(mask):
+            code = domain_codes.setdefault(window.target.source_domain, len(domain_codes))
+            if code > np.iinfo(np.uint8).max:
+                raise ValueError("too many source domains")
+            logits.append(frame_output[mask])
+            labels.append(frame_labels[mask].astype(np.uint8, copy=False))
+            domains.append(np.full(int(mask.sum()), code, dtype=np.uint8))
+        window_count += 1
+    if not logits:
+        raise ValueError("temporal evaluation produced no supervised points")
+    return PredictionCollection(
+        logits=np.concatenate(logits),
+        labels=np.concatenate(labels),
+        domains=np.concatenate(domains),
+        domain_names=tuple(domain_codes),
+        frames=window_count,
     )
 
 
