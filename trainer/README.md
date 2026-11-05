@@ -105,6 +105,24 @@ writes both `runs\comparison-v1-comparison.json` and
 `runs\comparison-v1-comparison.csv`. The PowerShell output also displays the primary
 comparison table: average precision, ROC-AUC, F1, recall, and false-positive rate.
 
+## Moving-data-only comparison
+
+To compare the models without any stationary frames in either training or testing,
+run this separate experiment:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\trainer\scripts\train_moving_models_windows.ps1 `
+  -ExperimentName moving-only-v1
+```
+
+It creates a split limited to `grandtour_ros1`, then trains L1, G1, and GT with the
+matching GrandTour-only configurations. Its comparison outputs are
+`runs\moving-only-v1-comparison.json` and `.csv`. Do not compare its absolute scores
+directly with the mixed-domain run: it uses a different training distribution and a
+GrandTour-only split, intentionally answering a different question. GT requires a
+five-scan causal context, so its report omits the first four frames of each contiguous
+test segment; use the exported `points` count when comparing it with L1 and G1.
+
 ## GrandTour-only experiment
 
 To measure the moving-sensor baseline without stationary ROS 2 frames, use the
