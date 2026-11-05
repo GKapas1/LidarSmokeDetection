@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "protocol": "pilot_temporal_v1",
+  "manifest": "dataset_manifest.json",
+  "manifest_sha256": "e66d83f60ac7ad99e385639b9cc1d26cb65d97ccc345844c0043ae98f7de1604",
+  "fractions": {
+    "train": 0.55,
+    "selection": 0.15,
+    "calibration": 0.15,
+    "test": 0.15
+  },
+  "purge_frames_each_side": 20,
+  "chunks": [
+    {
+      "index": 2,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_000.npz",
+      "sha256": "0def432e70afef1a590103217df40f1294333f63d081326b6123ed99e43c76ad",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 3,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_001.npz",
+      "sha256": "af8f59f5356868be2ff48d2f3bb1af7a39b9473a3e19a5e421e3f07064a16a6f",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 4,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_002.npz",
+      "sha256": "947a149db259b457d787f7dac68fbeb07bf17cc8e8aaee1c6728288ae73ab23a",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 5,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_003.npz",
+      "sha256": "da5fa092f5c2710f7f8c1d2400182cf9e5df985de10f8485341a29ce4ffb7a5e",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 6,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_004.npz",
+      "sha256": "812d664fb15d8168dd621a634c70bbcc8b1f8cba463710000e2f2bd55fb40c46",
+      "frames": 599,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 7,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_005.npz",
+      "sha256": "2284f0bda7e3f3608fe34cde8f0d9f013783fb46befdf1d7337cd7f8e8f82fae",
+      "frames": 600,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    },
+    {
+      "index": 8,
+      "path": "chunks\\grandtour_ros1__2024-11-18-17-13-09__chunk_006.npz",
+      "sha256": "3daf49af0ca24f52b9686dc5bdc71b06682b8c99ac4736478d1786984c9444a5",
+      "frames": 10,
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09"
+    }
+  ],
+  "streams": [
+    {
+      "stream_id": "grandtour_ros1/2024-11-18-17-13-09",
+      "chunk_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "frames": 3609,
+      "boundaries": [
+        1984,
+        2526,
+        3067,
+        3609
+      ]
+    }
+  ],
+  "roles": {
+    "train": [
+      {
+        "chunk_index": 2,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 3,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 4,
+        "ranges": [
+          [
+            0,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            0,
+            164
+          ]
+        ]
+      }
+    ],
+    "selection": [
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            204,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            0,
+            106
+          ]
+        ]
+      }
+    ],
+    "calibration": [
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            146,
+            599
+          ]
+        ]
+      },
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            0,
+            48
+          ]
+        ]
+      }
+    ],
+    "test": [
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            88,
+            600
+          ]
+        ]
+      },
+      {
+        "chunk_index": 8,
+        "ranges": [
+          [
+            0,
+            10
+          ]
+        ]
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "chunk_index": 5,
+      "ranges": [
+        [
+          164,
+          204
+        ]
+      ]
+    },
+    {
+      "chunk_index": 6,
+      "ranges": [
+        [
+          106,
+          146
+        ]
+      ]
+    },
+    {
+      "chunk_index": 7,
+      "ranges": [
+        [
+          48,
+          88
+        ]
+      ]
+    }
+  ],
+  "source_domains": [
+    "grandtour_ros1"
+  ],
+  "summary": {
+    "train": {
+      "frames": 1964,
+      "points": 26165147,
+      "unimpacted": 26003702,
+      "smoke_impacted": 146768,
+      "ignore": 14677
+    },
+    "selection": {
+      "frames": 502,
+      "points": 6568370,
+      "unimpacted": 6545884,
+      "smoke_impacted": 19695,
+      "ignore": 2791
+    },
+    "calibration": {
+      "frames": 501,
+      "points": 6270084,
+      "unimpacted": 6213736,
+      "smoke_impacted": 52725,
+      "ignore": 3623
+    },
+    "test": {
+      "frames": 522,
+      "points": 6729132,
+      "unimpacted": 6724759,
+      "smoke_impacted": 2535,
+      "ignore": 1838
+    }
+  },
+  "split_sha256": "616e12632d078c40f257e2883c7debeecaf9596b0d7f15a66f194ffaa6e645f9"
+}

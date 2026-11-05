@@ -1,0 +1,50 @@
+﻿[
+    {
+        "model":  "L1 local voxel MLP",
+        "run_name":  "moving-only-v1-l1",
+        "training_domain":  "grandtour_ros1",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\moving-only-v1-l1\\test_metrics.json",
+        "average_precision":  0.2932749552054644,
+        "roc_auc":  0.9770329282747577,
+        "brier_score":  0.0005245659464435966,
+        "f1":  0.31097243889755594,
+        "precision":  0.45614035087719296,
+        "recall":  0.2358974358974359,
+        "false_positive_rate":  0.0001060261044299134,
+        "threshold":  0.3192184865474701,
+        "points":  6727294,
+        "positives":  2535
+    },
+    {
+        "model":  "G1 global PointNet",
+        "run_name":  "moving-only-v1-g1",
+        "training_domain":  "grandtour_ros1",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\moving-only-v1-g1\\test_metrics.json",
+        "average_precision":  0.3984438368380715,
+        "roc_auc":  0.9774602903119869,
+        "brier_score":  0.0002871287127619628,
+        "f1":  0.200068282690338,
+        "precision":  0.7436548223350253,
+        "recall":  0.11558185404339251,
+        "false_positive_rate":  1.5019125592456175E-05,
+        "threshold":  0.4914531111717224,
+        "points":  6727294,
+        "positives":  2535
+    },
+    {
+        "model":  "GT global temporal PointNet-GRU",
+        "run_name":  "moving-only-v1-gt",
+        "training_domain":  "grandtour_ros1",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\moving-only-v1-gt\\test_metrics.json",
+        "average_precision":  0.3498734138939598,
+        "roc_auc":  0.9569117975135597,
+        "brier_score":  0.00032372986130971846,
+        "f1":  0.024162120031176928,
+        "precision":  0.7380952380952381,
+        "recall":  0.012282091917591125,
+        "false_positive_rate":  1.6608316116045626E-06,
+        "threshold":  0.3830823302268982,
+        "points":  6625712,
+        "positives":  2524
+    }
+]
