@@ -1,0 +1,47 @@
+﻿[
+    {
+        "model":  "L1 local voxel MLP",
+        "run_name":  "thesis-comparison-v1-l1",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\thesis-comparison-v1-l1\\test_metrics.json",
+        "average_precision":  0.4727465391840488,
+        "roc_auc":  0.9761183500676438,
+        "brier_score":  0.003810004163815295,
+        "f1":  0.44592994235267636,
+        "precision":  0.36092143411651006,
+        "recall":  0.5833205305474471,
+        "false_positive_rate":  0.004471727944053848,
+        "threshold":  0.08221089094877243,
+        "points":  9059728,
+        "positives":  39054
+    },
+    {
+        "model":  "G1 global PointNet",
+        "run_name":  "thesis-comparison-v1-g1",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\thesis-comparison-v1-g1\\test_metrics.json",
+        "average_precision":  0.027678371552830466,
+        "roc_auc":  0.909873194453668,
+        "brier_score":  0.00432320257910589,
+        "f1":  0.08144950139626472,
+        "precision":  0.04317324256545494,
+        "recall":  0.7180826547856813,
+        "false_positive_rate":  0.06890006223481748,
+        "threshold":  0.02208014950156212,
+        "points":  9059728,
+        "positives":  39054
+    },
+    {
+        "model":  "GT global temporal PointNet-GRU",
+        "run_name":  "thesis-comparison-v1-gt",
+        "test_report":  "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\thesis-comparison-v1-gt\\test_metrics.json",
+        "average_precision":  0.06742589355308162,
+        "roc_auc":  0.9453921001775902,
+        "brier_score":  0.004097509259977607,
+        "f1":  0.18009190202627812,
+        "precision":  0.10479230432881505,
+        "recall":  0.6398953354871438,
+        "false_positive_rate":  0.023218173533318953,
+        "threshold":  0.059343256056308746,
+        "points":  8855287,
+        "positives":  37453
+    }
+]

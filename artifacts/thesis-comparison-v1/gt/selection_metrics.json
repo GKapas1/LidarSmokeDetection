@@ -1,0 +1,68 @@
+{
+  "frames": 627,
+  "calibration": {
+    "slope": 0.19926932787695115,
+    "bias": -3.91903475373717
+  },
+  "metrics": {
+    "overall": {
+      "points": 8163130,
+      "positives": 46430,
+      "prevalence": 0.00568776927477573,
+      "average_precision": 0.07307696415112008,
+      "roc_auc": 0.8565092216908929,
+      "brier_score": 0.005506216447494982,
+      "threshold": 0.059343256056308746,
+      "true_positive": 21145,
+      "false_positive": 112067,
+      "true_negative": 8004633,
+      "false_negative": 25285,
+      "precision": 0.15873194607092453,
+      "recall": 0.4554167564074951,
+      "f1": 0.23541265405640105,
+      "false_positive_rate": 0.013806965885150369
+    },
+    "stationary_ros2": {
+      "points": 1703958,
+      "positives": 28929,
+      "prevalence": 0.016977531136330826,
+      "average_precision": 0.9738257646356133,
+      "roc_auc": 0.9928743102703483,
+      "brier_score": 0.015055147130626056,
+      "threshold": 0.059343256056308746,
+      "true_positive": 21114,
+      "false_positive": 2,
+      "true_negative": 1675027,
+      "false_negative": 7815,
+      "precision": 0.9999052850918735,
+      "recall": 0.7298558539873483,
+      "f1": 0.8438005794784693,
+      "false_positive_rate": 1.194009178348554e-06
+    },
+    "grandtour_ros1": {
+      "points": 6459172,
+      "positives": 17501,
+      "prevalence": 0.0027094804101826056,
+      "average_precision": 0.0037017149498758616,
+      "roc_auc": 0.6322638734411979,
+      "brier_score": 0.0029871665090560207,
+      "threshold": 0.059343256056308746,
+      "true_positive": 31,
+      "false_positive": 112065,
+      "true_negative": 6329606,
+      "false_negative": 17470,
+      "precision": 0.0002765486725663717,
+      "recall": 0.0017713273527227016,
+      "f1": 0.0004784061359445048,
+      "false_positive_rate": 0.017396883510505272
+    }
+  },
+  "run_name": "thesis-comparison-v1-gt",
+  "device": "cuda",
+  "best_epoch": 1,
+  "best_selection_mean_domain_ap": 0.48876373986336313,
+  "split_sha256": "e2e770a61f0e2ee61f23bc583b953d8f99df4a786aff4eec749b14f5b14f16f8",
+  "history_length": 5,
+  "maximum_time_gap_s": 0.25,
+  "partition": "selection"
+}

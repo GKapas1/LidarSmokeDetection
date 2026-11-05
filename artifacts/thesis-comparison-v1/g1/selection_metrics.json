@@ -1,0 +1,66 @@
+{
+  "frames": 643,
+  "calibration": {
+    "slope": 0.12667747917086372,
+    "bias": -4.180278461577187
+  },
+  "metrics": {
+    "overall": {
+      "points": 8372531,
+      "positives": 49751,
+      "prevalence": 0.005942169697550239,
+      "average_precision": 0.018961399238150555,
+      "roc_auc": 0.8024664976938025,
+      "brier_score": 0.005913650431923659,
+      "threshold": 0.02208014950156212,
+      "true_positive": 23617,
+      "false_positive": 757701,
+      "true_negative": 7565079,
+      "false_negative": 26134,
+      "precision": 0.03022712903068917,
+      "recall": 0.47470402604972767,
+      "f1": 0.056835232694276885,
+      "false_positive_rate": 0.0910394123117516
+    },
+    "stationary_ros2": {
+      "points": 1806952,
+      "positives": 30056,
+      "prevalence": 0.016633535367845963,
+      "average_precision": 0.974991052171771,
+      "roc_auc": 0.9928800916570746,
+      "brier_score": 0.015893738190030038,
+      "threshold": 0.02208014950156212,
+      "true_positive": 22675,
+      "false_positive": 4,
+      "true_negative": 1776892,
+      "false_negative": 7381,
+      "precision": 0.9998236253803078,
+      "recall": 0.7544250731966995,
+      "f1": 0.8599601782497391,
+      "false_positive_rate": 2.2511165538106903e-06
+    },
+    "grandtour_ros1": {
+      "points": 6565579,
+      "positives": 19695,
+      "prevalence": 0.0029997354384129716,
+      "average_precision": 0.0033502152586639376,
+      "roc_auc": 0.5831833137656185,
+      "brier_score": 0.0031669711924101544,
+      "threshold": 0.02208014950156212,
+      "true_positive": 942,
+      "false_positive": 757697,
+      "true_negative": 5788187,
+      "false_negative": 18753,
+      "precision": 0.0012416973026696493,
+      "recall": 0.04782939832444783,
+      "f1": 0.00242055467190178,
+      "false_positive_rate": 0.11575166929325359
+    }
+  },
+  "run_name": "thesis-comparison-v1-g1",
+  "device": "cuda",
+  "best_epoch": 1,
+  "best_selection_mean_domain_ap": 0.48917063407285194,
+  "split_sha256": "e2e770a61f0e2ee61f23bc583b953d8f99df4a786aff4eec749b14f5b14f16f8",
+  "partition": "selection"
+}
