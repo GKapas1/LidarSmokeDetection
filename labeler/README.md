@@ -13,6 +13,13 @@ It provides two independent workflows:
 
 Python 3.11 or newer is required.
 
+For the November moving-car ROS 2 recordings, use the new
+[car preparation and alignment guide](CAR_LABELING.md). `car-prepare` audits the
+MCAPs and exports per-layout review artifacts; `car-reference` builds a clean map
+from explicitly reviewed transforms. The guide also covers the experimental
+automatic hall labels and their unified training export. The stationary
+`dataset` command requires a fixed sensor position.
+
 ## Installation
 
 ```bash
@@ -255,6 +262,7 @@ training implementation can choose and record a group-safe split policy.
 | `grandtour_pipeline.py` | GrandTour reference building, labeling, validation, QC, and training export |
 | `unified_dataset.py` | Canonical conversion, schema validation, and shared training loader |
 | `cli.py` | Command-line interface |
+| `car.py` | Car MCAP audits, reference previews, motion extraction and reviewed reference construction |
 
 See [GRANDTOUR_IMPLEMENTATION.md](GRANDTOUR_IMPLEMENTATION.md) for the exact
 implemented geometry, review decisions, and artifact contract.

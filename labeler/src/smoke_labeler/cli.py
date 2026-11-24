@@ -18,6 +18,33 @@ def _parser() -> argparse.ArgumentParser:
     inspect.add_argument("bag")
     inspect.add_argument("--topic", default=None)
 
+    car_prepare = sub.add_parser("car-prepare", help="Audit car MCAPs and prepare per-layout alignment reviews")
+    car_prepare.add_argument("root")
+    car_prepare.add_argument("--output", required=True)
+    car_reference = sub.add_parser("car-reference", help="Build a car reference from explicitly reviewed alignments")
+    car_reference.add_argument("prepared")
+    car_reference.add_argument("--layout", required=True)
+    car_reference.add_argument("--output", required=True)
+    car_register = sub.add_parser(
+        "car-register-clean",
+        help="Register a bounded clean moving-car pilot against a reviewed layout map",
+    )
+    car_register.add_argument("prepared")
+    car_register.add_argument("--recording", required=True)
+    car_register.add_argument("--reference", required=True)
+    car_register.add_argument("--initial-pose", required=True)
+    car_register.add_argument("--output", required=True)
+    car_register.add_argument("--frames", type=int, default=150)
+    car_audit = sub.add_parser(
+        "car-audit-clean",
+        help="Flag possible frame-level geometry failures in a fully registered clean drive",
+    )
+    car_audit.add_argument("prepared")
+    car_audit.add_argument("--recording", required=True)
+    car_audit.add_argument("--reference", required=True)
+    car_audit.add_argument("--registration", required=True)
+    car_audit.add_argument("--output", required=True)
+
     raw_preview = sub.add_parser(
         "raw-preview",
         help="Export a sampled raw Livox bag to a CloudCompare-friendly PLY",
@@ -26,6 +53,12 @@ def _parser() -> argparse.ArgumentParser:
     raw_preview.add_argument("--output", required=True)
     raw_preview.add_argument("--topic", default="/livox/lidar")
     raw_preview.add_argument("--frame-stride", type=int, default=20)
+    raw_preview.add_argument(
+        "--frame-index",
+        type=int,
+        default=None,
+        help="Export one zero-based frame instead of applying --frame-stride",
+    )
     raw_preview.add_argument("--point-stride", type=int, default=4)
     raw_preview.add_argument("--max-points", type=int, default=300_000)
     raw_preview.add_argument("--minimum-range-m", type=float, default=0.1)
@@ -133,6 +166,36 @@ def main() -> None:
     parser = _parser()
     args = parser.parse_args()
     try:
+        if args.command == "car-prepare":
+            from .car import prepare_car_dataset
+
+            print(json.dumps(prepare_car_dataset(args.root, args.output), indent=2))
+            return
+        if args.command == "car-reference":
+            from .car import build_car_reference
+
+            print(json.dumps(build_car_reference(args.prepared, args.layout, args.output), indent=2))
+            return
+        if args.command == "car-register-clean":
+            from .car_registration import register_clean_pilot
+
+            print(json.dumps(register_clean_pilot(
+                args.prepared,
+                args.recording,
+                args.reference,
+                args.initial_pose,
+                args.output,
+                frame_count=args.frames,
+            ), indent=2))
+            return
+        if args.command == "car-audit-clean":
+            from .car_clean_audit import audit_clean_drive
+
+            print(json.dumps(audit_clean_drive(
+                args.prepared, args.recording, args.reference,
+                args.registration, args.output,
+            ), indent=2))
+            return
         if args.command == "inspect":
             inspect_bag(args.bag, args.topic)
             return
@@ -144,6 +207,7 @@ def main() -> None:
                 args.output,
                 topic=args.topic,
                 frame_stride=args.frame_stride,
+                frame_index=args.frame_index,
                 point_stride=args.point_stride,
                 max_points=args.max_points,
                 minimum_range_m=args.minimum_range_m,

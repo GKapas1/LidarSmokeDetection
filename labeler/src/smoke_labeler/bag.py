@@ -259,6 +259,7 @@ def write_raw_preview(
     *,
     topic: str | None = "/livox/lidar",
     frame_stride: int = 20,
+    frame_index: int | None = None,
     point_stride: int = 4,
     max_points: int = 300_000,
     minimum_range_m: float = 0.1,
@@ -271,6 +272,8 @@ def write_raw_preview(
     """
     if frame_stride < 1 or point_stride < 1 or max_points < 1:
         raise ValueError("frame_stride, point_stride, and max_points must be positive")
+    if frame_index is not None and frame_index < 0:
+        raise ValueError("frame_index must be nonnegative")
     if minimum_range_m < 0 or maximum_range_m <= minimum_range_m:
         raise ValueError("range limits must satisfy 0 <= minimum < maximum")
 
@@ -278,12 +281,21 @@ def write_raw_preview(
     # unnecessarily huge ASCII file. The later even sampling keeps every part
     # of a drive represented if this cap is reached.
     decode_cap = max(max_points * frame_stride * 2, max_points)
+    if frame_index is not None:
+        # MID-360 frames normally contain about 20k points. Use a generous
+        # upper bound so the decoder reaches a requested late frame.
+        decode_cap = max(decode_cap, (frame_index + 1) * 50_000 // point_stride)
     points = read_bag_points(
         value, topic=topic, point_stride=point_stride, max_points=decode_cap
     )
     ranges = np.linalg.norm(points.xyz, axis=1)
+    frame_selected = (
+        points.frame_index == frame_index
+        if frame_index is not None
+        else points.frame_index % frame_stride == 0
+    )
     selected = (
-        (points.frame_index % frame_stride == 0)
+        frame_selected
         & np.isfinite(points.xyz).all(axis=1)
         & (ranges >= minimum_range_m)
         & (ranges <= maximum_range_m)
@@ -320,6 +332,7 @@ def write_raw_preview(
         "points": int(len(xyz)),
         "source_frames": int(len(points.frame_time_s)) if points.frame_time_s is not None else 0,
         "exported_frames": int(len(frames)),
+        "requested_frame_index": frame_index,
         "frame_stride": frame_stride,
         "point_stride": point_stride,
         "range_m": [minimum_range_m, maximum_range_m],

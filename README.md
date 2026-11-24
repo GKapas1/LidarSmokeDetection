@@ -7,11 +7,12 @@ neural network and publishing the result in ROS 2.
 
 | Component | Status |
 | --- | --- |
-| [Offline labeler](labeler/README.md) | Supports stationary ROS 2 Livox recordings and moving-sensor GrandTour ROS 1 sessions |
+| [Offline labeler](labeler/README.md) | Supports stationary ROS 2 Livox recordings, GrandTour ROS 1 sessions, and moving ROS 2 car recordings |
 | ARC-5 clean reference | Built from pose-aligned MID-360 scans, with a disjoint clean interval reserved for validation |
 | ARC-6 labeled dataset | Complete: 3,609 frames and 47,306,636 points with reviewed per-point labels |
 | [Unified training dataset](data/README.md) | Complete: stationary ROS 2 and ARC-6 data share one validated, model-safe NPZ contract |
-| Neural network trainer | Local voxel-MLP pipeline implemented; global and temporal models remain planned |
+| [Neural network trainer](trainer/README.md) | Local voxel MLP, single-scan PointNet, and temporal PointNet-GRU |
+| [Moving-car training on Windows](docs/CAR_WINDOWS_TRAINING.md) | Car binary v4 is ready for a CUDA PointNet baseline with whole recordings held out |
 | ROS 2 predictor | Not implemented yet |
 
 The finalized ARC-6 labels contain 47,061,035 unimpacted points, 221,980

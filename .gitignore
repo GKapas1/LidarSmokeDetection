@@ -24,6 +24,10 @@ data/grandtour/arc*/
 data/grandtour/prepared/
 data/grandtour/training/
 data/training/
+data/raw_car/prepared/
+data/raw_car/mid360_drivetest_*/
+data/raw_car/mid360_stationary_*/
+data/raw_car/smoke/
 
 # Training artifacts
 checkpoints/
@@ -42,3 +46,4 @@ wandb/
 # in docs/ untracked.
 docs/*
 !docs/CAR_RECORDING_GUIDE.md
+!docs/CAR_WINDOWS_TRAINING.md
