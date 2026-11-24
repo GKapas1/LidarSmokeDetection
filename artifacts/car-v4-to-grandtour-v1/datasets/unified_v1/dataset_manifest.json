@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "status": "complete",
+  "dataset_schema": "dataset_schema.json",
+  "split_policy": "unassigned; assign groups before training to prevent recording leakage",
+  "chunks": [
+    {
+      "source_domain": "stationary_ros2",
+      "session_id": "20260901_lab01_pos01_v040",
+      "recording_id": "clean_pos01_control_001",
+      "condition": "clean_control",
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/towel_test/labeled_sets/20260901_lab01_pos01_v040/recordings/clean_pos01_control_001.npz",
+      "split": "unassigned",
+      "path": "chunks/stationary_ros2__20260901_lab01_pos01_v040__clean_pos01_control_001.npz",
+      "sha256": "c8ac177fac29646a995011464e2aa1c55e89d8d2972289cac784f584c262406f",
+      "frames": 565,
+      "points": 11299872,
+      "labels": {
+        "unimpacted": 7273418,
+        "smoke_impacted": 0,
+        "ignore": 4026454
+      }
+    },
+    {
+      "source_domain": "stationary_ros2",
+      "session_id": "20260901_lab01_pos01_v040",
+      "recording_id": "smoke_pos01_low_001",
+      "condition": "smoke",
+      "label_policy": "preserve_final_label",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/towel_test/labeled_sets/20260901_lab01_pos01_v040/recordings/smoke_pos01_low_001.npz",
+      "split": "unassigned",
+      "path": "chunks/stationary_ros2__20260901_lab01_pos01_v040__smoke_pos01_low_001.npz",
+      "sha256": "72f21d636a574a41dca9318893c81b0d34487c0f7f5ddf9a96dc1b3fb56bbb2d",
+      "frames": 907,
+      "points": 18175584,
+      "labels": {
+        "unimpacted": 11286986,
+        "smoke_impacted": 304729,
+        "ignore": 6583869
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_000",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_000.npz",
+      "source_time_selection_s": {
+        "start": 0.0,
+        "end": 60.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_000.npz",
+      "sha256": "0def432e70afef1a590103217df40f1294333f63d081326b6123ed99e43c76ad",
+      "frames": 600,
+      "points": 7939296,
+      "labels": {
+        "unimpacted": 7880015,
+        "smoke_impacted": 53959,
+        "ignore": 5322
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_001",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_001.npz",
+      "source_time_selection_s": {
+        "start": 60.0,
+        "end": 120.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_001.npz",
+      "sha256": "af8f59f5356868be2ff48d2f3bb1af7a39b9473a3e19a5e421e3f07064a16a6f",
+      "frames": 600,
+      "points": 8077414,
+      "labels": {
+        "unimpacted": 8070513,
+        "smoke_impacted": 3325,
+        "ignore": 3576
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_002",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_002.npz",
+      "source_time_selection_s": {
+        "start": 120.0,
+        "end": 180.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_002.npz",
+      "sha256": "947a149db259b457d787f7dac68fbeb07bf17cc8e8aaee1c6728288ae73ab23a",
+      "frames": 600,
+      "points": 7924529,
+      "labels": {
+        "unimpacted": 7834825,
+        "smoke_impacted": 85002,
+        "ignore": 4702
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_003",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_003.npz",
+      "source_time_selection_s": {
+        "start": 180.0,
+        "end": 240.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_003.npz",
+      "sha256": "da5fa092f5c2710f7f8c1d2400182cf9e5df985de10f8485341a29ce4ffb7a5e",
+      "frames": 600,
+      "points": 8057029,
+      "labels": {
+        "unimpacted": 8038940,
+        "smoke_impacted": 14839,
+        "ignore": 3250
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_004",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_004.npz",
+      "source_time_selection_s": {
+        "start": 240.0,
+        "end": 300.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_004.npz",
+      "sha256": "812d664fb15d8168dd621a634c70bbcc8b1f8cba463710000e2f2bd55fb40c46",
+      "frames": 599,
+      "points": 7522988,
+      "labels": {
+        "unimpacted": 7456023,
+        "smoke_impacted": 62318,
+        "ignore": 4647
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_005",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_005.npz",
+      "source_time_selection_s": {
+        "start": 300.0,
+        "end": 360.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_005.npz",
+      "sha256": "2284f0bda7e3f3608fe34cde8f0d9f013783fb46befdf1d7337cd7f8e8f82fae",
+      "frames": 600,
+      "points": 7656041,
+      "labels": {
+        "unimpacted": 7651441,
+        "smoke_impacted": 2519,
+        "ignore": 2081
+      }
+    },
+    {
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-17-13-09",
+      "recording_id": "chunk_006",
+      "condition": "smoke",
+      "source_path": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/training/arc6_reviewed_v1/chunks/chunk_006.npz",
+      "source_time_selection_s": {
+        "start": 360.0,
+        "end": 362.0
+      },
+      "split": "unassigned",
+      "path": "chunks/grandtour_ros1__2024-11-18-17-13-09__chunk_006.npz",
+      "sha256": "3daf49af0ca24f52b9686dc5bdc71b06682b8c99ac4736478d1786984c9444a5",
+      "frames": 10,
+      "points": 129339,
+      "labels": {
+        "unimpacted": 129278,
+        "smoke_impacted": 18,
+        "ignore": 43
+      }
+    }
+  ],
+  "frames": 5081,
+  "points": 76782092,
+  "labels": {
+    "unimpacted": 65621439,
+    "smoke_impacted": 526709,
+    "ignore": 10633944
+  }
+}

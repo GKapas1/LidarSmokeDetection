@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "protocol": "car_whole_recording_v1",
+  "manifest": "dataset_manifest.json",
+  "manifest_sha256": "de36b4066bf548835f11c2605ca6042bfe07fd7fb1b2a17100a58979d46deeae",
+  "assignment": {
+    "train": [
+      "hall_smoke1",
+      "corridor_smoke1",
+      "hall_clean_moving1",
+      "corridor_clean_moving1"
+    ],
+    "selection": [
+      "hall_smoke2",
+      "hall_clean_moving2"
+    ],
+    "calibration": [
+      "corridor_smoke2",
+      "tree_clean_moving1"
+    ],
+    "test": [
+      "tree_smoke1",
+      "tree_clean_moving2"
+    ]
+  },
+  "purge_frames_each_side": 0,
+  "chunks": [
+    {
+      "index": 0,
+      "path": "chunks/corridor_clean_moving1.npz",
+      "sha256": "6ec73f308413ac2861d0cef487307b200d665711ab8f187fe22ca390546efbfc",
+      "frames": 476,
+      "stream_id": "car_ros2/20261113_v1/corridor_clean_moving1"
+    },
+    {
+      "index": 1,
+      "path": "chunks/corridor_smoke1.npz",
+      "sha256": "ae0f0b9d58f03db28225adb9c7ee5321b959e8c651bab33ba37fe60bd0940529",
+      "frames": 278,
+      "stream_id": "car_ros2/20261113_v1/corridor_smoke1"
+    },
+    {
+      "index": 2,
+      "path": "chunks/corridor_smoke2.npz",
+      "sha256": "c589bc15c64c4e850b89aa928f503ddeef273e1dd1bb26fd6ada9a0c36560bf1",
+      "frames": 168,
+      "stream_id": "car_ros2/20261113_v1/corridor_smoke2"
+    },
+    {
+      "index": 3,
+      "path": "chunks/hall_clean_moving1.npz",
+      "sha256": "17efea171c652996b7ac725bd74a703a1ed4968a05053c6b618096f9790b6677",
+      "frames": 464,
+      "stream_id": "car_ros2/20261113_v1/hall_clean_moving1"
+    },
+    {
+      "index": 4,
+      "path": "chunks/hall_clean_moving2.npz",
+      "sha256": "4e04b83ad8f7804ca77f08c0b5daafdfcc89e9847a82984213b034fd28b9dd4d",
+      "frames": 446,
+      "stream_id": "car_ros2/20261113_v1/hall_clean_moving2"
+    },
+    {
+      "index": 5,
+      "path": "chunks/hall_smoke1.npz",
+      "sha256": "2f2f5b825255ccca0aff7a1415bc0eeddc07d5ff08b4aa4712473972f4cbd7b0",
+      "frames": 312,
+      "stream_id": "car_ros2/20261113_v1/hall_smoke1"
+    },
+    {
+      "index": 6,
+      "path": "chunks/hall_smoke2.npz",
+      "sha256": "fba51ecb2aa382d0b20215c098a1d174f406784648d73e5c0d65aa22fdc7024d",
+      "frames": 271,
+      "stream_id": "car_ros2/20261113_v1/hall_smoke2"
+    },
+    {
+      "index": 7,
+      "path": "chunks/tree_clean_moving1.npz",
+      "sha256": "75c84e762e41bb50ffce6cd3cde5b9c403549a02cf6aff9b418bea76931f068f",
+      "frames": 404,
+      "stream_id": "car_ros2/20261113_v1/tree_clean_moving1"
+    },
+    {
+      "index": 8,
+      "path": "chunks/tree_clean_moving2.npz",
+      "sha256": "1c25941e4fd2fe8246f4793b81b4e5978785effbf46181860f0451ad55591c8f",
+      "frames": 406,
+      "stream_id": "car_ros2/20261113_v1/tree_clean_moving2"
+    },
+    {
+      "index": 9,
+      "path": "chunks/tree_smoke1.npz",
+      "sha256": "a5d8f80bafc4adfde578b20e2c3f142a3f4312e33c4b83ac253a0f37bd21176f",
+      "frames": 362,
+      "stream_id": "car_ros2/20261113_v1/tree_smoke1"
+    }
+  ],
+  "roles": {
+    "train": [
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            0,
+            278
+          ]
+        ]
+      },
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            0,
+            312
+          ]
+        ]
+      },
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            0,
+            476
+          ]
+        ]
+      },
+      {
+        "chunk_index": 3,
+        "ranges": [
+          [
+            0,
+            464
+          ]
+        ]
+      }
+    ],
+    "selection": [
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            0,
+            271
+          ]
+        ]
+      },
+      {
+        "chunk_index": 4,
+        "ranges": [
+          [
+            0,
+            446
+          ]
+        ]
+      }
+    ],
+    "calibration": [
+      {
+        "chunk_index": 2,
+        "ranges": [
+          [
+            0,
+            168
+          ]
+        ]
+      },
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            0,
+            404
+          ]
+        ]
+      }
+    ],
+    "test": [
+      {
+        "chunk_index": 9,
+        "ranges": [
+          [
+            0,
+            362
+          ]
+        ]
+      },
+      {
+        "chunk_index": 8,
+        "ranges": [
+          [
+            0,
+            406
+          ]
+        ]
+      }
+    ]
+  },
+  "excluded": [],
+  "summary": {
+    "train": {
+      "frames": 1530,
+      "points": 30592608,
+      "unimpacted": 22403985,
+      "smoke_impacted": 177987,
+      "ignore": 8010636
+    },
+    "selection": {
+      "frames": 717,
+      "points": 14336640,
+      "unimpacted": 10981365,
+      "smoke_impacted": 111268,
+      "ignore": 3244007
+    },
+    "calibration": {
+      "frames": 572,
+      "points": 11435808,
+      "unimpacted": 8141818,
+      "smoke_impacted": 112676,
+      "ignore": 3181314
+    },
+    "test": {
+      "frames": 768,
+      "points": 15357120,
+      "unimpacted": 9796741,
+      "smoke_impacted": 67462,
+      "ignore": 5492917
+    }
+  },
+  "split_sha256": "a68aa7abd70249053faaa00f830b854cdd559d2953c411c1063a5a700313faf0"
+}
