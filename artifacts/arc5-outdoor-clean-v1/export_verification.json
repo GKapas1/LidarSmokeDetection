@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "frames_checked_against_raw": 1161,
+  "points_checked_against_raw": 15488560,
+  "raw_xyz_intensity_tag_line_and_point_offsets_identical": true,
+  "all_frame_labels_independently_recomputed": true,
+  "training_frames": 1000,
+  "training_first_source_time_s": 95.099752188,
+  "training_last_source_time_s": 194.999878407,
+  "training_maximum_frame_gap_s": 0.1003284459999918,
+  "training_clean_range_counts": {
+    "clean_under_1m": 29942,
+    "clean_1_to_3m": 7715600,
+    "clean_3_to_5m": 2070244,
+    "clean_5_to_8m": 1118865,
+    "clean_over_8m": 1988693
+  },
+  "training_sensor_positions_inside_existing_reference_crop": 0,
+  "excluded_transition_frames": 161,
+  "limitation": "Sensor position outside the indoor crop does not establish that every visible surface is unique to the outdoor passage."
+}

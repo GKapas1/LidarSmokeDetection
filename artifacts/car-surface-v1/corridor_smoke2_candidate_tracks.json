@@ -1,0 +1,624 @@
+[
+  {
+    "track_id": 0,
+    "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "points": 52589,
+    "minimum_range_m": 0.6119329929351807,
+    "maximum_range_m": 2.624196767807007,
+    "original_background": 284,
+    "original_smoke": 50500,
+    "original_unknown": 1805
+  },
+  {
+    "track_id": 353,
+    "frames": [
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      139,
+      141,
+      142,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166
+    ],
+    "points": 28299,
+    "minimum_range_m": 0.7749948501586914,
+    "maximum_range_m": 2.561431646347046,
+    "original_background": 11,
+    "original_smoke": 27272,
+    "original_unknown": 1016
+  },
+  {
+    "track_id": 377,
+    "frames": [
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      139,
+      141,
+      142,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166
+    ],
+    "points": 1422,
+    "minimum_range_m": 1.7333084344863892,
+    "maximum_range_m": 3.4430317878723145,
+    "original_background": 21,
+    "original_smoke": 262,
+    "original_unknown": 1139
+  },
+  {
+    "track_id": 5,
+    "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "points": 407,
+    "minimum_range_m": 2.3954477310180664,
+    "maximum_range_m": 3.5087244510650635,
+    "original_background": 2,
+    "original_smoke": 42,
+    "original_unknown": 363
+  },
+  {
+    "track_id": 268,
+    "frames": [
+      46,
+      47,
+      48,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "points": 126,
+    "minimum_range_m": 0.6953517198562622,
+    "maximum_range_m": 1.0465352535247803,
+    "original_background": 80,
+    "original_smoke": 0,
+    "original_unknown": 46
+  },
+  {
+    "track_id": 3,
+    "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18
+    ],
+    "points": 122,
+    "minimum_range_m": 2.4988625049591064,
+    "maximum_range_m": 2.6422252655029297,
+    "original_background": 45,
+    "original_smoke": 0,
+    "original_unknown": 77
+  },
+  {
+    "track_id": 179,
+    "frames": [
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "points": 89,
+    "minimum_range_m": 2.223900079727173,
+    "maximum_range_m": 2.5531716346740723,
+    "original_background": 32,
+    "original_smoke": 0,
+    "original_unknown": 57
+  },
+  {
+    "track_id": 152,
+    "frames": [
+      21,
+      23,
+      25,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "points": 79,
+    "minimum_range_m": 2.611382007598877,
+    "maximum_range_m": 3.03544020652771,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 79
+  },
+  {
+    "track_id": 312,
+    "frames": [
+      54,
+      56,
+      57,
+      58,
+      59
+    ],
+    "points": 45,
+    "minimum_range_m": 1.8418278694152832,
+    "maximum_range_m": 2.1541330814361572,
+    "original_background": 37,
+    "original_smoke": 0,
+    "original_unknown": 8
+  },
+  {
+    "track_id": 410,
+    "frames": [
+      146,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153
+    ],
+    "points": 44,
+    "minimum_range_m": 2.4904253482818604,
+    "maximum_range_m": 2.71333384513855,
+    "original_background": 10,
+    "original_smoke": 0,
+    "original_unknown": 34
+  },
+  {
+    "track_id": 360,
+    "frames": [
+      124,
+      125,
+      126,
+      127
+    ],
+    "points": 30,
+    "minimum_range_m": 0.44344672560691833,
+    "maximum_range_m": 0.6898623108863831,
+    "original_background": 29,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 4,
+    "frames": [
+      2,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "points": 28,
+    "minimum_range_m": 2.3438620567321777,
+    "maximum_range_m": 2.3842437267303467,
+    "original_background": 23,
+    "original_smoke": 0,
+    "original_unknown": 5
+  },
+  {
+    "track_id": 168,
+    "frames": [
+      24,
+      25,
+      26,
+      27,
+      29
+    ],
+    "points": 26,
+    "minimum_range_m": 2.218981981277466,
+    "maximum_range_m": 2.2765085697174072,
+    "original_background": 15,
+    "original_smoke": 0,
+    "original_unknown": 11
+  },
+  {
+    "track_id": 329,
+    "frames": [
+      57,
+      58,
+      59
+    ],
+    "points": 25,
+    "minimum_range_m": 0.3011079728603363,
+    "maximum_range_m": 0.36152178049087524,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 25
+  },
+  {
+    "track_id": 2,
+    "frames": [
+      2,
+      3,
+      4,
+      6
+    ],
+    "points": 15,
+    "minimum_range_m": 1.5540941953659058,
+    "maximum_range_m": 1.696748971939087,
+    "original_background": 15,
+    "original_smoke": 0,
+    "original_unknown": 0
+  },
+  {
+    "track_id": 475,
+    "frames": [
+      160,
+      162,
+      164
+    ],
+    "points": 12,
+    "minimum_range_m": 3.406057357788086,
+    "maximum_range_m": 3.5986135005950928,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 12
+  },
+  {
+    "track_id": 120,
+    "frames": [
+      17,
+      19,
+      21
+    ],
+    "points": 11,
+    "minimum_range_m": 3.393728017807007,
+    "maximum_range_m": 3.475343704223633,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 11
+  },
+  {
+    "track_id": 356,
+    "frames": [
+      123
+    ],
+    "points": 10,
+    "minimum_range_m": 2.129002332687378,
+    "maximum_range_m": 2.197211980819702,
+    "original_background": 0,
+    "original_smoke": 10,
+    "original_unknown": 0
+  },
+  {
+    "track_id": 333,
+    "frames": [
+      57,
+      58
+    ],
+    "points": 9,
+    "minimum_range_m": 2.4942214488983154,
+    "maximum_range_m": 2.647601366043091,
+    "original_background": 8,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 217,
+    "frames": [
+      33,
+      35
+    ],
+    "points": 6,
+    "minimum_range_m": 3.411106586456299,
+    "maximum_range_m": 3.4784419536590576,
+    "original_background": 3,
+    "original_smoke": 0,
+    "original_unknown": 3
+  },
+  {
+    "track_id": 432,
+    "frames": [
+      151,
+      153
+    ],
+    "points": 6,
+    "minimum_range_m": 3.3208370208740234,
+    "maximum_range_m": 3.4846315383911133,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 6
+  },
+  {
+    "track_id": 331,
+    "frames": [
+      57
+    ],
+    "points": 5,
+    "minimum_range_m": 2.684743642807007,
+    "maximum_range_m": 2.7159202098846436,
+    "original_background": 5,
+    "original_smoke": 0,
+    "original_unknown": 0
+  },
+  {
+    "track_id": 276,
+    "frames": [
+      48,
+      50
+    ],
+    "points": 4,
+    "minimum_range_m": 1.469519019126892,
+    "maximum_range_m": 1.7443835735321045,
+    "original_background": 0,
+    "original_smoke": 1,
+    "original_unknown": 3
+  },
+  {
+    "track_id": 54,
+    "frames": [
+      8
+    ],
+    "points": 3,
+    "minimum_range_m": 3.3988120555877686,
+    "maximum_range_m": 3.457815647125244,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 3
+  },
+  {
+    "track_id": 110,
+    "frames": [
+      16
+    ],
+    "points": 3,
+    "minimum_range_m": 2.0673699378967285,
+    "maximum_range_m": 2.2587692737579346,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 3
+  },
+  {
+    "track_id": 142,
+    "frames": [
+      20
+    ],
+    "points": 3,
+    "minimum_range_m": 1.5795437097549438,
+    "maximum_range_m": 1.6224229335784912,
+    "original_background": 3,
+    "original_smoke": 0,
+    "original_unknown": 0
+  },
+  {
+    "track_id": 207,
+    "frames": [
+      31
+    ],
+    "points": 3,
+    "minimum_range_m": 1.1335859298706055,
+    "maximum_range_m": 1.1519501209259033,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 3
+  },
+  {
+    "track_id": 105,
+    "frames": [
+      15
+    ],
+    "points": 1,
+    "minimum_range_m": 2.355255126953125,
+    "maximum_range_m": 2.355255126953125,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 187,
+    "frames": [
+      27
+    ],
+    "points": 1,
+    "minimum_range_m": 1.489992380142212,
+    "maximum_range_m": 1.489992380142212,
+    "original_background": 1,
+    "original_smoke": 0,
+    "original_unknown": 0
+  },
+  {
+    "track_id": 234,
+    "frames": [
+      36
+    ],
+    "points": 1,
+    "minimum_range_m": 3.5161333084106445,
+    "maximum_range_m": 3.5161333084106445,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 253,
+    "frames": [
+      42
+    ],
+    "points": 1,
+    "minimum_range_m": 1.8250150680541992,
+    "maximum_range_m": 1.8250150680541992,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 292,
+    "frames": [
+      51
+    ],
+    "points": 1,
+    "minimum_range_m": 1.3657302856445312,
+    "maximum_range_m": 1.3657302856445312,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 1
+  },
+  {
+    "track_id": 407,
+    "frames": [
+      142
+    ],
+    "points": 1,
+    "minimum_range_m": 2.5562562942504883,
+    "maximum_range_m": 2.5562562942504883,
+    "original_background": 0,
+    "original_smoke": 0,
+    "original_unknown": 1
+  }
+]

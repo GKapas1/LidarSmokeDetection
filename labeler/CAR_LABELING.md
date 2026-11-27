@@ -1,5 +1,48 @@
 # Preparing the November RC-car recordings
 
+## Full-recording object-surface pilot
+
+`scripts/refine_car_surfaces.py` fits finite corridor faces and a lower-trunk
+cylinder from registered scan measurements. Models are fitted independently for
+each recording. Panel endpoints require support in at least three other one-second
+blocks. Existing smoke labels can become background on supported surfaces. Smoke
+labels in the surface ambiguity band are preserved. The trunk fit is checked on alternating
+time blocks. Its seed region comes from the reviewed lower trunk in frames 122–124.
+
+From the repository root, using the existing November preparation and review:
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=labeler/src \
+  labeler/.venv/bin/python labeler/scripts/refine_car_surfaces.py \
+  --base data/training/car_binary_v4 \
+  --prepared data/raw_car/prepared \
+  --reviews artifacts/car-surface-v1/reviewed_input_points.csv \
+  --split experiments/splits/car_whole_recording_v1.json \
+  --output data/training/car_surface_v2
+```
+
+The output is a complete portable training dataset with its own manifest, schema
+and `split.json`. Frame assignments follow the input whole-recording split.
+Only labels are revised. Per-point sensor inputs, timestamps and ordering are
+verified against the source. The output directory must be new. Dataset creation
+is staged and published after the complete export succeeds.
+
+The `audit/` directory retains models, scan hashes, original point IDs, class
+transitions, clean-control smoke proposals, candidate sequences and PLY examples.
+PLY colors are green for background, orange for smoke and gray for ignored.
+`v4_label` and `label` permit comparisons in a point-cloud viewer. Reasons are
+1 for a supported surface, 4 for propagation from reviewed
+smoke, and 8 for an explicit point review.
+
+The seed-independent smoke search requires clear-space or panel-depth evidence
+and neighboring-scan support. It exports candidates on clean controls as an error
+check. New positive labels require connection to user-reviewed smoke examples.
+Other candidate sequences remain available for review. Clean-control labels retain
+their known-clean definition. A count of changed or accepted points does not
+measure annotation accuracy. Review sampled object boundaries and smoke at
+different ranges before using the pilot as thesis ground truth. The tree recording
+is in the test role, so comparisons must identify which label version was scored.
+
 The new `car-prepare` workflow reads your ROS 2 MCAPs directly on the laptop.
 It does not need ROS installed, a running car, or a repaired `metadata.yaml`.
 It prepares reference alignment and motion review. Section 6 includes an

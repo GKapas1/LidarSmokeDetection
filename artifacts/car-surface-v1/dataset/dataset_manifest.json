@@ -1,0 +1,336 @@
+{
+  "schema_version": "1.0",
+  "status": "complete",
+  "dataset_schema": "dataset_schema.json",
+  "split_policy": "unassigned; keep whole recordings together",
+  "prepared_inventory": {
+    "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/prepared/20261113_v1/manifest.json",
+    "sha256": "6c60fb7c95fb70c538e91f438b8904fcf4354475846fd913bc31500e4214a11b"
+  },
+  "frozen_smoke_manifest": {
+    "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/prepared/labels/car_smoke_v1/manifest.json",
+    "sha256": "d2394f499799e7848d9907044e3ee003b7f0ea1e367e758c93d916b4fbe17967"
+  },
+  "chunks": [
+    {
+      "path": "chunks/corridor_clean_moving1.npz",
+      "sha256": "6ec73f308413ac2861d0cef487307b200d665711ab8f187fe22ca390546efbfc",
+      "frames": 476,
+      "points": 9516960,
+      "labels": {
+        "unimpacted": 8989272,
+        "smoke_impacted": 0,
+        "ignore": 527688
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "corridor_clean_moving1",
+      "condition": "clean_control",
+      "layout": "corridor",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_corridor_clean_moving1/mid360_corridor_clean_moving1_0.mcap",
+          "bytes": 196782162,
+          "sha256": "e006dc070c75ae4ce4d7b7e5f56d5e9dcdc8b76834ab04b7903058471608d144"
+        }
+      ],
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/corridor_smoke1.npz",
+      "sha256": "784daa49d544e150c91eca218f4efbc2bad6a51ed772e693b187bea76fc1c6c8",
+      "frames": 278,
+      "points": 5559168,
+      "labels": {
+        "unimpacted": 1034288,
+        "smoke_impacted": 69338,
+        "ignore": 4455542
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "corridor_smoke1",
+      "condition": "smoke",
+      "layout": "corridor",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_corridor_smoke1/mid360_corridor_smoke1_0.mcap",
+          "bytes": 114954641,
+          "sha256": "434ba17841c18ee6d330c8b82b4c0211ca109607a29d57393489576d1e923fdb"
+        }
+      ],
+      "label_policy": "object_surface_review_pilot_v1",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/corridor_smoke2.npz",
+      "sha256": "454de08a5033a83ba083fde0fcdaa118e7fa9495bad037f458566caeef18cafe",
+      "frames": 168,
+      "points": 3359040,
+      "labels": {
+        "unimpacted": 419715,
+        "smoke_impacted": 110790,
+        "ignore": 2828535
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "corridor_smoke2",
+      "condition": "smoke",
+      "layout": "corridor",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_corridor_smoke2/mid360_corridor_smoke2_0.mcap",
+          "bytes": 69480857,
+          "sha256": "64dd8b54a84cf8092815833ecb560697a718bc156de850d872d5519f0f82eea6"
+        }
+      ],
+      "label_policy": "object_surface_review_pilot_v1",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/hall_clean_moving1.npz",
+      "sha256": "17efea171c652996b7ac725bd74a703a1ed4968a05053c6b618096f9790b6677",
+      "frames": 464,
+      "points": 9276672,
+      "labels": {
+        "unimpacted": 8898985,
+        "smoke_impacted": 0,
+        "ignore": 377687
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "hall_clean_moving1",
+      "condition": "clean_control",
+      "layout": "hall",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_hall_clean_moving1/mid360_hall_clean_moving1_0.mcap",
+          "bytes": 191810516,
+          "sha256": "66313c47ccf0ce78206f192ff993cb539f28cb27b3db27da2121d40b758ba5c8"
+        }
+      ],
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/hall_clean_moving2.npz",
+      "sha256": "4e04b83ad8f7804ca77f08c0b5daafdfcc89e9847a82984213b034fd28b9dd4d",
+      "frames": 446,
+      "points": 8916672,
+      "labels": {
+        "unimpacted": 8551554,
+        "smoke_impacted": 0,
+        "ignore": 365118
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "hall_clean_moving2",
+      "condition": "clean_control",
+      "layout": "hall",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_hall_clean_moving2/mid360_hall_clean_moving2_0.mcap",
+          "bytes": 184363243,
+          "sha256": "713a46221d441dfa2269b359a84c51dc0c3bb6fa1fe8249066995d28684c6002"
+        }
+      ],
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/hall_smoke1.npz",
+      "sha256": "2f2f5b825255ccca0aff7a1415bc0eeddc07d5ff08b4aa4712473972f4cbd7b0",
+      "frames": 312,
+      "points": 6239808,
+      "labels": {
+        "unimpacted": 3544246,
+        "smoke_impacted": 104654,
+        "ignore": 2590908
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "hall_smoke1",
+      "condition": "smoke",
+      "layout": "hall",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_hall_smoke1/mid360_hall_smoke1_0.mcap",
+          "bytes": 129035086,
+          "sha256": "692a7d8657125fe4825f25127db39ccb02efcc18462d88e6553a5ff52f08083d"
+        }
+      ],
+      "label_policy": "frozen_smoke_with_room_panel_and_tree_background",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/hall_smoke2.npz",
+      "sha256": "fba51ecb2aa382d0b20215c098a1d174f406784648d73e5c0d65aa22fdc7024d",
+      "frames": 271,
+      "points": 5419968,
+      "labels": {
+        "unimpacted": 2429811,
+        "smoke_impacted": 111268,
+        "ignore": 2878889
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "hall_smoke2",
+      "condition": "smoke",
+      "layout": "hall",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_hall_smoke2/mid360_hall_smoke2_0.mcap",
+          "bytes": 112074519,
+          "sha256": "0bf0d562152311e0c74830b68edadab6a7f6dc628d4cba41f808bc0fd85816ae"
+        }
+      ],
+      "label_policy": "frozen_smoke_with_room_panel_and_tree_background",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/tree_clean_moving1.npz",
+      "sha256": "75c84e762e41bb50ffce6cd3cde5b9c403549a02cf6aff9b418bea76931f068f",
+      "frames": 404,
+      "points": 8076768,
+      "labels": {
+        "unimpacted": 7747303,
+        "smoke_impacted": 0,
+        "ignore": 329465
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "tree_clean_moving1",
+      "condition": "clean_control",
+      "layout": "tree",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_tree_clean_moving1/mid360_tree_clean_moving1_0.mcap",
+          "bytes": 167012619,
+          "sha256": "4d8a59b52b589017b8cd6b53e86a1c21fd8bfe54bffa4f1e45b7912ef3b77479"
+        }
+      ],
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/tree_clean_moving2.npz",
+      "sha256": "1c25941e4fd2fe8246f4793b81b4e5978785effbf46181860f0451ad55591c8f",
+      "frames": 406,
+      "points": 8116320,
+      "labels": {
+        "unimpacted": 7792208,
+        "smoke_impacted": 0,
+        "ignore": 324112
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "tree_clean_moving2",
+      "condition": "clean_control",
+      "layout": "tree",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_tree_clean_moving2/mid360_tree_clean_moving2_0.mcap",
+          "bytes": 167819995,
+          "sha256": "2966404d5ef30fead4e27e8c9c1501f974cd056348c52681d1977233d1953856"
+        }
+      ],
+      "label_policy": "known_clean_valid_points_are_unimpacted",
+      "split": "unassigned"
+    },
+    {
+      "path": "chunks/tree_smoke1.npz",
+      "sha256": "bc0c207af5baf301a4657e6e1530e1608843e53bbb1a14e2afc69b6d4d1e394b",
+      "frames": 362,
+      "points": 7240800,
+      "labels": {
+        "unimpacted": 2005478,
+        "smoke_impacted": 66374,
+        "ignore": 5168948
+      },
+      "source_domain": "car_ros2",
+      "session_id": "20261113_v1",
+      "recording_id": "tree_smoke1",
+      "condition": "smoke",
+      "layout": "tree",
+      "source_files": [
+        {
+          "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/smoke/mid360_tree_smoke1/mid360_tree_smoke1_0.mcap",
+          "bytes": 149730878,
+          "sha256": "a261313cf9017b8e04dde20efa2332f591793f68608a38fd91cbf2667c4b8367"
+        }
+      ],
+      "label_policy": "object_surface_review_pilot_v1",
+      "split": "unassigned"
+    }
+  ],
+  "frames": 3587,
+  "points": 71722176,
+  "labels": {
+    "unimpacted": 51412860,
+    "smoke_impacted": 462424,
+    "ignore": 19846892
+  },
+  "dataset_version": "car_surface_v1",
+  "background_review": {
+    "path": "/home/user/Smoke/LidarSmokeDetection/data/raw_car/prepared/diagnostics/smoky_background_v3/results.json",
+    "status": "automatic background proposals, with hall development check"
+  },
+  "label_review_status": "Automatic full-recording pilot with user-reviewed clip anchors",
+  "surface_review": {
+    "settings": {
+      "version": "car_surface_v1",
+      "time_block_s": 1.0,
+      "panel_anchor_intensity_min": 4,
+      "panel_roi_min": [
+        -5.7,
+        -3.5,
+        0.08
+      ],
+      "panel_roi_max": [
+        -0.4,
+        0.2,
+        1.6
+      ],
+      "smoke_roi_min": [
+        -5.8,
+        -3.6,
+        0.12
+      ],
+      "smoke_roi_max": [
+        -0.3,
+        0.4,
+        2.5
+      ],
+      "trunk_seed_min": [
+        -1.95,
+        -1.49,
+        0.1
+      ],
+      "trunk_seed_max": [
+        -1.82,
+        -1.31,
+        0.55
+      ],
+      "trunk_center_bounds": [
+        [
+          -1.97,
+          -1.51
+        ],
+        [
+          -1.8,
+          -1.29
+        ]
+      ],
+      "smoke_cluster_radius_m": 0.2,
+      "smoke_minimum_neighbors": 3,
+      "temporal_window_s": 0.31,
+      "temporal_radius_m": 0.25,
+      "smoke_policy": "Only tracks connected to user-reviewed smoke points become new label 1. Other tracks are review candidates."
+    },
+    "source_hashes": {
+      "data/training/car_binary_v4/dataset_manifest.json": "de36b4066bf548835f11c2605ca6042bfe07fd7fb1b2a17100a58979d46deeae",
+      "runs/car-label-review/reviewed/label_overrides.csv": "dbf6284141eab875419c1671b3e7cd61c3ead5b325e3bfc565b27931f8c91f85"
+    },
+    "report": "audit/summary.json"
+  }
+}

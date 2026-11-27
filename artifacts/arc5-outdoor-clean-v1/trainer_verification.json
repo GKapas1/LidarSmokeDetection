@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "manifest_checksums": "passed",
+  "all_chunks_schema_and_metadata": "passed",
+  "split_hash_and_summary": "passed",
+  "frame_assignment_coverage": "passed",
+  "local_and_global_adapters": "passed",
+  "five_scan_temporal_windows": 992
+}

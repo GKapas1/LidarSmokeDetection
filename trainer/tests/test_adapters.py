@@ -7,7 +7,7 @@ import unittest
 import numpy as np
 import torch
 
-from smoke_trainer.adapters import GlobalPointAdapter, LocalVoxelAdapter, create_adapter_for_model
+from smoke_trainer.adapters import GlobalPointAdapter, LocalVoxelAdapter, VoxelPointAdapter, create_adapter_for_model
 from smoke_trainer.data import Frame, FrameRef, UnifiedDataset
 from smoke_trainer.evaluate import Calibration, frame_logits
 from smoke_trainer.features import fit_normalizer
@@ -18,6 +18,18 @@ from helpers import make_dataset
 
 
 class AdapterTests(unittest.TestCase):
+    def test_voxel_points_use_local_geometry_and_preserve_mapping(self):
+        source = Frame(FrameRef(0, 0), "test", "s", "r", "smoke", 0.0,
+            np.array([[0.1, 0, 0], [0.3, 0, 0], [1.2, 0, 0], [np.nan, 0, 0]], dtype=np.float32),
+            np.array([1, 2, 3, 4], dtype=np.float32), np.array([0, 1, 0, 1], dtype=np.uint8))
+        adapter = VoxelPointAdapter()
+        prepared = adapter.prepare(source, {"voxel_size_m": 1.0})
+        np.testing.assert_allclose(prepared.features[:, 0], [-0.1, 0.1, 0], atol=1e-6)
+        np.testing.assert_array_equal(prepared.features[:, -1], [0, 0, 1])
+        np.testing.assert_array_equal(prepared.point_index, [0, 1, 2, -1])
+        normalizer = adapter.fit_normalizer([source], {"voxel_size_m": 1.0})
+        np.testing.assert_array_equal(normalizer.transform(prepared.features)[:, -1], [0, 0, 1])
+
     def _source_frame(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

@@ -1,0 +1,9 @@
+{
+  "changed_points": 93606,
+  "raw_fields_and_order": "byte-equivalent arrays for all ten chunks",
+  "split_roles": "identical frame assignments",
+  "manual_review_points_verified": 279,
+  "trainer_manifest_checksums": "passed",
+  "trainer_chunk_validation": "passed",
+  "audit_changes_match_export": "passed"
+}

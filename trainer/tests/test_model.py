@@ -5,10 +5,24 @@ import unittest
 import torch
 from torch.nn import functional as F
 
-from smoke_trainer.models import GlobalPointNet, GlobalTemporalPointNet, LocalMLP
+from smoke_trainer.models import GlobalPointNet, GlobalTemporalPointNet, LocalMLP, VoxelPointNet
 
 
 class ModelTests(unittest.TestCase):
+    def test_voxel_pointnet_is_local_and_permutation_equivariant(self):
+        torch.manual_seed(5)
+        model = VoxelPointNet(5, (8, 12), (6,)).eval()
+        features = torch.tensor([[0.1, 0, 0, 1, 0], [-0.1, 0, 0, 2, 0],
+                                 [0, 0, 0, 3, 1]], dtype=torch.float32)
+        output = model(features)
+        torch.testing.assert_close(output[0], output[1])
+        permutation = torch.tensor([2, 0, 1])
+        torch.testing.assert_close(model(features[permutation]), output[permutation])
+        changed = features.clone()
+        changed[2, 3] = 1000
+        torch.testing.assert_close(model(changed)[:2], output[:2])
+        self.assertEqual(model(features[:0]).shape, (0,))
+
     def test_local_model_returns_one_logit_per_voxel(self):
         model = LocalMLP(11, (8, 4))
         output = model(torch.zeros((7, 11)))

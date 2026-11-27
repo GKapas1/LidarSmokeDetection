@@ -1,0 +1,175 @@
+{
+  "settings": {
+    "version": "car_surface_v1",
+    "time_block_s": 1.0,
+    "panel_anchor_intensity_min": 4,
+    "panel_roi_min": [
+      -5.7,
+      -3.5,
+      0.08
+    ],
+    "panel_roi_max": [
+      -0.4,
+      0.2,
+      1.6
+    ],
+    "smoke_roi_min": [
+      -5.8,
+      -3.6,
+      0.12
+    ],
+    "smoke_roi_max": [
+      -0.3,
+      0.4,
+      2.5
+    ],
+    "trunk_seed_min": [
+      -1.95,
+      -1.49,
+      0.1
+    ],
+    "trunk_seed_max": [
+      -1.82,
+      -1.31,
+      0.55
+    ],
+    "trunk_center_bounds": [
+      [
+        -1.97,
+        -1.51
+      ],
+      [
+        -1.8,
+        -1.29
+      ]
+    ],
+    "smoke_cluster_radius_m": 0.2,
+    "smoke_minimum_neighbors": 3,
+    "temporal_window_s": 0.31,
+    "temporal_radius_m": 0.25,
+    "smoke_policy": "Only tracks connected to user-reviewed smoke points become new label 1. Other tracks are review candidates."
+  },
+  "source_hashes": {
+    "data/training/car_binary_v4/dataset_manifest.json": "de36b4066bf548835f11c2605ca6042bfe07fd7fb1b2a17100a58979d46deeae",
+    "runs/car-label-review/reviewed/label_overrides.csv": "dbf6284141eab875419c1671b3e7cd61c3ead5b325e3bfc565b27931f8c91f85"
+  },
+  "records": {
+    "corridor_clean_moving1": {
+      "recording": "corridor_clean_moving1",
+      "approved_frames": 353,
+      "total_frames": 476,
+      "changed": 0,
+      "supported_smoke_candidates": 3196,
+      "candidate_tracks": 72,
+      "candidate_frames": 294,
+      "transitions": {
+        "255->0": 0,
+        "1->0": 0,
+        "1->255": 0,
+        "255->1": 0
+      }
+    },
+    "corridor_smoke1": {
+      "recording": "corridor_smoke1",
+      "approved_frames": 204,
+      "total_frames": 278,
+      "changed": 65563,
+      "supported_smoke_candidates": 71390,
+      "candidate_tracks": 50,
+      "candidate_frames": 200,
+      "transitions": {
+        "255->0": 61442,
+        "1->0": 1364,
+        "1->255": 2694,
+        "255->1": 63
+      }
+    },
+    "corridor_smoke2": {
+      "recording": "corridor_smoke2",
+      "approved_frames": 101,
+      "total_frames": 168,
+      "changed": 26455,
+      "supported_smoke_candidates": 83427,
+      "candidate_tracks": 33,
+      "candidate_frames": 96,
+      "transitions": {
+        "255->0": 24569,
+        "1->0": 631,
+        "1->255": 1255,
+        "255->1": 0
+      }
+    },
+    "tree_clean_moving1": {
+      "recording": "tree_clean_moving1",
+      "approved_frames": 398,
+      "total_frames": 404,
+      "changed": 0,
+      "supported_smoke_candidates": 1286,
+      "candidate_tracks": 16,
+      "candidate_frames": 108,
+      "transitions": {
+        "255->0": 0,
+        "1->0": 0,
+        "1->255": 0,
+        "255->1": 0
+      }
+    },
+    "tree_clean_moving2": {
+      "recording": "tree_clean_moving2",
+      "approved_frames": 379,
+      "total_frames": 406,
+      "changed": 0,
+      "supported_smoke_candidates": 1672,
+      "candidate_tracks": 18,
+      "candidate_frames": 134,
+      "transitions": {
+        "255->0": 0,
+        "1->0": 0,
+        "1->255": 0,
+        "255->1": 0
+      }
+    },
+    "tree_smoke1": {
+      "recording": "tree_smoke1",
+      "approved_frames": 219,
+      "total_frames": 362,
+      "changed": 1588,
+      "supported_smoke_candidates": 45905,
+      "candidate_tracks": 85,
+      "candidate_frames": 193,
+      "transitions": {
+        "255->0": 500,
+        "1->0": 445,
+        "1->255": 643,
+        "255->1": 0
+      }
+    }
+  },
+  "limitations": [
+    "Surface tolerances and registration are empirical.",
+    "Clean recordings have also been inspected during earlier label development.",
+    "Label correctness across unreviewed scans remains unmeasured.",
+    "Tree test labels have changed. Report old- and new-label metrics separately.",
+    "Unlinked smoke candidates require review before class-1 export."
+  ],
+  "implementation_sha256_at_export": {
+    "/home/user/Smoke/LidarSmokeDetection/labeler/scripts/refine_car_surfaces.py": "6eb8cbc821d33bb4e9722b49e7ddcb0e778143c9e840e0adb904ed1462579f16",
+    "object_surfaces.py": "542db3883d13191d532b1bedb735814033149ffb9f4184f567f875c7bbf7624d"
+  },
+  "implementation_sha256": {
+    "labeler/scripts/refine_car_surfaces.py": "39b0bf186cc28e8b47420436e1ed3fb7dbf583c79b2be968832f95aa3d16e81d",
+    "labeler/src/smoke_labeler/object_surfaces.py": "1d5e0e7bfab39ff648e8ec0f99d4abc25bad578cc27222f9062bd72520f8228c",
+    "labeler/scripts/plot_car_surface_review.py": "b275c2f86280b6aae04256b7307923553f1c4780e63319cdef68b349f40b2743"
+  },
+  "post_export_maintenance": "Moved the unchanged rigid floor transform to a shared plotting helper, guarded insufficient trunk observations, and completed dependency provenance. Export identity and transition checks passed.",
+  "validation": {
+    "changed_points": 93606,
+    "raw_fields_and_order": "byte-equivalent arrays for all ten chunks",
+    "split_roles": "identical frame assignments",
+    "manual_review_points_verified": 279,
+    "trainer_manifest_checksums": "passed",
+    "trainer_chunk_validation": "passed",
+    "audit_changes_match_export": "passed",
+    "labeler_tests_passed": 46
+  }
+}

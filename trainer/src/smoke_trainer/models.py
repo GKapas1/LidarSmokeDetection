@@ -162,6 +162,30 @@ class GlobalPointNet(GlobalPointEncoder):
         return self.head(combined).squeeze(-1)
 
 
+class VoxelPointNet(nn.Module):
+    """PointNet classifier with independent max pooling for each occupied voxel."""
+
+    def __init__(self, input_features: int, point_widths: Sequence[int], head_widths: Sequence[int]):
+        super().__init__()
+        if input_features != 5:
+            raise ValueError("voxel PointNet requires local XYZ, intensity, and a voxel index")
+        widths = _positive_widths("point_widths", point_widths)
+        self.encoder = _mlp(4, widths)
+        self.head = _mlp(widths[-1], _positive_widths("head_widths", head_widths), final_width=1)
+
+    def forward(self, features: torch.Tensor) -> torch.Tensor:
+        if features.ndim != 2 or features.shape[1] != 5:
+            raise ValueError("voxel PointNet expects N x 5 feature tensors")
+        if not len(features):
+            return features.new_empty(0)
+        indices = features[:, 4].long()
+        _, inverse = torch.unique(indices, sorted=True, return_inverse=True)
+        embeddings = self.encoder(features[:, :4])
+        pooled = embeddings.new_full((int(inverse.max().item()) + 1, embeddings.shape[1]), -torch.inf)
+        pooled = pooled.scatter_reduce(0, inverse[:, None].expand_as(embeddings), embeddings, reduce="amax", include_self=True)
+        return self.head(pooled).squeeze(-1)[inverse]
+
+
 class GlobalTemporalPointNet(nn.Module):
     """Five-scan global context model that predicts points in the current scan."""
 
@@ -259,6 +283,8 @@ class GlobalTemporalPointNet(nn.Module):
 def create_model(name: str, input_features: int, parameters: dict) -> nn.Module:
     if name == "local_mlp":
         return LocalMLP(input_features, tuple(int(v) for v in parameters["hidden_widths"]))
+    if name == "voxel_pointnet":
+        return VoxelPointNet(input_features, parameters["point_widths"], parameters["head_widths"])
     if name == "global_pointnet":
         return GlobalPointNet(
             input_features,

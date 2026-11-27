@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "protocol": "arc5_outdoor_clean_train_only_v1",
+  "manifest": "dataset_manifest.json",
+  "manifest_sha256": "3b1a9ab7c7b208175649ea399a16b52ae011f0dd52c55f974d8e2b16ac4f4377",
+  "purge_frames_each_side": 0,
+  "chunks": [
+    {
+      "index": 0,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_000.npz",
+      "sha256": "9f2f0f8a13a1396e79ed99e97b053067c70fb660da3cd56d89bd3852b6ebe721",
+      "frames": 71,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    },
+    {
+      "index": 1,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_001.npz",
+      "sha256": "245c107db6cc58815a1c38a6ceeef21e546223b4685d914018a53e595d541789",
+      "frames": 500,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    },
+    {
+      "index": 2,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_002.npz",
+      "sha256": "47f352c6b637a874c8cb38453d10cf10982790d987680c5e364622e1db10fc91",
+      "frames": 500,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    },
+    {
+      "index": 3,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_003.npz",
+      "sha256": "d92cc825e70d66a5b23b6f9483829a239eca15dffca14366b1e5bd715faff490",
+      "frames": 90,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    }
+  ],
+  "roles": {
+    "train": [
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            0,
+            500
+          ]
+        ]
+      },
+      {
+        "chunk_index": 2,
+        "ranges": [
+          [
+            0,
+            500
+          ]
+        ]
+      }
+    ],
+    "selection": [],
+    "calibration": [],
+    "test": []
+  },
+  "excluded": [
+    {
+      "chunk_index": 0,
+      "ranges": [
+        [
+          0,
+          71
+        ]
+      ]
+    },
+    {
+      "chunk_index": 3,
+      "ranges": [
+        [
+          0,
+          90
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "train": {
+      "frames": 1000,
+      "points": 13378969,
+      "unimpacted": 12923344,
+      "smoke_impacted": 0,
+      "ignore": 455625
+    },
+    "selection": {
+      "frames": 0,
+      "points": 0,
+      "unimpacted": 0,
+      "smoke_impacted": 0,
+      "ignore": 0
+    },
+    "calibration": {
+      "frames": 0,
+      "points": 0,
+      "unimpacted": 0,
+      "smoke_impacted": 0,
+      "ignore": 0
+    },
+    "test": {
+      "frames": 0,
+      "points": 0,
+      "unimpacted": 0,
+      "smoke_impacted": 0,
+      "ignore": 0
+    }
+  },
+  "split_sha256": "af8710ee1f24738c183adb958d7b69bdd10827c833fa93b8c20c4e1868b86b23"
+}

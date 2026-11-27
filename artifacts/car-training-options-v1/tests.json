@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "suite": "trainer/tests",
+  "tests": 31,
+  "platform": "Linux CPU",
+  "windows_launcher": "static review"
+}

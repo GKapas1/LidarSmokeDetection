@@ -1,0 +1,22 @@
+schema_version = "1.0"
+session_id = "2024-11-18-16-59-23"
+
+[time]
+# Seconds from the first raw Livox header, matching the existing ARC-5 pipeline.
+candidate_start_s = 88.0
+candidate_end_s = 204.0
+# Buffer the approximate doorway transitions identified in the user's video review.
+training_start_s = 95.0
+training_end_s = 195.0
+chunk_duration_s = 50.0
+
+[input]
+# Match the car clean-control range policy. Preserve all source point positions.
+minimum_range_m = 0.3
+maximum_range_m = 25.0
+# Match the ARC-6 isolated-return filter.
+maximum_isolated_neighbor_distance_m = 0.5
+
+[review]
+clean_evidence = "User identified the smoke-free outdoor passage at approximately 88–204 recording seconds. LiDAR route and boundary scans support the outdoor interval."
+limitation = "Video timer synchronization has not been independently verified. The clean assumption comes from the user's video review. Outdoor scans may still see shared building facades or interiors through openings."

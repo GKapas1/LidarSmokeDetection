@@ -1,0 +1,11 @@
+{
+  "old_smoke_to_ignore": 0,
+  "restored_from_v1": 4592,
+  "smoke_to_background": 2440,
+  "changes_from_v4": 89014,
+  "manual_review_points_verified": 279,
+  "trainer_checksum_and_chunk_validation": "passed",
+  "frame_assignments": "identical",
+  "raw_arrays": "identical",
+  "audit_changes": "passed"
+}

@@ -24,6 +24,8 @@ GLOBAL_POINT_FEATURE_NAMES = (
     "intensity",
 )
 
+VOXEL_POINT_FEATURE_NAMES = ("relative_x_m", "relative_y_m", "relative_z_m", "intensity", "voxel_index")
+
 
 @dataclass(frozen=True)
 class PreparedFrame:
@@ -168,6 +170,60 @@ class LocalVoxelAdapter:
         return {"voxel_size_m": float(data_config["voxel_size_m"])}
 
 
+class VoxelPointAdapter:
+    """Group points into fixed-size voxels, keeping only local geometry and intensity."""
+
+    name = "voxel_points"
+
+    @property
+    def feature_names(self) -> tuple[str, ...]:
+        return VOXEL_POINT_FEATURE_NAMES
+
+    def fit_normalizer(self, frames: Iterable[Frame], data_config: dict) -> FeatureNormalizer:
+        normalizer = fit_feature_normalizer(
+            (self.prepare(frame, data_config).features for frame in frames), self.feature_names
+        )
+        mean, scale = normalizer.mean.copy(), normalizer.scale.copy()
+        # The final column is a grouping key, not a model feature.
+        mean[-1], scale[-1] = 0.0, 1.0
+        return FeatureNormalizer(normalizer.feature_names, mean, scale, normalizer.count)
+
+    def prepare(self, frame: Frame, data_config: dict) -> PreparedFrame:
+        size = float(data_config["voxel_size_m"])
+        if not np.isfinite(size) or size <= 0:
+            raise ValueError("voxel_size_m must be finite and positive")
+        xyz = np.asarray(frame.xyz, dtype=np.float32)
+        intensity = np.asarray(frame.intensity, dtype=np.float32)
+        labels = np.asarray(frame.label, dtype=np.uint8)
+        if xyz.shape != (len(intensity), 3) or labels.shape != intensity.shape:
+            raise ValueError("frame point arrays have incompatible shapes")
+        valid = np.isfinite(xyz).all(axis=1) & np.isfinite(intensity)
+        point_index = np.full(len(labels), -1, dtype=np.int64)
+        point_index[valid] = np.arange(valid.sum(), dtype=np.int64)
+        points = xyz[valid]
+        if len(points):
+            coordinates = np.floor(points.astype(np.float64) / size).astype(np.int64)
+            _, inverse, counts = np.unique(coordinates, axis=0, return_inverse=True, return_counts=True)
+            if len(counts) > 2**24:
+                raise ValueError("too many voxels for float32 grouping indices")
+            centroids = np.zeros((len(counts), 3), dtype=np.float64)
+            np.add.at(centroids, inverse, points)
+            centroids /= counts[:, None]
+            features = np.column_stack((points - centroids[inverse], intensity[valid], inverse)).astype(np.float32)
+        else:
+            features = np.empty((0, len(self.feature_names)), dtype=np.float32)
+        return PreparedFrame(features, labels, valid, point_index)
+
+    def expand_logits(self, unit_logits: torch.Tensor, prepared: PreparedFrame) -> torch.Tensor:
+        return _expand_point_logits(unit_logits, prepared)
+
+    def augment_features(self, features: np.ndarray, training_config: dict, rng: np.random.Generator) -> np.ndarray:
+        return _rotate_features(features, _rotation_from_training_config(training_config, rng))
+
+    def preprocessing(self, data_config: dict) -> dict:
+        return {"voxel_size_m": float(data_config["voxel_size_m"]), "point_validity": "finite_xyz_and_intensity"}
+
+
 class GlobalPointAdapter:
     """Direct point features for a PointNet-style whole-scan model."""
 
@@ -285,6 +341,7 @@ class GlobalTemporalAdapter(GlobalPointAdapter):
 
 _ADAPTERS = {
     LocalVoxelAdapter.name: LocalVoxelAdapter,
+    VoxelPointAdapter.name: VoxelPointAdapter,
     GlobalPointAdapter.name: GlobalPointAdapter,
     GlobalTemporalAdapter.name: GlobalTemporalAdapter,
 }

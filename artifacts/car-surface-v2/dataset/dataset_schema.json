@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "description": "Canonical frame-preserving Livox MID-360 per-point training dataset",
+  "coordinate_frame": "original LiDAR sensor frame for each recording",
+  "arrays": {
+    "schema_version": "scalar string",
+    "session_id": "scalar string",
+    "source_domain": "scalar string: car_ros2",
+    "recording_id": "scalar string",
+    "condition": "scalar string",
+    "xyz": "float32 [P,3], metres",
+    "intensity": "float32 [P], raw Livox reflectivity/intensity values",
+    "tag": "uint8 [P], raw Livox tag",
+    "line": "uint8 [P], raw Livox laser line",
+    "point_offset_s": "float32 [P], point time relative to its frame timestamp",
+    "label": "uint8 [P]: 0 unimpacted, 1 smoke impacted, 255 ignore",
+    "frame_index": "int32 [P], zero-based frame within this chunk",
+    "frame_ptr": "int64 [F+1], point slice for each frame",
+    "frame_time_s": "float64 [F], frame timestamp relative to chunk/recording start"
+  },
+  "model_input_arrays": [
+    "xyz",
+    "intensity",
+    "tag",
+    "line",
+    "point_offset_s"
+  ],
+  "target_array": "label",
+  "loss_mask": "label != 255",
+  "known_clean_policy": "Clean controls use label 0 for finite returns within [0.3, 25.0] metres inclusive, regardless of alignment. Other clean returns are ignored.",
+  "normalization": "No normalization is applied; fit preprocessing on the training split only.",
+  "forbidden_model_inputs": [
+    "source_domain",
+    "condition",
+    "automatic_label",
+    "world_xyz",
+    "nearest_reference_distance_m",
+    "label_confidence"
+  ],
+  "smoky_background_policy": "Preserve v3 labels. Recover additional observed room surfaces outside the plume. Recover panel faces from current measured surfaces and tree surfaces from repeated endpoints.",
+  "surface_review_policy": {
+    "version": "car_surface_v2",
+    "time_block_s": 1.0,
+    "panel_anchor_intensity_min": 4,
+    "panel_roi_min": [
+      -5.7,
+      -3.5,
+      0.08
+    ],
+    "panel_roi_max": [
+      -0.4,
+      0.2,
+      1.6
+    ],
+    "smoke_roi_min": [
+      -5.8,
+      -3.6,
+      0.12
+    ],
+    "smoke_roi_max": [
+      -0.3,
+      0.4,
+      2.5
+    ],
+    "trunk_seed_min": [
+      -1.95,
+      -1.49,
+      0.1
+    ],
+    "trunk_seed_max": [
+      -1.82,
+      -1.31,
+      0.55
+    ],
+    "trunk_center_bounds": [
+      [
+        -1.97,
+        -1.51
+      ],
+      [
+        -1.8,
+        -1.29
+      ]
+    ],
+    "smoke_cluster_radius_m": 0.2,
+    "smoke_minimum_neighbors": 3,
+    "temporal_window_s": 0.31,
+    "temporal_radius_m": 0.25,
+    "smoke_policy": "Only tracks connected to user-reviewed smoke points become new label 1. Other tracks are review candidates."
+  }
+}

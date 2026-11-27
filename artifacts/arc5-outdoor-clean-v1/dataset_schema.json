@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "description": "Canonical frame-preserving Livox MID-360 per-point training dataset",
+  "coordinate_frame": "original LiDAR sensor frame for each recording",
+  "arrays": {
+    "schema_version": "scalar string",
+    "session_id": "scalar string",
+    "source_domain": "scalar string: stationary_ros2 or grandtour_ros1",
+    "recording_id": "scalar string",
+    "condition": "scalar string",
+    "xyz": "float32 [P,3], metres",
+    "intensity": "float32 [P], raw Livox reflectivity/intensity values",
+    "tag": "uint8 [P], raw Livox tag",
+    "line": "uint8 [P], raw Livox laser line",
+    "point_offset_s": "float32 [P], point time relative to its frame timestamp",
+    "label": "uint8 [P]: 0 unimpacted, 1 smoke impacted, 255 ignore",
+    "frame_index": "int32 [P], zero-based frame within this chunk",
+    "frame_ptr": "int64 [F+1], point slice for each frame",
+    "frame_time_s": "float64 [F], frame timestamp relative to chunk/recording start"
+  },
+  "model_input_arrays": [
+    "xyz",
+    "intensity",
+    "tag",
+    "line",
+    "point_offset_s"
+  ],
+  "target_array": "label",
+  "loss_mask": "label != 255",
+  "known_clean_policy": {
+    "minimum_range_m": 0.3,
+    "maximum_range_m": 25.0,
+    "maximum_isolated_neighbor_distance_m": 0.5,
+    "label_0": "finite, in-range returns with a same-frame neighbor within the isolation radius",
+    "label_255": "out-of-range or isolated returns",
+    "point_order": "all raw points retained in source order"
+  },
+  "normalization": "No normalization is applied; fit preprocessing on the training split only.",
+  "forbidden_model_inputs": [
+    "source_domain",
+    "condition",
+    "automatic_label",
+    "world_xyz",
+    "nearest_reference_distance_m",
+    "label_confidence"
+  ]
+}

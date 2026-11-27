@@ -1,0 +1,11 @@
+{
+  "center": [
+    -1.8841114987456713,
+    -1.4130419115136938
+  ],
+  "radius": 0.05695405922373153,
+  "accepted": true,
+  "alternate_block_center_difference_m": 0.015378171824469572,
+  "median_residual_m": 0.015079004981620382,
+  "blocks": 31
+}

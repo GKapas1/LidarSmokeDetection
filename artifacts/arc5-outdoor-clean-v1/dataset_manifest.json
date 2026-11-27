@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "status": "complete",
+  "dataset_schema": "dataset_schema.json",
+  "split_policy": "Use split.json. Train-only supplement with excluded doorway buffers.",
+  "chunks": [
+    {
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_000.npz",
+      "sha256": "9f2f0f8a13a1396e79ed99e97b053067c70fb660da3cd56d89bd3852b6ebe721",
+      "frames": 71,
+      "points": 922301,
+      "labels": {
+        "unimpacted": 880526,
+        "smoke_impacted": 0,
+        "ignore": 41775
+      },
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-16-59-23",
+      "recording_id": "outdoor_clean_000",
+      "condition": "clean_control",
+      "split": "excluded",
+      "label_policy": "known_clean_range_valid_nonisolated_returns_are_unimpacted",
+      "source_time_selection_s": {
+        "start": 88.000023127,
+        "end": 94.999912024,
+        "end_is_last_frame_timestamp": true
+      },
+      "source_frame_index_first": 880,
+      "source_frame_index_last": 950
+    },
+    {
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_001.npz",
+      "sha256": "245c107db6cc58815a1c38a6ceeef21e546223b4685d914018a53e595d541789",
+      "frames": 500,
+      "points": 6565277,
+      "labels": {
+        "unimpacted": 6290759,
+        "smoke_impacted": 0,
+        "ignore": 274518
+      },
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-16-59-23",
+      "recording_id": "outdoor_clean_001",
+      "condition": "clean_control",
+      "split": "train",
+      "label_policy": "known_clean_range_valid_nonisolated_returns_are_unimpacted",
+      "source_time_selection_s": {
+        "start": 95.099752188,
+        "end": 144.99993825,
+        "end_is_last_frame_timestamp": true
+      },
+      "source_frame_index_first": 951,
+      "source_frame_index_last": 1450
+    },
+    {
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_002.npz",
+      "sha256": "47f352c6b637a874c8cb38453d10cf10982790d987680c5e364622e1db10fc91",
+      "frames": 500,
+      "points": 6813692,
+      "labels": {
+        "unimpacted": 6632585,
+        "smoke_impacted": 0,
+        "ignore": 181107
+      },
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-16-59-23",
+      "recording_id": "outdoor_clean_002",
+      "condition": "clean_control",
+      "split": "train",
+      "label_policy": "known_clean_range_valid_nonisolated_returns_are_unimpacted",
+      "source_time_selection_s": {
+        "start": 145.099778176,
+        "end": 194.999878407,
+        "end_is_last_frame_timestamp": true
+      },
+      "source_frame_index_first": 1451,
+      "source_frame_index_last": 1950
+    },
+    {
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_003.npz",
+      "sha256": "d92cc825e70d66a5b23b6f9483829a239eca15dffca14366b1e5bd715faff490",
+      "frames": 90,
+      "points": 1187290,
+      "labels": {
+        "unimpacted": 1160728,
+        "smoke_impacted": 0,
+        "ignore": 26562
+      },
+      "source_domain": "grandtour_ros1",
+      "session_id": "2024-11-18-16-59-23",
+      "recording_id": "outdoor_clean_003",
+      "condition": "clean_control",
+      "split": "excluded",
+      "label_policy": "known_clean_range_valid_nonisolated_returns_are_unimpacted",
+      "source_time_selection_s": {
+        "start": 195.099718333,
+        "end": 203.999937773,
+        "end_is_last_frame_timestamp": true
+      },
+      "source_frame_index_first": 1951,
+      "source_frame_index_last": 2040
+    }
+  ],
+  "frames": 1161,
+  "points": 15488560,
+  "labels": {
+    "unimpacted": 14964598,
+    "smoke_impacted": 0,
+    "ignore": 523962
+  },
+  "provenance": {
+    "source_file": "/home/user/Smoke/LidarSmokeDetection/data/grandtour/arc5/2024-11-18-16-59-23_livox.bag",
+    "source_sha256": "2a227c7278fb0136543527bb7f5a3edf4153191f6c689da8ef762a1cce99e2a3",
+    "source_topic": "/boxi/livox/points",
+    "session_origin_header_ns": 1731945633000429630,
+    "time_origin": "first raw Livox header timestamp, identical to existing ARC-5 pipeline",
+    "configuration": "/home/user/Smoke/LidarSmokeDetection/labeler/config/grandtour/arc5_outdoor_clean.toml",
+    "configuration_sha256": "dac9773f3bc6e13f4f958a4eccc276edfa2ed5e4e14bb0a3aea151fdaca969dc",
+    "exporter_sha256": "18bde0aa1b8f0f962030666102d7ba73ebe127324de1c63cb12d0dd5ab7f3479",
+    "selection": {
+      "candidate_start_s": 88.0,
+      "candidate_end_s": 204.0,
+      "training_start_s": 95.0,
+      "training_end_s": 195.0,
+      "chunk_duration_s": 50.0
+    },
+    "review": {
+      "clean_evidence": "User identified the smoke-free outdoor passage at approximately 88\u2013204 recording seconds. LiDAR route and boundary scans support the outdoor interval.",
+      "limitation": "Video timer synchronization has not been independently verified. The clean assumption comes from the user's video review. Outdoor scans may still see shared building facades or interiors through openings."
+    },
+    "ignore_counts": {
+      "invalid_input": 0,
+      "outside_range": 421386,
+      "isolated_return": 102576
+    }
+  }
+}

@@ -6,8 +6,9 @@ local voxel and global point features, compact local and PointNet-style models,
 checkpointing, calibration, full-frame evaluation, portable inference, and
 end-to-end timing.
 
-The current models are the L1 local voxel baseline, G1 global single-scan
-PointNet-style classifier, and GT global temporal PointNet-GRU classifier.
+The models are the L1 local voxel baseline, G1 global single-scan
+PointNet-style classifier, GT global temporal PointNet-GRU classifier, and the
+local voxel PointNet described below.
 
 ## Environment
 
@@ -105,6 +106,53 @@ writes both `runs\comparison-v1-comparison.json` and
 `runs\comparison-v1-comparison.csv`. The PowerShell output also displays the primary
 comparison table: average precision, ROC-AUC, F1, recall, and false-positive rate.
 
+## Windows: all car and ARC-5 options
+
+The car-options dataset supports a 4-model by 8-recipe CUDA experiment: L1,
+G1, GT, and the local voxel PointNet, each with car-only or clean ARC-5 data,
+and with baseline, distant-smoke copying, background masking, or both.
+
+On the Windows PC, extract the existing `car_training_options_v1_windows.zip`
+at the repository root. Copy the **current** `trainer/` source and scripts after
+extracting it: the older archive contains an earlier trainer. The dataset must be
+at `data/training/car_training_options_v1/`. Install the NVIDIA driver and set
+up the repository environment as described in `docs/CAR_WINDOWS_TRAINING.md`.
+Then run from the repository root:
+
+```powershell
+.\trainer\scripts\train_all_car_options_windows.ps1 -RunPrefix car-all-options-v1
+```
+
+This runs 32 experiments sequentially, each with up to 30 epochs, 1,400
+optimizer steps per epoch and four hours. It checks CUDA and dataset hashes,
+refuses to overwrite runs, generates configurations under
+`runs/<RunPrefix>-setup/`, and saves each model and its held-out car test report
+under `runs/<RunPrefix>-<model>-<recipe>/`. For a smaller selection:
+
+```powershell
+.\trainer\scripts\train_all_car_options_windows.ps1 `
+  -Models voxel,gt `
+  -Recipes a_baseline_with_arc5,d_both_with_arc5 `
+  -RunPrefix car-local-temporal-v1
+```
+
+Model keys are `l1`, `g1`, `gt`, and `voxel`. Recipe names are listed in
+`data/training/car_training_options_v1/experiments.json`; see
+`artifacts/car-training-options-v1/README.md` for their construction and label
+caveats. After an interruption, use a new prefix for a subset of unfinished
+runs, or resume a specific run with `smoke-train train --resume-run` and its
+generated configuration.
+
+Single-scan models use the original split, including every fourth clean ARC-5
+scan. GT instead uses 254 consecutive clean ARC-5 training frames, yielding 250
+five-frame targets; its car selection, calibration and test recordings stay the
+same. GT evaluation excludes the first four scans of each contiguous segment,
+so its reported test points differ from the single-scan models. Frame-level
+smoke copying and context masking in GT modify only the target scan: without
+registration they do not model coherent smoke movement across the history.
+Treat those GT augmented runs as a temporal robustness experiment and compare
+them with the GT baseline, rather than assuming realistic synthetic motion.
+
 ## Moving-data-only comparison
 
 To compare the models without any stationary frames in either training or testing,
@@ -156,6 +204,26 @@ smoke-train split \
 
 smoke-train train --config trainer/configs/local.toml --run-name local-default
 ```
+
+## Local voxel PointNet
+
+This model divides each scan into fixed-size, axis-aligned voxels and uses a
+shared point encoder and max pooling to predict one smoke logit for each occupied
+voxel. The prediction is assigned to every point in that voxel. Inputs are each
+point's XYZ offset from its voxel's point centroid and its intensity; absolute
+position and range are excluded. Supervision and evaluation use original point
+labels, excluding ignored and invalid points. Mixed-label voxels share one
+prediction and contribute the loss of each labeled point.
+
+```bash
+smoke-train train --config trainer/configs/voxel_pointnet.toml --run-name voxel-pointnet
+```
+
+Change `voxel_size_m` to choose the physical neighborhood size. Local coordinates
+remove direct dependence on sensor position, but the voxel grid can change when a
+scan moves relative to its boundaries. Point density and intensity can also vary
+with distance, so distance independence must be measured on held-out data.
+The existing comparison scripts still run L1, G1, and GT only.
 
 ## G1 global PointNet-style model
 

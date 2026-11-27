@@ -18,7 +18,9 @@ from .adapters import (
     create_adapter_for_model,
 )
 from .config import public_config
+from .augmentation import augment_training_frame, validate_augmentation
 from .data import (
+    TemporalWindow,
     UnifiedDataset,
     create_split_plan,
     iter_frames,
@@ -121,6 +123,11 @@ def train_model(
     max_eval_frames: int | None = None,
 ) -> Path:
     training = config["training"]
+    frame_augmentation = config.get("augmentation", {})
+    validate_augmentation(frame_augmentation, config["model"]["name"])
+    step_limit = training.get("max_optimizer_steps_per_epoch")
+    if step_limit is not None and int(step_limit) <= 0:
+        raise ValueError("max_optimizer_steps_per_epoch must be positive")
     seed = int(training["seed"])
     seed_everything(seed)
     device = resolve_device(str(training["device"]))
@@ -181,6 +188,10 @@ def train_model(
         if not checkpoint_path.is_file() or not history_path.is_file():
             raise FileNotFoundError("resume run requires last.pt and history.json")
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+        if checkpoint["config"].get("augmentation", {}) != frame_augmentation:
+            raise ValueError("resume checkpoint augmentation differs from the configuration")
+        if checkpoint["config"]["training"].get("max_optimizer_steps_per_epoch") != step_limit:
+            raise ValueError("resume checkpoint optimizer step limit differs from the configuration")
         if checkpoint["model_parameters"] != config["model"]:
             raise ValueError("resume checkpoint model parameters do not match the configuration")
         if checkpoint.get("adapter_name", adapter_name_for_model(config["model"])) != adapter.name:
@@ -221,6 +232,8 @@ def train_model(
         epoch_alignment_loss = 0.0
         supervised_points = 0
         processed_frames = 0
+        augmentation_counts = {"copied_smoke_points": 0, "masked_context_points": 0}
+        domain_frames: dict[str, int] = {}
         frames = iter_frames(
             dataset,
             split,
@@ -230,7 +243,9 @@ def train_model(
             max_frames=max_train_frames,
         )
         augmentation_rng = np.random.default_rng(seed + epoch)
+        frame_rng = np.random.default_rng(seed + epoch + 100_000)
         for frame in frames:
+            frame, counts = augment_training_frame(frame, frame_augmentation, frame_rng)
             prepared = adapter.prepare(frame, config["data"])
             valid = prepared.valid & (prepared.labels != 255)
             if not np.any(valid) or not len(prepared.features):
@@ -258,8 +273,13 @@ def train_model(
             epoch_alignment_loss += float(alignment_loss.detach().cpu()) * count
             supervised_points += count
             processed_frames += 1
+            domain_frames[frame.source_domain] = domain_frames.get(frame.source_domain, 0) + 1
+            for key, count in counts.items():
+                augmentation_counts[key] += count
             if time.monotonic() >= deadline:
                 stop_for_budget = True
+                break
+            if step_limit is not None and processed_frames >= int(step_limit):
                 break
         if supervised_points == 0:
             raise RuntimeError("training epoch contained no supervised points")
@@ -281,6 +301,8 @@ def train_model(
             "training_points": supervised_points,
             "selection_mean_domain_ap": selection_ap,
             "stopped_for_budget": stop_for_budget,
+            "augmentation": augmentation_counts,
+            "training_frames_by_domain": domain_frames,
         }
         history.append(row)
         (run_dir / "history.json").write_text(
@@ -364,6 +386,11 @@ def train_global_temporal_model(
     """Train GT on bounded windows; only each window's final scan is supervised."""
 
     training = config["training"]
+    frame_augmentation = config.get("augmentation", {})
+    validate_augmentation(frame_augmentation, config["model"]["name"])
+    step_limit = training.get("max_optimizer_steps_per_epoch")
+    if step_limit is not None and int(step_limit) <= 0:
+        raise ValueError("max_optimizer_steps_per_epoch must be positive")
     seed = int(training["seed"])
     seed_everything(seed)
     device = resolve_device(str(training["device"]))
@@ -430,6 +457,10 @@ def train_global_temporal_model(
             raise ValueError("resume checkpoint model parameters do not match the configuration")
         if checkpoint.get("adapter_name") != adapter.name:
             raise ValueError("resume checkpoint adapter does not match the configuration")
+        if checkpoint["config"].get("augmentation", {}) != frame_augmentation:
+            raise ValueError("resume checkpoint augmentation differs from the configuration")
+        if checkpoint["config"]["training"].get("max_optimizer_steps_per_epoch") != step_limit:
+            raise ValueError("resume checkpoint optimizer step limit differs from the configuration")
         normalizer = FeatureNormalizer.from_dict(checkpoint["normalizer"])
         history = json.loads(history_path.read_text(encoding="utf-8"))
         if not history or int(history[-1]["epoch"]) != int(checkpoint["epoch"]):
@@ -466,6 +497,7 @@ def train_global_temporal_model(
         epoch_alignment_loss = 0.0
         supervised_points = 0
         processed_windows = 0
+        augmentation_counts = {"copied_smoke_points": 0, "masked_context_points": 0}
         windows = iter_temporal_windows(
             dataset,
             split,
@@ -477,7 +509,13 @@ def train_global_temporal_model(
             max_windows=max_train_frames,
         )
         augmentation_rng = np.random.default_rng(seed + epoch)
+        frame_rng = np.random.default_rng(seed + epoch + 100_000)
         for window in windows:
+            if frame_augmentation:
+                target_frame, counts = augment_training_frame(window.target, frame_augmentation, frame_rng)
+                window = TemporalWindow(window.frames[:-1] + (target_frame,))
+                for key, count in counts.items():
+                    augmentation_counts[key] += count
             prepared = adapter.prepare_window(window, config["data"])
             target = prepared.target
             valid = target.valid & (target.labels != 255)
@@ -510,6 +548,8 @@ def train_global_temporal_model(
             if time.monotonic() >= deadline:
                 stop_for_budget = True
                 break
+            if step_limit is not None and processed_windows >= int(step_limit):
+                break
         if supervised_points == 0:
             raise RuntimeError("training epoch contained no supervised points")
 
@@ -536,6 +576,7 @@ def train_global_temporal_model(
                 "training_alignment_loss": epoch_alignment_loss / supervised_points,
                 "training_windows": processed_windows,
                 "training_points": supervised_points,
+                "augmentation": augmentation_counts,
                 "selection_mean_domain_ap": selection_ap,
                 "stopped_for_budget": stop_for_budget,
             }
