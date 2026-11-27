@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "protocol": "car_options_v1_car_only",
+  "manifest": "dataset_manifest.json",
+  "manifest_sha256": "559db7b62e11765c5444c424de7e4f4135d9c957129a83a1c076f064c85bd18a",
+  "purge_frames_each_side": 0,
+  "assignment": {
+    "train": [
+      "hall_smoke1",
+      "corridor_smoke1",
+      "hall_clean_moving1",
+      "corridor_clean_moving1"
+    ],
+    "selection": [
+      "hall_smoke2",
+      "hall_clean_moving2"
+    ],
+    "calibration": [
+      "corridor_smoke2",
+      "tree_clean_moving1"
+    ],
+    "test": [
+      "tree_smoke1",
+      "tree_clean_moving2"
+    ]
+  },
+  "arc5_training_policy": "Excluded",
+  "chunks": [
+    {
+      "index": 0,
+      "path": "chunks/corridor_clean_moving1.npz",
+      "sha256": "6ec73f308413ac2861d0cef487307b200d665711ab8f187fe22ca390546efbfc",
+      "frames": 476,
+      "stream_id": "car_ros2/20261113_v1/corridor_clean_moving1"
+    },
+    {
+      "index": 1,
+      "path": "chunks/corridor_smoke1.npz",
+      "sha256": "357d11d50747b27dc9967566c137b64a48e7944c173c6442aa146f3f2e2a6888",
+      "frames": 278,
+      "stream_id": "car_ros2/20261113_v1/corridor_smoke1"
+    },
+    {
+      "index": 2,
+      "path": "chunks/corridor_smoke2.npz",
+      "sha256": "4c767e7515772ed57c121c6a0a18d6945a58ac59cced201b2bb7408ceb235097",
+      "frames": 168,
+      "stream_id": "car_ros2/20261113_v1/corridor_smoke2"
+    },
+    {
+      "index": 3,
+      "path": "chunks/hall_clean_moving1.npz",
+      "sha256": "17efea171c652996b7ac725bd74a703a1ed4968a05053c6b618096f9790b6677",
+      "frames": 464,
+      "stream_id": "car_ros2/20261113_v1/hall_clean_moving1"
+    },
+    {
+      "index": 4,
+      "path": "chunks/hall_clean_moving2.npz",
+      "sha256": "4e04b83ad8f7804ca77f08c0b5daafdfcc89e9847a82984213b034fd28b9dd4d",
+      "frames": 446,
+      "stream_id": "car_ros2/20261113_v1/hall_clean_moving2"
+    },
+    {
+      "index": 5,
+      "path": "chunks/hall_smoke1.npz",
+      "sha256": "2f2f5b825255ccca0aff7a1415bc0eeddc07d5ff08b4aa4712473972f4cbd7b0",
+      "frames": 312,
+      "stream_id": "car_ros2/20261113_v1/hall_smoke1"
+    },
+    {
+      "index": 6,
+      "path": "chunks/hall_smoke2.npz",
+      "sha256": "fba51ecb2aa382d0b20215c098a1d174f406784648d73e5c0d65aa22fdc7024d",
+      "frames": 271,
+      "stream_id": "car_ros2/20261113_v1/hall_smoke2"
+    },
+    {
+      "index": 7,
+      "path": "chunks/tree_clean_moving1.npz",
+      "sha256": "75c84e762e41bb50ffce6cd3cde5b9c403549a02cf6aff9b418bea76931f068f",
+      "frames": 404,
+      "stream_id": "car_ros2/20261113_v1/tree_clean_moving1"
+    },
+    {
+      "index": 8,
+      "path": "chunks/tree_clean_moving2.npz",
+      "sha256": "1c25941e4fd2fe8246f4793b81b4e5978785effbf46181860f0451ad55591c8f",
+      "frames": 406,
+      "stream_id": "car_ros2/20261113_v1/tree_clean_moving2"
+    },
+    {
+      "index": 9,
+      "path": "chunks/tree_smoke1.npz",
+      "sha256": "a6e5811cf8b83099974a0c682770b196d38624c43af9536835f4dc0d894ed60e",
+      "frames": 362,
+      "stream_id": "car_ros2/20261113_v1/tree_smoke1"
+    },
+    {
+      "index": 10,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_001.npz",
+      "sha256": "245c107db6cc58815a1c38a6ceeef21e546223b4685d914018a53e595d541789",
+      "frames": 500,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    },
+    {
+      "index": 11,
+      "path": "chunks/grandtour_ros1__2024-11-18-16-59-23__outdoor_clean_002.npz",
+      "sha256": "47f352c6b637a874c8cb38453d10cf10982790d987680c5e364622e1db10fc91",
+      "frames": 500,
+      "stream_id": "grandtour_ros1/2024-11-18-16-59-23"
+    }
+  ],
+  "roles": {
+    "train": [
+      {
+        "chunk_index": 1,
+        "ranges": [
+          [
+            0,
+            278
+          ]
+        ]
+      },
+      {
+        "chunk_index": 5,
+        "ranges": [
+          [
+            0,
+            312
+          ]
+        ]
+      },
+      {
+        "chunk_index": 0,
+        "ranges": [
+          [
+            0,
+            476
+          ]
+        ]
+      },
+      {
+        "chunk_index": 3,
+        "ranges": [
+          [
+            0,
+            464
+          ]
+        ]
+      }
+    ],
+    "selection": [
+      {
+        "chunk_index": 6,
+        "ranges": [
+          [
+            0,
+            271
+          ]
+        ]
+      },
+      {
+        "chunk_index": 4,
+        "ranges": [
+          [
+            0,
+            446
+          ]
+        ]
+      }
+    ],
+    "calibration": [
+      {
+        "chunk_index": 2,
+        "ranges": [
+          [
+            0,
+            168
+          ]
+        ]
+      },
+      {
+        "chunk_index": 7,
+        "ranges": [
+          [
+            0,
+            404
+          ]
+        ]
+      }
+    ],
+    "test": [
+      {
+        "chunk_index": 9,
+        "ranges": [
+          [
+            0,
+            362
+          ]
+        ]
+      },
+      {
+        "chunk_index": 8,
+        "ranges": [
+          [
+            0,
+            406
+          ]
+        ]
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "chunk_index": 10,
+      "ranges": [
+        [
+          0,
+          500
+        ]
+      ]
+    },
+    {
+      "chunk_index": 11,
+      "ranges": [
+        [
+          0,
+          500
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "train": {
+      "frames": 1530,
+      "points": 30592608,
+      "unimpacted": 22466791,
+      "smoke_impacted": 176686,
+      "ignore": 7949131
+    },
+    "selection": {
+      "frames": 717,
+      "points": 14336640,
+      "unimpacted": 10981365,
+      "smoke_impacted": 111268,
+      "ignore": 3244007
+    },
+    "calibration": {
+      "frames": 572,
+      "points": 11435808,
+      "unimpacted": 8167018,
+      "smoke_impacted": 112045,
+      "ignore": 3156745
+    },
+    "test": {
+      "frames": 768,
+      "points": 15357120,
+      "unimpacted": 9797686,
+      "smoke_impacted": 67017,
+      "ignore": 5492417
+    }
+  },
+  "split_sha256": "a0cad38da6ac73ae08c9e8dfc7f034c484af4c65ba6eb186908c6461d904ea0f"
+}

@@ -1,0 +1,104 @@
+[
+  {
+    "epoch": 1,
+    "training_loss": 0.04041437386053355,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22318029,
+    "selection_mean_domain_ap": 0.49356061849343197,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 1485,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1150,
+      "grandtour_ros1": 250
+    }
+  },
+  {
+    "epoch": 2,
+    "training_loss": 0.04094233239994811,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 21739991,
+    "selection_mean_domain_ap": 0.03292221302243876,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 3132,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1275,
+      "grandtour_ros1": 125
+    }
+  },
+  {
+    "epoch": 3,
+    "training_loss": 0.04558529491515638,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 21049175,
+    "selection_mean_domain_ap": 0.055610207062372574,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 2749,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1150,
+      "grandtour_ros1": 250
+    }
+  },
+  {
+    "epoch": 4,
+    "training_loss": 0.024996480964077358,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 24115920,
+    "selection_mean_domain_ap": 0.0472779940646776,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 1838,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1202,
+      "grandtour_ros1": 198
+    }
+  },
+  {
+    "epoch": 5,
+    "training_loss": 0.0369237119602294,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 21052401,
+    "selection_mean_domain_ap": 0.08413094933176331,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 2673,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "grandtour_ros1": 250,
+      "car_ros2": 1150
+    }
+  },
+  {
+    "epoch": 6,
+    "training_loss": 0.022899201905921426,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 24079671,
+    "selection_mean_domain_ap": 0.1698788644982322,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 1414,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1202,
+      "grandtour_ros1": 198
+    }
+  }
+]

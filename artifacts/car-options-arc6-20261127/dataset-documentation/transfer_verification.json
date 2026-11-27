@@ -1,0 +1,10 @@
+{
+  "archive": "data/training/car_training_options_v1_windows.zip",
+  "bytes": 1010012170,
+  "sha256": "85899ce6bdf78f5a8e37ba2e3b725bc373e9dab221e856b8600c09e5023fef60",
+  "members": 72,
+  "zip_integrity": "passed",
+  "all_packaged_chunk_hashes": "passed",
+  "updated_trainer_sources": "passed",
+  "tests": 31
+}

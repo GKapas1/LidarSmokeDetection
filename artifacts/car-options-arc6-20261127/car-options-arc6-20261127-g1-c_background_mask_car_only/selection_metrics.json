@@ -1,0 +1,49 @@
+{
+  "frames": 717,
+  "calibration": {
+    "slope": 0.7044045508529093,
+    "bias": 8.75088044538238
+  },
+  "metrics": {
+    "overall": {
+      "points": 11092633,
+      "positives": 111268,
+      "prevalence": 0.010030801523858221,
+      "average_precision": 0.8272845940049665,
+      "roc_auc": 0.9983293067436827,
+      "brier_score": 0.0033961511383893725,
+      "threshold": 0.21353617310523987,
+      "true_positive": 95360,
+      "false_positive": 34506,
+      "true_negative": 10946859,
+      "false_negative": 15908,
+      "precision": 0.7342953505921488,
+      "recall": 0.8570298738181688,
+      "f1": 0.7909295246626357,
+      "false_positive_rate": 0.0031422323181134588
+    },
+    "car_ros2": {
+      "points": 11092633,
+      "positives": 111268,
+      "prevalence": 0.010030801523858221,
+      "average_precision": 0.8272845940049665,
+      "roc_auc": 0.9983293067436827,
+      "brier_score": 0.0033961511383893725,
+      "threshold": 0.21353617310523987,
+      "true_positive": 95360,
+      "false_positive": 34506,
+      "true_negative": 10946859,
+      "false_negative": 15908,
+      "precision": 0.7342953505921488,
+      "recall": 0.8570298738181688,
+      "f1": 0.7909295246626357,
+      "false_positive_rate": 0.0031422323181134588
+    }
+  },
+  "run_name": "car-options-arc6-20261127-g1-c_background_mask_car_only",
+  "device": "cuda",
+  "best_epoch": 8,
+  "best_selection_mean_domain_ap": 0.8272845966271908,
+  "split_sha256": "a0cad38da6ac73ae08c9e8dfc7f034c484af4c65ba6eb186908c6461d904ea0f",
+  "partition": "selection"
+}

@@ -1,0 +1,30 @@
+[data]
+manifest = "C:/Users/Guest Account/Desktop/Thesis/LidarSmokeDetection/data/training/car_training_options_v1/dataset_manifest.json"
+split = "C:/Users/Guest Account/Desktop/Thesis/LidarSmokeDetection/data/training/car_training_options_v1/split_car_only.json"
+verify_checksums = false
+voxel_size_m = 0.10
+history_length = 5
+maximum_time_gap_s = 0.25
+
+[model]
+name = "voxel_pointnet"
+adapter = "voxel_points"
+point_widths = [64, 128]
+head_widths = [64]
+
+[training]
+seed = 20260920
+device = "cuda"
+epochs = 30
+learning_rate = 0.001
+weight_decay = 0.0001
+positive_weight = 8.0
+patience = 5
+max_hours = 4.0
+max_optimizer_steps_per_epoch = 1400
+yaw_augmentation_deg = 180.0
+pitch_augmentation_deg = 0.0
+roll_augmentation_deg = 0.0
+
+[output]
+root = "C:/Users/Guest Account/Desktop/Thesis/LidarSmokeDetection/runs/car-options-arc6-20261127"

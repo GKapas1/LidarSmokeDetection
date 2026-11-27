@@ -1,0 +1,92 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_with_arc5.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 1.835567124883455,
+    "bias": -1.8607589617624856
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.45780610511578823,
+      "roc_auc": 0.9886830515007196,
+      "brier_score": 0.005082222541423311,
+      "threshold": 0.39019885659217834,
+      "true_positive": 37267,
+      "false_positive": 45817,
+      "true_negative": 9751869,
+      "false_negative": 29750,
+      "precision": 0.4485460497809446,
+      "recall": 0.5560827849650088,
+      "f1": 0.49655898361769735,
+      "false_positive_rate": 0.0046763082629918944
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.45780610511578823,
+      "roc_auc": 0.9886830515007196,
+      "brier_score": 0.005082222541423311,
+      "threshold": 0.39019885659217834,
+      "true_positive": 37267,
+      "false_positive": 45817,
+      "true_negative": 9751869,
+      "false_negative": 29750,
+      "precision": 0.4485460497809446,
+      "recall": 0.5560827849650088,
+      "f1": 0.49655898361769735,
+      "false_positive_rate": 0.0046763082629918944
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 1.835567124883455,
+    "bias": -1.8607589617624856
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.10993476134841583,
+      "roc_auc": 0.9305846658698061,
+      "brier_score": 0.012146714898388552,
+      "threshold": 0.39019885659217834,
+      "true_positive": 94154,
+      "false_positive": 888355,
+      "true_negative": 46172680,
+      "false_negative": 127826,
+      "precision": 0.09583016542342106,
+      "recall": 0.4241553293089467,
+      "f1": 0.1563384970722024,
+      "false_positive_rate": 0.018876656665115843
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.10993476134841583,
+      "roc_auc": 0.9305846658698061,
+      "brier_score": 0.012146714898388552,
+      "threshold": 0.39019885659217834,
+      "true_positive": 94154,
+      "false_positive": 888355,
+      "true_negative": 46172680,
+      "false_negative": 127826,
+      "precision": 0.09583016542342106,
+      "recall": 0.4241553293089467,
+      "f1": 0.1563384970722024,
+      "false_positive_rate": 0.018876656665115843
+    }
+  },
+  "partition": "test"
+}

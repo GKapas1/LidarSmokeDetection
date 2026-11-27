@@ -1,0 +1,633 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli inspect --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --verify-checksums
+{
+  "manifest": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\dataset_manifest.json",
+  "manifest_sha256": "559db7b62e11765c5444c424de7e4f4135d9c957129a83a1c076f064c85bd18a",
+  "chunks": 12,
+  "frames": 4587,
+  "points": 85101145,
+  "streams": [
+    "car_ros2/20261113_v1/corridor_clean_moving1",
+    "car_ros2/20261113_v1/corridor_smoke1",
+    "car_ros2/20261113_v1/corridor_smoke2",
+    "car_ros2/20261113_v1/hall_clean_moving1",
+    "car_ros2/20261113_v1/hall_clean_moving2",
+    "car_ros2/20261113_v1/hall_smoke1",
+    "car_ros2/20261113_v1/hall_smoke2",
+    "car_ros2/20261113_v1/tree_clean_moving1",
+    "car_ros2/20261113_v1/tree_clean_moving2",
+    "car_ros2/20261113_v1/tree_smoke1",
+    "grandtour_ros1/2024-11-18-16-59-23"
+  ]
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli inspect --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --verify-checksums
+{
+  "manifest": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\unified_v1\\dataset_manifest.json",
+  "manifest_sha256": "e66d83f60ac7ad99e385639b9cc1d26cb65d97ccc345844c0043ae98f7de1604",
+  "chunks": 9,
+  "frames": 5081,
+  "points": 76782092,
+  "streams": [
+    "grandtour_ros1/2024-11-18-17-13-09",
+    "stationary_ros2/20260901_lab01_pos01_v040/clean_pos01_control_001",
+    "stationary_ros2/20260901_lab01_pos01_v040/smoke_pos01_low_001"
+  ]
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\trainer\scripts\prepare_all_car_options.py" --dataset "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1" --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup" --run-prefix car-options-arc6-20261127 --models l1 g1 gt voxel
+Prepared 32 runs in C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\l1-a_baseline_car_only.toml" --run-name car-options-arc6-20261127-l1-a_baseline_car_only --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-a_baseline_car_only",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-a_baseline_car_only\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.890370054831569,
+    "bias": -3.8677919448424234
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.618539658038623,
+      "roc_auc": 0.9947480206180067,
+      "brier_score": 0.003955221549772981,
+      "threshold": 0.10443631559610367,
+      "true_positive": 62209,
+      "false_positive": 92545,
+      "true_negative": 9705141,
+      "false_negative": 4808,
+      "precision": 0.4019863783811727,
+      "recall": 0.9282570094155215,
+      "f1": 0.5610201514174531,
+      "false_positive_rate": 0.009445597664591415
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.618539658038623,
+      "roc_auc": 0.9947480206180067,
+      "brier_score": 0.003955221549772981,
+      "threshold": 0.10443631559610367,
+      "true_positive": 62209,
+      "false_positive": 92545,
+      "true_negative": 9705141,
+      "false_negative": 4808,
+      "precision": 0.4019863783811727,
+      "recall": 0.9282570094155215,
+      "f1": 0.5610201514174531,
+      "false_positive_rate": 0.009445597664591415
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.890370054831569,
+    "bias": -3.8677919448424234
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0422310231166306,
+      "roc_auc": 0.7852981594953807,
+      "brier_score": 0.026852715224520655,
+      "threshold": 0.10443631559610367,
+      "true_positive": 132570,
+      "false_positive": 8429847,
+      "true_negative": 38631188,
+      "false_negative": 89410,
+      "precision": 0.015482777818459437,
+      "recall": 0.5972159654022885,
+      "f1": 0.0301830620815521,
+      "false_positive_rate": 0.17912583095548154
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0422310231166306,
+      "roc_auc": 0.7852981594953807,
+      "brier_score": 0.026852715224520655,
+      "threshold": 0.10443631559610367,
+      "true_positive": 132570,
+      "false_positive": 8429847,
+      "true_negative": 38631188,
+      "false_negative": 89410,
+      "precision": 0.015482777818459437,
+      "recall": 0.5972159654022885,
+      "f1": 0.0301830620815521,
+      "false_positive_rate": 0.17912583095548154
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\g1-a_baseline_car_only.toml" --run-name car-options-arc6-20261127-g1-a_baseline_car_only --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-g1-a_baseline_car_only",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-g1-a_baseline_car_only\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.7918244278384514,
+    "bias": 8.21769148164381
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.6915331297221704,
+      "roc_auc": 0.9976632463861135,
+      "brier_score": 0.0031124226352207893,
+      "threshold": 0.14786098897457123,
+      "true_positive": 65002,
+      "false_positive": 58819,
+      "true_negative": 9738867,
+      "false_negative": 2015,
+      "precision": 0.5249674933977274,
+      "recall": 0.9699330020741006,
+      "f1": 0.6812270092958427,
+      "false_positive_rate": 0.0060033563027024955
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.6915331297221704,
+      "roc_auc": 0.9976632463861135,
+      "brier_score": 0.0031124226352207893,
+      "threshold": 0.14786098897457123,
+      "true_positive": 65002,
+      "false_positive": 58819,
+      "true_negative": 9738867,
+      "false_negative": 2015,
+      "precision": 0.5249674933977274,
+      "recall": 0.9699330020741006,
+      "f1": 0.6812270092958427,
+      "false_positive_rate": 0.0060033563027024955
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.7918244278384514,
+    "bias": 8.21769148164381
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.02714484687795603,
+      "roc_auc": 0.7125049090556048,
+      "brier_score": 0.010845615305222595,
+      "threshold": 0.14786098897457123,
+      "true_positive": 38496,
+      "false_positive": 1598071,
+      "true_negative": 45462964,
+      "false_negative": 183484,
+      "precision": 0.023522410020488008,
+      "recall": 0.17342102892152447,
+      "f1": 0.041425909594968544,
+      "false_positive_rate": 0.03395741296382453
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.02714484687795603,
+      "roc_auc": 0.7125049090556048,
+      "brier_score": 0.010845615305222595,
+      "threshold": 0.14786098897457123,
+      "true_positive": 38496,
+      "false_positive": 1598071,
+      "true_negative": 45462964,
+      "false_negative": 183484,
+      "precision": 0.023522410020488008,
+      "recall": 0.17342102892152447,
+      "f1": 0.041425909594968544,
+      "false_positive_rate": 0.03395741296382453
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\gt-a_baseline_car_only.toml" --run-name car-options-arc6-20261127-gt-a_baseline_car_only --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-gt-a_baseline_car_only",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-gt-a_baseline_car_only\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-a_baseline_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 760,
+  "calibration": {
+    "slope": 1.009914322371305,
+    "bias": -5.137098683815511
+  },
+  "metrics": {
+    "overall": {
+      "points": 9787825,
+      "positives": 67017,
+      "prevalence": 0.006846975707064644,
+      "average_precision": 0.5743869787656214,
+      "roc_auc": 0.9969667981893688,
+      "brier_score": 0.003775489118472769,
+      "threshold": 0.0017450826708227396,
+      "true_positive": 66749,
+      "false_positive": 125504,
+      "true_negative": 9595304,
+      "false_negative": 268,
+      "precision": 0.34719354184330026,
+      "recall": 0.9960010146679201,
+      "f1": 0.5148995255910827,
+      "false_positive_rate": 0.012910860907858689
+    },
+    "car_ros2": {
+      "points": 9787825,
+      "positives": 67017,
+      "prevalence": 0.006846975707064644,
+      "average_precision": 0.5743869787656214,
+      "roc_auc": 0.9969667981893688,
+      "brier_score": 0.003775489118472769,
+      "threshold": 0.0017450826708227396,
+      "true_positive": 66749,
+      "false_positive": 125504,
+      "true_negative": 9595304,
+      "false_negative": 268,
+      "precision": 0.34719354184330026,
+      "recall": 0.9960010146679201,
+      "f1": 0.5148995255910827,
+      "false_positive_rate": 0.012910860907858689
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-a_baseline_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3581,
+  "calibration": {
+    "slope": 1.009914322371305,
+    "bias": -5.137098683815511
+  },
+  "metrics": {
+    "overall": {
+      "points": 46916532,
+      "positives": 218274,
+      "prevalence": 0.004652389908103182,
+      "average_precision": 0.007968567722842611,
+      "roc_auc": 0.6779562733672131,
+      "brier_score": 0.04406766574715484,
+      "threshold": 0.0017450826708227396,
+      "true_positive": 92261,
+      "false_positive": 10494171,
+      "true_negative": 36204087,
+      "false_negative": 126013,
+      "precision": 0.008715023154165634,
+      "recall": 0.42268433253617016,
+      "f1": 0.017077928821015585,
+      "false_positive_rate": 0.22472296504079445
+    },
+    "grandtour_ros1": {
+      "points": 46916532,
+      "positives": 218274,
+      "prevalence": 0.004652389908103182,
+      "average_precision": 0.007968567722842611,
+      "roc_auc": 0.6779562733672131,
+      "brier_score": 0.04406766574715484,
+      "threshold": 0.0017450826708227396,
+      "true_positive": 92261,
+      "false_positive": 10494171,
+      "true_negative": 36204087,
+      "false_negative": 126013,
+      "precision": 0.008715023154165634,
+      "recall": 0.42268433253617016,
+      "f1": 0.017077928821015585,
+      "false_positive_rate": 0.22472296504079445
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\voxel-a_baseline_car_only.toml" --run-name car-options-arc6-20261127-voxel-a_baseline_car_only --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-voxel-a_baseline_car_only",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-voxel-a_baseline_car_only\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-a_baseline_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.803042083911649,
+    "bias": -3.9028202075400253
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.5693706812891365,
+      "roc_auc": 0.9901491417401922,
+      "brier_score": 0.004270045982269258,
+      "threshold": 0.36179760098457336,
+      "true_positive": 40731,
+      "false_positive": 33865,
+      "true_negative": 9763821,
+      "false_negative": 26286,
+      "precision": 0.5460212343825406,
+      "recall": 0.6077711625408478,
+      "f1": 0.5752437982388622,
+      "false_positive_rate": 0.003456428385233003
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.5693706812891365,
+      "roc_auc": 0.9901491417401922,
+      "brier_score": 0.004270045982269258,
+      "threshold": 0.36179760098457336,
+      "true_positive": 40731,
+      "false_positive": 33865,
+      "true_negative": 9763821,
+      "false_negative": 26286,
+      "precision": 0.5460212343825406,
+      "recall": 0.6077711625408478,
+      "f1": 0.5752437982388622,
+      "false_positive_rate": 0.003456428385233003
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-a_baseline_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-a_baseline_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.803042083911649,
+    "bias": -3.9028202075400253
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0814171815712267,
+      "roc_auc": 0.8520985654873101,
+      "brier_score": 0.03348423673925826,
+      "threshold": 0.36179760098457336,
+      "true_positive": 108616,
+      "false_positive": 2957766,
+      "true_negative": 44103269,
+      "false_negative": 113364,
+      "precision": 0.03542154891334478,
+      "recall": 0.4893053428236778,
+      "f1": 0.0660608533975274,
+      "false_positive_rate": 0.06284957396283358
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0814171815712267,
+      "roc_auc": 0.8520985654873101,
+      "brier_score": 0.03348423673925826,
+      "threshold": 0.36179760098457336,
+      "true_positive": 108616,
+      "false_positive": 2957766,
+      "true_negative": 44103269,
+      "false_negative": 113364,
+      "precision": 0.03542154891334478,
+      "recall": 0.4893053428236778,
+      "f1": 0.0660608533975274,
+      "false_positive_rate": 0.06284957396283358
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\l1-a_baseline_with_arc5.toml" --run-name car-options-arc6-20261127-l1-a_baseline_with_arc5 --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-a_baseline_with_arc5",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-a_baseline_with_arc5\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_with_arc5.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_with_arc5\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 1.257281152966341,
+    "bias": -2.5395090061700643
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.7085600692624926,
+      "roc_auc": 0.9951698689171,
+      "brier_score": 0.0037013411727468333,
+      "threshold": 0.2192942351102829,
+      "true_positive": 60926,
+      "false_positive": 86753,
+      "true_negative": 9710933,
+      "false_negative": 6091,
+      "precision": 0.41255696476817966,
+      "recall": 0.9091126132175418,
+      "f1": 0.5675559861385401,
+      "false_positive_rate": 0.008854437670282555
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.7085600692624926,
+      "roc_auc": 0.9951698689171,
+      "brier_score": 0.0037013411727468333,
+      "threshold": 0.2192942351102829,
+      "true_positive": 60926,
+      "false_positive": 86753,
+      "true_negative": 9710933,
+      "false_negative": 6091,
+      "precision": 0.41255696476817966,
+      "recall": 0.9091126132175418,
+      "f1": 0.5675559861385401,
+      "false_positive_rate": 0.008854437670282555
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-a_baseline_with_arc5\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 1.257281152966341,
+    "bias": -2.5395090061700643
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0338177214083296,
+      "roc_auc": 0.8211350378535334,
+      "brier_score": 0.022463758581011076,
+      "threshold": 0.2192942351102829,
+      "true_positive": 102341,
+      "false_positive": 4133542,
+      "true_negative": 42927493,
+      "false_negative": 119639,
+      "precision": 0.024160487907716053,
+      "recall": 0.4610370303630958,
+      "f1": 0.045914825107904844,
+      "false_positive_rate": 0.08783363986788646
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.0338177214083296,
+      "roc_auc": 0.8211350378535334,
+      "brier_score": 0.022463758581011076,
+      "threshold": 0.2192942351102829,
+      "true_positive": 102341,
+      "false_positive": 4133542,
+      "true_negative": 42927493,
+      "false_negative": 119639,
+      "precision": 0.024160487907716053,
+      "recall": 0.4610370303630958,
+      "f1": 0.045914825107904844,
+      "false_positive_rate": 0.08783363986788646
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\g1-a_baseline_with_arc5.toml" --run-name car-options-arc6-20261127-g1-a_baseline_with_arc5 --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-g1-a_baseline_with_arc5",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-g1-a_baseline_with_arc5\\bundle.pt"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_with_arc5.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_with_arc5\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.6919348219866286,
+    "bias": 7.7549303586388
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.4795002352579506,
+      "roc_auc": 0.9953803329269909,
+      "brier_score": 0.004574342702515524,
+      "threshold": 0.035763055086135864,
+      "true_positive": 63107,
+      "false_positive": 113585,
+      "true_negative": 9684101,
+      "false_negative": 3910,
+      "precision": 0.35715821882145204,
+      "recall": 0.9416565945954012,
+      "f1": 0.5178881370815194,
+      "false_positive_rate": 0.011593043500271391
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.4795002352579506,
+      "roc_auc": 0.9953803329269909,
+      "brier_score": 0.004574342702515524,
+      "threshold": 0.035763055086135864,
+      "true_positive": 63107,
+      "false_positive": 113585,
+      "true_negative": 9684101,
+      "false_negative": 3910,
+      "precision": 0.35715821882145204,
+      "recall": 0.9416565945954012,
+      "f1": 0.5178881370815194,
+      "false_positive_rate": 0.011593043500271391
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-g1-a_baseline_with_arc5\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.6919348219866286,
+    "bias": 7.7549303586388
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.022307747471202483,
+      "roc_auc": 0.7585255229585459,
+      "brier_score": 0.008136215901689045,
+      "threshold": 0.035763055086135864,
+      "true_positive": 81096,
+      "false_positive": 2888813,
+      "true_negative": 44172222,
+      "false_negative": 140884,
+      "precision": 0.027305887150077663,
+      "recall": 0.3653302099288224,
+      "f1": 0.050813797096327606,
+      "false_positive_rate": 0.061384391567248786
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.022307747471202483,
+      "roc_auc": 0.7585255229585459,
+      "brier_score": 0.008136215901689045,
+      "threshold": 0.035763055086135864,
+      "true_positive": 81096,
+      "false_positive": 2888813,
+      "true_negative": 44172222,
+      "false_negative": 140884,
+      "precision": 0.027305887150077663,
+      "recall": 0.3653302099288224,
+      "f1": 0.050813797096327606,
+      "false_positive_rate": 0.061384391567248786
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\gt-a_baseline_with_arc5.toml" --run-name car-options-arc6-20261127-gt-a_baseline_with_arc5 --device cuda
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-gt-a_baseline_with_arc5",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-gt-a_baseline_with_arc5\\bundle.pt"
+}

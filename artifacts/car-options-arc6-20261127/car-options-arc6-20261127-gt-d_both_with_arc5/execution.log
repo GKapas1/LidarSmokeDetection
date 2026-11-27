@@ -1,0 +1,92 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-d_both_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\split_gt_with_arc5.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-d_both_with_arc5\car_test_metrics.json" --device cuda
+{
+  "frames": 760,
+  "calibration": {
+    "slope": 1.1127372616080506,
+    "bias": -4.905660677484719
+  },
+  "metrics": {
+    "overall": {
+      "points": 9787825,
+      "positives": 67017,
+      "prevalence": 0.006846975707064644,
+      "average_precision": 0.4814119610612058,
+      "roc_auc": 0.9959861758174064,
+      "brier_score": 0.00432849209524876,
+      "threshold": 0.039257608354091644,
+      "true_positive": 65145,
+      "false_positive": 112731,
+      "true_negative": 9608077,
+      "false_negative": 1872,
+      "precision": 0.366238278351211,
+      "recall": 0.9720667890236806,
+      "f1": 0.5320282735725399,
+      "false_positive_rate": 0.011596875486070706
+    },
+    "car_ros2": {
+      "points": 9787825,
+      "positives": 67017,
+      "prevalence": 0.006846975707064644,
+      "average_precision": 0.4814119610612058,
+      "roc_auc": 0.9959861758174064,
+      "brier_score": 0.00432849209524876,
+      "threshold": 0.039257608354091644,
+      "true_positive": 65145,
+      "false_positive": 112731,
+      "true_negative": 9608077,
+      "false_negative": 1872,
+      "precision": 0.366238278351211,
+      "recall": 0.9720667890236806,
+      "f1": 0.5320282735725399,
+      "false_positive_rate": 0.011596875486070706
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-d_both_with_arc5\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-gt-d_both_with_arc5\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3581,
+  "calibration": {
+    "slope": 1.1127372616080506,
+    "bias": -4.905660677484719
+  },
+  "metrics": {
+    "overall": {
+      "points": 46916532,
+      "positives": 218274,
+      "prevalence": 0.004652389908103182,
+      "average_precision": 0.02534133396301434,
+      "roc_auc": 0.7508928750116639,
+      "brier_score": 0.014086493696492206,
+      "threshold": 0.039257608354091644,
+      "true_positive": 96877,
+      "false_positive": 7673779,
+      "true_negative": 39024479,
+      "false_negative": 121397,
+      "precision": 0.012467029810610585,
+      "recall": 0.44383206428617245,
+      "f1": 0.02425280982559617,
+      "false_positive_rate": 0.1643268791739512
+    },
+    "grandtour_ros1": {
+      "points": 46916532,
+      "positives": 218274,
+      "prevalence": 0.004652389908103182,
+      "average_precision": 0.02534133396301434,
+      "roc_auc": 0.7508928750116639,
+      "brier_score": 0.014086493696492206,
+      "threshold": 0.039257608354091644,
+      "true_positive": 96877,
+      "false_positive": 7673779,
+      "true_negative": 39024479,
+      "false_negative": 121397,
+      "precision": 0.012467029810610585,
+      "recall": 0.44383206428617245,
+      "f1": 0.02425280982559617,
+      "false_positive_rate": 0.1643268791739512
+    }
+  },
+  "partition": "test"
+}

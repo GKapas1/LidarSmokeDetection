@@ -1,0 +1,6 @@
+{
+  "workers": 3,
+  "evaluation_workers": 1,
+  "training_configuration_changed": false,
+  "note": "Independent processes share GPU. Wall-clock four-hour limits include contention."
+}

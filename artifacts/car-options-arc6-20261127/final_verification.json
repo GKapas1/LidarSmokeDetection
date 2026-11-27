@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "runs": 32,
+  "required_files_per_run": [
+    "bundle.pt",
+    "best.pt",
+    "last.pt",
+    "config.json",
+    "split.json",
+    "normalizer.json",
+    "history.json",
+    "selection_metrics.json",
+    "calibration_fit.png",
+    "car_test_metrics.json",
+    "arc6_test_metrics.json"
+  ],
+  "all_bundles_load_on_cpu": true,
+  "dataset_checksums_verified": [
+    "car_training_options_v1",
+    "unified_v1"
+  ],
+  "split_integrity_verified": true,
+  "time_limited_runs": 0,
+  "best_arc6_ap_per_model": [
+    {
+      "model": "l1",
+      "recipe": "b_distant_smoke_car_only",
+      "best_epoch": 1,
+      "epochs": 6,
+      "hit_time_limit": false,
+      "car_ap": 0.6511646303348531,
+      "car_f1": 0.5526326441579003,
+      "arc6_average_precision": 0.048013890785571035,
+      "arc6_precision": 0.015303876679839264,
+      "arc6_recall": 0.579363005676187,
+      "arc6_f1": 0.02982005642083502,
+      "arc6_false_positive_rate": 0.17583442438101923,
+      "arc6_threshold": 0.09914213418960571,
+      "arc6_points": 47283015
+    },
+    {
+      "model": "g1",
+      "recipe": "b_distant_smoke_with_arc5",
+      "best_epoch": 4,
+      "epochs": 9,
+      "hit_time_limit": false,
+      "car_ap": 0.2661017555502791,
+      "car_f1": 0.37772834620904977,
+      "arc6_average_precision": 0.03655324884815571,
+      "arc6_precision": 0.0856479116992123,
+      "arc6_recall": 0.13220560410847823,
+      "arc6_f1": 0.10395181243546625,
+      "arc6_false_positive_rate": 0.006657312147937248,
+      "arc6_threshold": 0.22825631499290466,
+      "arc6_points": 47283015
+    },
+    {
+      "model": "gt",
+      "recipe": "c_background_mask_car_only",
+      "best_epoch": 9,
+      "epochs": 14,
+      "hit_time_limit": false,
+      "car_ap": 0.5902567089638436,
+      "car_f1": 0.5837806586466833,
+      "arc6_average_precision": 0.030318098752106327,
+      "arc6_precision": 0.047264844074251265,
+      "arc6_recall": 0.27338574452293907,
+      "arc6_f1": 0.08059573284134637,
+      "arc6_false_positive_rate": 0.02575794154891174,
+      "arc6_threshold": 0.10672254860401154,
+      "arc6_points": 46916532
+    },
+    {
+      "model": "voxel",
+      "recipe": "b_distant_smoke_with_arc5",
+      "best_epoch": 1,
+      "epochs": 6,
+      "hit_time_limit": false,
+      "car_ap": 0.45780610511578823,
+      "car_f1": 0.49655898361769735,
+      "arc6_average_precision": 0.10993476134841583,
+      "arc6_precision": 0.09583016542342106,
+      "arc6_recall": 0.4241553293089467,
+      "arc6_f1": 0.1563384970722024,
+      "arc6_false_positive_rate": 0.018876656665115843,
+      "arc6_threshold": 0.39019885659217834,
+      "arc6_points": 47283015
+    }
+  ]
+}

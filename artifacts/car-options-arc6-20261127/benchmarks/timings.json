@@ -1,0 +1,7 @@
+{
+  "sequential_seconds": 86.04650980001315,
+  "concurrent_seconds": 48.86222970002564,
+  "speedup": 1.7610025233860338,
+  "workers": 2,
+  "protocol": "GT and L1 d_both_with_arc5, each 1 epoch, first 256 shuffled training frames, full selection and calibration"
+}

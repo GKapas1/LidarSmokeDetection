@@ -1,0 +1,92 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.8028262458457509,
+    "bias": -3.9533587931021907
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.5692592641669065,
+      "roc_auc": 0.9901890019567687,
+      "brier_score": 0.004264226544631696,
+      "threshold": 0.33255213499069214,
+      "true_positive": 41850,
+      "false_positive": 37012,
+      "true_negative": 9760674,
+      "false_negative": 25167,
+      "precision": 0.5306738353072455,
+      "recall": 0.6244684184609876,
+      "f1": 0.573763187299063,
+      "false_positive_rate": 0.003777626676339699
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.5692592641669065,
+      "roc_auc": 0.9901890019567687,
+      "brier_score": 0.004264226544631696,
+      "threshold": 0.33255213499069214,
+      "true_positive": 41850,
+      "false_positive": 37012,
+      "true_negative": 9760674,
+      "false_negative": 25167,
+      "precision": 0.5306738353072455,
+      "recall": 0.6244684184609876,
+      "f1": 0.573763187299063,
+      "false_positive_rate": 0.003777626676339699
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-voxel-b_distant_smoke_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.8028262458457509,
+    "bias": -3.9533587931021907
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.08369045920361247,
+      "roc_auc": 0.8538837111582704,
+      "brier_score": 0.03238150000013516,
+      "threshold": 0.33255213499069214,
+      "true_positive": 111747,
+      "false_positive": 3178871,
+      "true_negative": 43882164,
+      "false_negative": 110233,
+      "precision": 0.033959274519254436,
+      "recall": 0.503410217136679,
+      "f1": 0.06362640985390301,
+      "false_positive_rate": 0.06754783442395604
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.08369045920361247,
+      "roc_auc": 0.8538837111582704,
+      "brier_score": 0.03238150000013516,
+      "threshold": 0.33255213499069214,
+      "true_positive": 111747,
+      "false_positive": 3178871,
+      "true_negative": 43882164,
+      "false_negative": 110233,
+      "precision": 0.033959274519254436,
+      "recall": 0.503410217136679,
+      "f1": 0.06362640985390301,
+      "false_positive_rate": 0.06754783442395604
+    }
+  },
+  "partition": "test"
+}

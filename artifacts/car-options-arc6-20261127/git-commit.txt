@@ -1,0 +1,3 @@
+
+$ git rev-parse HEAD
+a78c1fa5a0c7a6633f184d66fbbaa589874d0d9f

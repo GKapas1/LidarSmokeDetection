@@ -1,0 +1,226 @@
+[
+  {
+    "model": "l1",
+    "recipe": "a_baseline_car_only",
+    "run_name": "car-options-arc6-20261127-l1-a_baseline_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-a_baseline_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "a_baseline_with_arc5",
+    "run_name": "car-options-arc6-20261127-l1-a_baseline_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-a_baseline_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "b_distant_smoke_car_only",
+    "run_name": "car-options-arc6-20261127-l1-b_distant_smoke_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-b_distant_smoke_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "b_distant_smoke_with_arc5",
+    "run_name": "car-options-arc6-20261127-l1-b_distant_smoke_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-b_distant_smoke_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "c_background_mask_car_only",
+    "run_name": "car-options-arc6-20261127-l1-c_background_mask_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-c_background_mask_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "c_background_mask_with_arc5",
+    "run_name": "car-options-arc6-20261127-l1-c_background_mask_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-c_background_mask_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "d_both_car_only",
+    "run_name": "car-options-arc6-20261127-l1-d_both_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-d_both_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "l1",
+    "recipe": "d_both_with_arc5",
+    "run_name": "car-options-arc6-20261127-l1-d_both_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\l1-d_both_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "a_baseline_car_only",
+    "run_name": "car-options-arc6-20261127-g1-a_baseline_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-a_baseline_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "a_baseline_with_arc5",
+    "run_name": "car-options-arc6-20261127-g1-a_baseline_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-a_baseline_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "b_distant_smoke_car_only",
+    "run_name": "car-options-arc6-20261127-g1-b_distant_smoke_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-b_distant_smoke_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "b_distant_smoke_with_arc5",
+    "run_name": "car-options-arc6-20261127-g1-b_distant_smoke_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-b_distant_smoke_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "c_background_mask_car_only",
+    "run_name": "car-options-arc6-20261127-g1-c_background_mask_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-c_background_mask_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "c_background_mask_with_arc5",
+    "run_name": "car-options-arc6-20261127-g1-c_background_mask_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-c_background_mask_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "d_both_car_only",
+    "run_name": "car-options-arc6-20261127-g1-d_both_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-d_both_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "g1",
+    "recipe": "d_both_with_arc5",
+    "run_name": "car-options-arc6-20261127-g1-d_both_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\g1-d_both_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "a_baseline_car_only",
+    "run_name": "car-options-arc6-20261127-gt-a_baseline_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-a_baseline_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "a_baseline_with_arc5",
+    "run_name": "car-options-arc6-20261127-gt-a_baseline_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-a_baseline_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\split_gt_with_arc5.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "b_distant_smoke_car_only",
+    "run_name": "car-options-arc6-20261127-gt-b_distant_smoke_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-b_distant_smoke_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "b_distant_smoke_with_arc5",
+    "run_name": "car-options-arc6-20261127-gt-b_distant_smoke_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-b_distant_smoke_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\split_gt_with_arc5.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "c_background_mask_car_only",
+    "run_name": "car-options-arc6-20261127-gt-c_background_mask_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-c_background_mask_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "c_background_mask_with_arc5",
+    "run_name": "car-options-arc6-20261127-gt-c_background_mask_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-c_background_mask_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\split_gt_with_arc5.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "d_both_car_only",
+    "run_name": "car-options-arc6-20261127-gt-d_both_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-d_both_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "gt",
+    "recipe": "d_both_with_arc5",
+    "run_name": "car-options-arc6-20261127-gt-d_both_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\gt-d_both_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\split_gt_with_arc5.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "a_baseline_car_only",
+    "run_name": "car-options-arc6-20261127-voxel-a_baseline_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-a_baseline_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "a_baseline_with_arc5",
+    "run_name": "car-options-arc6-20261127-voxel-a_baseline_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-a_baseline_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "b_distant_smoke_car_only",
+    "run_name": "car-options-arc6-20261127-voxel-b_distant_smoke_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-b_distant_smoke_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "b_distant_smoke_with_arc5",
+    "run_name": "car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-b_distant_smoke_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "c_background_mask_car_only",
+    "run_name": "car-options-arc6-20261127-voxel-c_background_mask_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-c_background_mask_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "c_background_mask_with_arc5",
+    "run_name": "car-options-arc6-20261127-voxel-c_background_mask_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-c_background_mask_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "d_both_car_only",
+    "run_name": "car-options-arc6-20261127-voxel-d_both_car_only",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-d_both_car_only.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_car_only.json"
+  },
+  {
+    "model": "voxel",
+    "recipe": "d_both_with_arc5",
+    "run_name": "car-options-arc6-20261127-voxel-d_both_with_arc5",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\setup\\voxel-d_both_with_arc5.toml",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json"
+  }
+]

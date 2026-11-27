@@ -1,0 +1,44 @@
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.7918244278384514,
+    "bias": 8.21769148164381
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.02714484687795603,
+      "roc_auc": 0.7125049090556048,
+      "brier_score": 0.010845615305222595,
+      "threshold": 0.14786098897457123,
+      "true_positive": 38496,
+      "false_positive": 1598071,
+      "true_negative": 45462964,
+      "false_negative": 183484,
+      "precision": 0.023522410020488008,
+      "recall": 0.17342102892152447,
+      "f1": 0.041425909594968544,
+      "false_positive_rate": 0.03395741296382453
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.02714484687795603,
+      "roc_auc": 0.7125049090556048,
+      "brier_score": 0.010845615305222595,
+      "threshold": 0.14786098897457123,
+      "true_positive": 38496,
+      "false_positive": 1598071,
+      "true_negative": 45462964,
+      "false_negative": 183484,
+      "precision": 0.023522410020488008,
+      "recall": 0.17342102892152447,
+      "f1": 0.041425909594968544,
+      "false_positive_rate": 0.03395741296382453
+    }
+  },
+  "partition": "test"
+}

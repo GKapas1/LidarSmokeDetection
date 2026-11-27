@@ -1,0 +1,14 @@
+{
+  "recipes": [
+    "a_baseline_car_only",
+    "a_baseline_with_arc5",
+    "b_distant_smoke_car_only",
+    "b_distant_smoke_with_arc5",
+    "c_background_mask_car_only",
+    "c_background_mask_with_arc5",
+    "d_both_car_only",
+    "d_both_with_arc5"
+  ],
+  "model": "G1",
+  "seed": 20260920
+}

@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "chunks": 12,
+  "frames": 4587,
+  "car_chunks_byte_identical": true,
+  "splits": {
+    "car_only": {
+      "train": {
+        "frames": 1530,
+        "points": 30592608,
+        "unimpacted": 22466791,
+        "smoke_impacted": 176686,
+        "ignore": 7949131
+      },
+      "selection": {
+        "frames": 717,
+        "points": 14336640,
+        "unimpacted": 10981365,
+        "smoke_impacted": 111268,
+        "ignore": 3244007
+      },
+      "calibration": {
+        "frames": 572,
+        "points": 11435808,
+        "unimpacted": 8167018,
+        "smoke_impacted": 112045,
+        "ignore": 3156745
+      },
+      "test": {
+        "frames": 768,
+        "points": 15357120,
+        "unimpacted": 9797686,
+        "smoke_impacted": 67017,
+        "ignore": 5492417
+      }
+    },
+    "with_arc5": {
+      "train": {
+        "frames": 1780,
+        "points": 33937347,
+        "unimpacted": 25697961,
+        "smoke_impacted": 176686,
+        "ignore": 8062700
+      },
+      "selection": {
+        "frames": 717,
+        "points": 14336640,
+        "unimpacted": 10981365,
+        "smoke_impacted": 111268,
+        "ignore": 3244007
+      },
+      "calibration": {
+        "frames": 572,
+        "points": 11435808,
+        "unimpacted": 8167018,
+        "smoke_impacted": 112045,
+        "ignore": 3156745
+      },
+      "test": {
+        "frames": 768,
+        "points": 15357120,
+        "unimpacted": 9797686,
+        "smoke_impacted": 67017,
+        "ignore": 5492417
+      }
+    }
+  },
+  "configs": [
+    "a_baseline_car_only",
+    "a_baseline_with_arc5",
+    "b_distant_smoke_car_only",
+    "b_distant_smoke_with_arc5",
+    "c_background_mask_car_only",
+    "c_background_mask_with_arc5",
+    "d_both_car_only",
+    "d_both_with_arc5"
+  ],
+  "maximum_original_car_training_smoke_range_m": 7.745508193969727,
+  "supervised_car_training_frames": 1406,
+  "configured_step_budget_available": true
+}

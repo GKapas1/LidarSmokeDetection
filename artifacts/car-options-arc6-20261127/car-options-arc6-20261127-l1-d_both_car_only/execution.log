@@ -1,0 +1,92 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-d_both_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\car_training_options_v1\split_car_only.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-d_both_car_only\car_test_metrics.json" --device cuda
+{
+  "frames": 768,
+  "calibration": {
+    "slope": 0.9624055754940564,
+    "bias": -4.2204350354041
+  },
+  "metrics": {
+    "overall": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.6644969004087011,
+      "roc_auc": 0.9947141984130445,
+      "brier_score": 0.003801140297335316,
+      "threshold": 0.09427645057439804,
+      "true_positive": 62048,
+      "false_positive": 95864,
+      "true_negative": 9701822,
+      "false_negative": 4969,
+      "precision": 0.39292770657074827,
+      "recall": 0.9258546338988615,
+      "f1": 0.5517118735245344,
+      "false_positive_rate": 0.009784351121274962
+    },
+    "car_ros2": {
+      "points": 9864703,
+      "positives": 67017,
+      "prevalence": 0.006793615580722502,
+      "average_precision": 0.6644969004087011,
+      "roc_auc": 0.9947141984130445,
+      "brier_score": 0.003801140297335316,
+      "threshold": 0.09427645057439804,
+      "true_positive": 62048,
+      "false_positive": 95864,
+      "true_negative": 9701822,
+      "false_negative": 4969,
+      "precision": 0.39292770657074827,
+      "recall": 0.9258546338988615,
+      "f1": 0.5517118735245344,
+      "false_positive_rate": 0.009784351121274962
+    }
+  },
+  "partition": "test"
+}
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli evaluate --bundle "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-d_both_car_only\bundle.pt" --manifest "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\data\training\unified_v1\dataset_manifest.json" --split "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\experiments\splits\grandtour_all_external_test_v1.json" --partition test --output "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\car-options-arc6-20261127-l1-d_both_car_only\arc6_test_metrics.json" --device cuda
+{
+  "frames": 3609,
+  "calibration": {
+    "slope": 0.9624055754940564,
+    "bias": -4.2204350354041
+  },
+  "metrics": {
+    "overall": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.03521035454551422,
+      "roc_auc": 0.7868500290213607,
+      "brier_score": 0.02681320703864477,
+      "threshold": 0.09427645057439804,
+      "true_positive": 130262,
+      "false_positive": 9093839,
+      "true_negative": 37967196,
+      "false_negative": 91718,
+      "precision": 0.0141219182227081,
+      "recall": 0.586818632309217,
+      "f1": 0.02758011497043059,
+      "false_positive_rate": 0.19323499791281684
+    },
+    "grandtour_ros1": {
+      "points": 47283015,
+      "positives": 221980,
+      "prevalence": 0.004694709083166545,
+      "average_precision": 0.03521035454551422,
+      "roc_auc": 0.7868500290213607,
+      "brier_score": 0.02681320703864477,
+      "threshold": 0.09427645057439804,
+      "true_positive": 130262,
+      "false_positive": 9093839,
+      "true_negative": 37967196,
+      "false_negative": 91718,
+      "precision": 0.0141219182227081,
+      "recall": 0.586818632309217,
+      "f1": 0.02758011497043059,
+      "false_positive_rate": 0.19323499791281684
+    }
+  },
+  "partition": "test"
+}

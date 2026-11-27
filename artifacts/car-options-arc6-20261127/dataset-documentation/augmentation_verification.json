@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "sampling": "Every eighth frame from the with-ARC5 training split, deterministic seed 20260920",
+  "original_arrays_unchanged": true,
+  "all_original_smoke_preserved_in_sample": true,
+  "recipes": {
+    "a_baseline": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0,
+      "frames": 318,
+      "smoke_frames": 58,
+      "copied_frames": 0,
+      "masked_frames": 0
+    },
+    "b_distant_smoke": {
+      "copied_smoke_points": 388,
+      "masked_context_points": 0,
+      "frames": 318,
+      "smoke_frames": 58,
+      "copied_frames": 20,
+      "masked_frames": 0,
+      "copied_3_to_5m": 328,
+      "copied_5_to_8m": 60
+    },
+    "c_background_mask": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 75905,
+      "frames": 318,
+      "smoke_frames": 58,
+      "copied_frames": 0,
+      "masked_frames": 138
+    },
+    "d_both": {
+      "copied_smoke_points": 397,
+      "masked_context_points": 90981,
+      "frames": 318,
+      "smoke_frames": 58,
+      "copied_frames": 24,
+      "masked_frames": 145,
+      "copied_3_to_5m": 198,
+      "copied_5_to_8m": 199
+    }
+  }
+}

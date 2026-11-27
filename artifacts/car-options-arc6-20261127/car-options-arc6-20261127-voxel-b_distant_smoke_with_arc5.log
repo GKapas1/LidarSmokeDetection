@@ -1,0 +1,6 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\voxel-b_distant_smoke_with_arc5.toml" --device cuda --run-name car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-voxel-b_distant_smoke_with_arc5\\bundle.pt"
+}

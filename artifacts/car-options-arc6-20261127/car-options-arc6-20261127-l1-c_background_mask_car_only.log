@@ -1,0 +1,6 @@
+
+$ "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\.venv\Scripts\python.exe" -m smoke_trainer.cli train --config "C:\Users\Guest Account\Desktop\Thesis\LidarSmokeDetection\runs\car-options-arc6-20261127\setup\l1-c_background_mask_car_only.toml" --device cuda --run-name car-options-arc6-20261127-l1-c_background_mask_car_only
+{
+  "run_directory": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-c_background_mask_car_only",
+  "bundle": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\car-options-arc6-20261127\\car-options-arc6-20261127-l1-c_background_mask_car_only\\bundle.pt"
+}

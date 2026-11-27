@@ -1,0 +1,25 @@
+{
+  "trials": [
+    {
+      "workers": 2,
+      "seconds": 108.78327770001488,
+      "minimum_available_ram_gib": 14.187824249267578,
+      "minimum_available_commit_gib": 7.942943572998047
+    },
+    {
+      "workers": 3,
+      "seconds": 94.0996235999628,
+      "minimum_available_ram_gib": 12.886611938476562,
+      "minimum_available_commit_gib": 4.394824981689453
+    },
+    {
+      "workers": 4,
+      "seconds": 62.75626110000303,
+      "minimum_available_ram_gib": 11.345489501953125,
+      "minimum_available_commit_gib": 1.1071815490722656
+    }
+  ],
+  "workers": 3,
+  "speedup_over_two_workers": 1.1560437070659855,
+  "protocol": "GT, L1, G1 and voxel d_both_with_arc5, each 1 epoch, first 256 shuffled training frames, full selection and calibration"
+}

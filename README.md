@@ -13,6 +13,7 @@ neural network and publishing the result in ROS 2.
 | [Unified training dataset](data/README.md) | Complete: stationary ROS 2 and ARC-6 data share one validated, model-safe NPZ contract |
 | [Neural network trainer](trainer/README.md) | Local voxel MLP, single-scan PointNet, and temporal PointNet-GRU |
 | [Moving-car training on Windows](docs/CAR_WINDOWS_TRAINING.md) | Car binary v4 is ready for a CUDA PointNet baseline with whole recordings held out |
+| [Car options and ARC6 results](artifacts/car-options-arc6-20261127/README.md) | Complete: all four models across eight recipes, with 32 saved models and car and ARC6 evaluations |
 | ROS 2 predictor | Not implemented yet |
 
 The finalized ARC-6 labels contain 47,061,035 unimpacted points, 221,980

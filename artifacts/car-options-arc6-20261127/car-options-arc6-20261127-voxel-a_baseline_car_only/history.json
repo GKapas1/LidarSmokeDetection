@@ -1,0 +1,98 @@
+[
+  {
+    "epoch": 1,
+    "training_loss": 0.06594666186437405,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22557014,
+    "selection_mean_domain_ap": 0.710547488417065,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  },
+  {
+    "epoch": 2,
+    "training_loss": 0.034262343749732846,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22531381,
+    "selection_mean_domain_ap": 0.04121950501041092,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  },
+  {
+    "epoch": 3,
+    "training_loss": 0.03376461621016327,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22530267,
+    "selection_mean_domain_ap": 0.07026840378678403,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  },
+  {
+    "epoch": 4,
+    "training_loss": 0.03698083291389666,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22607786,
+    "selection_mean_domain_ap": 0.6530350244922853,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  },
+  {
+    "epoch": 5,
+    "training_loss": 0.03325951054160667,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22527805,
+    "selection_mean_domain_ap": 0.06936560235595068,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  },
+  {
+    "epoch": 6,
+    "training_loss": 0.03767143061323193,
+    "training_alignment_loss": 0.0,
+    "training_frames": 1400,
+    "training_points": 22608596,
+    "selection_mean_domain_ap": 0.6333796891811151,
+    "stopped_for_budget": false,
+    "augmentation": {
+      "copied_smoke_points": 0,
+      "masked_context_points": 0
+    },
+    "training_frames_by_domain": {
+      "car_ros2": 1400
+    }
+  }
+]
