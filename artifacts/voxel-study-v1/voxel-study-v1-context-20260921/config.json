@@ -1,0 +1,38 @@
+{
+  "data": {
+    "manifest": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\dataset_manifest.json",
+    "split": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\data\\training\\car_training_options_v1\\split_with_arc5.json",
+    "verify_checksums": true,
+    "voxel_size_m": 0.1
+  },
+  "model": {
+    "name": "context_voxel_pointnet",
+    "adapter": "context_voxel_points",
+    "point_widths": [
+      64,
+      128
+    ],
+    "head_widths": [
+      64
+    ]
+  },
+  "training": {
+    "seed": 20260921,
+    "device": "cuda",
+    "epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "positive_weight": 8.0,
+    "patience": 5,
+    "max_hours": 4.0,
+    "max_optimizer_steps_per_epoch": 1400,
+    "yaw_augmentation_deg": 180.0,
+    "pitch_augmentation_deg": 0.0,
+    "roll_augmentation_deg": 0.0,
+    "frame_sampling": "interleaved"
+  },
+  "output": {
+    "root": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs"
+  },
+  "config_path": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\context-20260921.toml"
+}

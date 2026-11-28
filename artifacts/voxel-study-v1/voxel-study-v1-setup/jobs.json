@@ -1,0 +1,38 @@
+[
+  {
+    "name": "voxel-study-v1-baseline-20260920",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\baseline-20260920.toml"
+  },
+  {
+    "name": "voxel-study-v1-baseline-20260921",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\baseline-20260921.toml"
+  },
+  {
+    "name": "voxel-study-v1-baseline-20260922",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\baseline-20260922.toml"
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260920",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\interleaved-20260920.toml"
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260921",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\interleaved-20260921.toml"
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260922",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\interleaved-20260922.toml"
+  },
+  {
+    "name": "voxel-study-v1-context-20260920",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\context-20260920.toml"
+  },
+  {
+    "name": "voxel-study-v1-context-20260921",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\context-20260921.toml"
+  },
+  {
+    "name": "voxel-study-v1-context-20260922",
+    "config": "C:\\Users\\Guest Account\\Desktop\\Thesis\\LidarSmokeDetection\\runs\\voxel-study-v1-setup\\context-20260922.toml"
+  }
+]

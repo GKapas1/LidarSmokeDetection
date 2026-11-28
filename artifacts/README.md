@@ -11,3 +11,4 @@ environments must not be committed.
 
 - [Car v4 to GrandTour comparison](car-v4-to-grandtour-v1/README.md): L1, G1, and GT checkpoints and cross-dataset results.
 - [Car options and ARC6 comparison](car-options-arc6-20261127/README.md): all 32 L1, G1, GT, and local voxel experiments, with checkpoints, training histories, calibration plots, and car and ARC6 test results.
+- [Nine-run voxel study](voxel-study-v1/README.md): baseline, interleaved, and context variants across three seeds, with checkpoints and car and stationary reports.

@@ -1,0 +1,11 @@
+{
+  "car_chunks_unchanged": 10,
+  "arc5_core_chunks": 2,
+  "arc5_core_frames": 1000,
+  "arc5_training_frames_per_epoch_pool": 250,
+  "arc5_training_span_s": [
+    95,
+    195
+  ],
+  "exporter_sha256": "9e40959eafe321aa44c3fd8beb288c3a6ab74220af4c23c665461ed73487c192"
+}

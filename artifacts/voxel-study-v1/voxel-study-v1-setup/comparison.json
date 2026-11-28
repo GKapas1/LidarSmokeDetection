@@ -1,0 +1,1406 @@
+[
+  {
+    "name": "voxel-study-v1-baseline-20260920",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.8448791409506997,
+        "bias": -2.0689338839273663
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.4647528893652085,
+          "roc_auc": 0.9886359046651377,
+          "brier_score": 0.005072283044778953,
+          "threshold": 0.33492904901504517,
+          "true_positive": 39800,
+          "false_positive": 53037,
+          "true_negative": 9744649,
+          "false_negative": 27217,
+          "precision": 0.4287083813565712,
+          "recall": 0.5938791649879881,
+          "f1": 0.4979543833748295,
+          "false_positive_rate": 0.00541321695755508
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.4647528893652085,
+          "roc_auc": 0.9886359046651377,
+          "brier_score": 0.005072283044778953,
+          "threshold": 0.33492904901504517,
+          "true_positive": 39800,
+          "false_positive": 53037,
+          "true_negative": 9744649,
+          "false_negative": 27217,
+          "precision": 0.4287083813565712,
+          "recall": 0.5938791649879881,
+          "f1": 0.4979543833748295,
+          "false_positive_rate": 0.00541321695755508
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.33492904901504517,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 21816,
+              "false_positive": 387464,
+              "recall": 0.07259127147857798,
+              "false_positive_rate": 0.029994042436185326
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 27,
+              "false_positive": 8439,
+              "recall": 0.008214177061149984,
+              "false_positive_rate": 0.002163492228707201
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 36,
+              "false_positive": 38283,
+              "recall": 0.03956043956043956,
+              "false_positive_rate": 0.02197982011030387
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.24755533039569855,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 24045,
+              "false_positive": 500375,
+              "recall": 0.08000811893575394,
+              "false_positive_rate": 0.03873461530363139
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 32,
+              "false_positive": 11041,
+              "recall": 0.009735320961362945,
+              "false_positive_rate": 0.0028305625900173254
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 37,
+              "false_positive": 48415,
+              "recall": 0.04065934065934066,
+              "false_positive_rate": 0.02779701148395794
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-baseline-20260921",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.9937163413606205,
+        "bias": 6.243036664434241
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.35714096825116015,
+          "roc_auc": 0.9856505305019599,
+          "brier_score": 0.005728069123270392,
+          "threshold": 0.28854483366012573,
+          "true_positive": 35329,
+          "false_positive": 63076,
+          "true_negative": 9734610,
+          "false_negative": 31688,
+          "precision": 0.35901631014684215,
+          "recall": 0.5271647492427295,
+          "f1": 0.42713786558015265,
+          "false_positive_rate": 0.006437846650729571
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.35714096825116015,
+          "roc_auc": 0.9856505305019599,
+          "brier_score": 0.005728069123270392,
+          "threshold": 0.28854483366012573,
+          "true_positive": 35329,
+          "false_positive": 63076,
+          "true_negative": 9734610,
+          "false_negative": 31688,
+          "precision": 0.35901631014684215,
+          "recall": 0.5271647492427295,
+          "f1": 0.42713786558015265,
+          "false_positive_rate": 0.006437846650729571
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999940808815663,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.28854483366012573,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 18435,
+              "false_positive": 401979,
+              "recall": 0.0613412215670877,
+              "false_positive_rate": 0.031117665601076077
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 37,
+              "false_positive": 14871,
+              "recall": 0.011256464861575905,
+              "false_positive_rate": 0.0038124532448281538
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 36,
+              "false_positive": 48894,
+              "recall": 0.03956043956043956,
+              "false_positive_rate": 0.028072024775310123
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.3249313533306122,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 17379,
+              "false_positive": 351031,
+              "recall": 0.057827452650632875,
+              "false_positive_rate": 0.02717372119839926
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 33,
+              "false_positive": 13918,
+              "recall": 0.010039549741405538,
+              "false_positive_rate": 0.00356813423855277
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 35,
+              "false_positive": 44325,
+              "recall": 0.038461538461538464,
+              "false_positive_rate": 0.025448776908529088
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-baseline-20260922",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.8525230541633515,
+        "bias": 6.593912079088695
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.24892325858987754,
+          "roc_auc": 0.9839551762664952,
+          "brier_score": 0.006407538926514083,
+          "threshold": 0.2081861048936844,
+          "true_positive": 40914,
+          "false_positive": 96671,
+          "true_negative": 9701015,
+          "false_negative": 26103,
+          "precision": 0.2973725333430243,
+          "recall": 0.6105018129728278,
+          "f1": 0.39993743951672034,
+          "false_positive_rate": 0.009866717508603563
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.24892325858987754,
+          "roc_auc": 0.9839551762664952,
+          "brier_score": 0.006407538926514083,
+          "threshold": 0.2081861048936844,
+          "true_positive": 40914,
+          "false_positive": 96671,
+          "true_negative": 9701015,
+          "false_negative": 26103,
+          "precision": 0.2973725333430243,
+          "recall": 0.6105018129728278,
+          "f1": 0.39993743951672034,
+          "false_positive_rate": 0.009866717508603563
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999758682094621,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.2081861048936844,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 14611,
+              "false_positive": 145313,
+              "recall": 0.04861711897568312,
+              "false_positive_rate": 0.01124884966998069
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 67,
+              "false_positive": 20486,
+              "recall": 0.020383328262853665,
+              "false_positive_rate": 0.005251961345810609
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 42,
+              "false_positive": 68136,
+              "recall": 0.046153846153846156,
+              "false_positive_rate": 0.03911963594900254
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.3685169219970703,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 4417,
+              "false_positive": 60400,
+              "recall": 0.014697270174224375,
+              "false_positive_rate": 0.004675634802576739
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 45,
+              "false_positive": 14694,
+              "recall": 0.013690295101916642,
+              "false_positive_rate": 0.0037670760526867654
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 39,
+              "false_positive": 40040,
+              "recall": 0.04285714285714286,
+              "false_positive_rate": 0.022988584938917193
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260920",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.1171339184883273,
+        "bias": -2.722837587792752
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.5992652755492632,
+          "roc_auc": 0.9913369252980226,
+          "brier_score": 0.004196053466742796,
+          "threshold": 0.4734356999397278,
+          "true_positive": 41515,
+          "false_positive": 28860,
+          "true_negative": 9768826,
+          "false_negative": 25502,
+          "precision": 0.589911190053286,
+          "recall": 0.6194696867958877,
+          "f1": 0.604329218586235,
+          "false_positive_rate": 0.0029455934799298526
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.5992652755492632,
+          "roc_auc": 0.9913369252980226,
+          "brier_score": 0.004196053466742796,
+          "threshold": 0.4734356999397278,
+          "true_positive": 41515,
+          "false_positive": 28860,
+          "true_negative": 9768826,
+          "false_negative": 25502,
+          "precision": 0.589911190053286,
+          "recall": 0.6194696867958877,
+          "f1": 0.604329218586235,
+          "false_positive_rate": 0.0029455934799298526
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.4734356999397278,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 19270,
+              "false_positive": 545588,
+              "recall": 0.06411962785992839,
+              "false_positive_rate": 0.0422346066335801
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 2,
+              "false_positive": 5668,
+              "recall": 0.000608457560085184,
+              "false_positive_rate": 0.0014530956217931527
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 14,
+              "false_positive": 13199,
+              "recall": 0.015384615384615385,
+              "false_positive_rate": 0.007578080234984217
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.18662101030349731,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 24827,
+              "false_positive": 642605,
+              "recall": 0.08261017129623467,
+              "false_positive_rate": 0.04974480632963287
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 32,
+              "false_positive": 14479,
+              "recall": 0.009735320961362945,
+              "false_positive_rate": 0.003711956864492424
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 40,
+              "false_positive": 46497,
+              "recall": 0.04395604395604396,
+              "false_positive_rate": 0.026695810037583236
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260921",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.3694536122971879,
+        "bias": -2.441384732429528
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.591477558474309,
+          "roc_auc": 0.9910049023385167,
+          "brier_score": 0.00423914536153563,
+          "threshold": 0.4763902723789215,
+          "true_positive": 41506,
+          "false_positive": 29251,
+          "true_negative": 9768435,
+          "false_negative": 25511,
+          "precision": 0.5865992057322951,
+          "recall": 0.6193353925123476,
+          "f1": 0.602522972404082,
+          "false_positive_rate": 0.0029855008621423465
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.591477558474309,
+          "roc_auc": 0.9910049023385167,
+          "brier_score": 0.00423914536153563,
+          "threshold": 0.4763902723789215,
+          "true_positive": 41506,
+          "false_positive": 29251,
+          "true_negative": 9768435,
+          "false_negative": 25511,
+          "precision": 0.5865992057322951,
+          "recall": 0.6193353925123476,
+          "f1": 0.602522972404082,
+          "false_positive_rate": 0.0029855008621423465
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.4763902723789215,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 19616,
+              "false_positive": 555876,
+              "recall": 0.06527091956929712,
+              "false_positive_rate": 0.043031012773462704
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 3,
+              "false_positive": 5571,
+              "recall": 0.0009126863401277761,
+              "false_positive_rate": 0.0014282278950264035
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 17,
+              "false_positive": 14034,
+              "recall": 0.01868131868131868,
+              "false_positive_rate": 0.008057487538280816
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.19346392154693604,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 24740,
+              "false_positive": 644172,
+              "recall": 0.08232068465254948,
+              "false_positive_rate": 0.04986610963651429
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 38,
+              "false_positive": 13885,
+              "recall": 0.011560693641618497,
+              "false_positive_rate": 0.0035596740840857315
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 42,
+              "false_positive": 47104,
+              "recall": 0.046153846153846156,
+              "false_positive_rate": 0.027044313310758128
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-interleaved-20260922",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.4368480996759792,
+        "bias": -2.4680365653574245
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.5863978351596069,
+          "roc_auc": 0.9908158317454563,
+          "brier_score": 0.004320996367354059,
+          "threshold": 0.4823046624660492,
+          "true_positive": 40848,
+          "false_positive": 30051,
+          "true_negative": 9767635,
+          "false_negative": 26169,
+          "precision": 0.5761435281174628,
+          "recall": 0.6095169882268678,
+          "f1": 0.5923605673018358,
+          "false_positive_rate": 0.003067152795057935
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.5863978351596069,
+          "roc_auc": 0.9908158317454563,
+          "brier_score": 0.004320996367354059,
+          "threshold": 0.4823046624660492,
+          "true_positive": 40848,
+          "false_positive": 30051,
+          "true_negative": 9767635,
+          "false_negative": 26169,
+          "precision": 0.5761435281174628,
+          "recall": 0.6095169882268678,
+          "f1": 0.5923605673018358,
+          "false_positive_rate": 0.003067152795057935
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.4823046624660492,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 18955,
+              "false_positive": 545896,
+              "recall": 0.06307148656382681,
+              "false_positive_rate": 0.04225844927462635
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 3,
+              "false_positive": 5341,
+              "recall": 0.0009126863401277761,
+              "false_positive_rate": 0.0013692631820743171
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 13,
+              "false_positive": 13548,
+              "recall": 0.014285714285714285,
+              "false_positive_rate": 0.007778455263547706
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.1971825361251831,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 24606,
+              "false_positive": 659974,
+              "recall": 0.08187480867262055,
+              "false_positive_rate": 0.0510893609800626
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 34,
+              "false_positive": 13293,
+              "recall": 0.010343778521448129,
+              "false_positive_rate": 0.003407904040313405
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 41,
+              "false_positive": 45761,
+              "recall": 0.045054945054945054,
+              "false_positive_rate": 0.02627324264210264
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-context-20260920",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.30656179228557,
+        "bias": -3.895688706433589
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8917309805094092,
+          "roc_auc": 0.997796083197515,
+          "brier_score": 0.0020890831297988234,
+          "threshold": 0.6428712010383606,
+          "true_positive": 57272,
+          "false_positive": 15060,
+          "true_negative": 9782626,
+          "false_negative": 9745,
+          "precision": 0.7917933971133109,
+          "recall": 0.8545891341003029,
+          "f1": 0.8219936992730483,
+          "false_positive_rate": 0.0015370976371359524
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8917309805094092,
+          "roc_auc": 0.997796083197515,
+          "brier_score": 0.0020890831297988234,
+          "threshold": 0.6428712010383606,
+          "true_positive": 57272,
+          "false_positive": 15060,
+          "true_negative": 9782626,
+          "false_negative": 9745,
+          "precision": 0.7917933971133109,
+          "recall": 0.8545891341003029,
+          "f1": 0.8219936992730483,
+          "false_positive_rate": 0.0015370976371359524
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.6428712010383606,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 14464,
+              "false_positive": 566013,
+              "recall": 0.04812798637083572,
+              "false_positive_rate": 0.04381572982633887
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 0,
+              "false_positive": 1650,
+              "recall": 0.0,
+              "false_positive_rate": 0.00042300772335192343
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 1,
+              "false_positive": 3201,
+              "recall": 0.001098901098901099,
+              "false_positive_rate": 0.0018378236860507977
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.022929012775421143,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 26077,
+              "false_positive": 891839,
+              "recall": 0.08676946215378063,
+              "false_positive_rate": 0.06903830242872908
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 13,
+              "false_positive": 9689,
+              "recall": 0.003954974140553696,
+              "false_positive_rate": 0.002483952625185931
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 47,
+              "false_positive": 60680,
+              "recall": 0.051648351648351645,
+              "false_positive_rate": 0.03483884450782956
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-context-20260921",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.236346855291715,
+        "bias": -4.158082368493045
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8937520089709914,
+          "roc_auc": 0.997775400231208,
+          "brier_score": 0.002070515302941899,
+          "threshold": 0.6972042322158813,
+          "true_positive": 56383,
+          "false_positive": 13518,
+          "true_negative": 9784168,
+          "false_negative": 10634,
+          "precision": 0.8066122086951546,
+          "recall": 0.8413238432039631,
+          "f1": 0.823602448180663,
+          "false_positive_rate": 0.0013797135364411557
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8937520089709914,
+          "roc_auc": 0.997775400231208,
+          "brier_score": 0.002070515302941899,
+          "threshold": 0.6972042322158813,
+          "true_positive": 56383,
+          "false_positive": 13518,
+          "true_negative": 9784168,
+          "false_negative": 10634,
+          "precision": 0.8066122086951546,
+          "recall": 0.8413238432039631,
+          "f1": 0.823602448180663,
+          "false_positive_rate": 0.0013797135364411557
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999758682094621,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.6972042322158813,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 11856,
+              "false_positive": 566047,
+              "recall": 0.039450041925651845,
+              "false_positive_rate": 0.043818361806194625
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 0,
+              "false_positive": 1116,
+              "recall": 0.0,
+              "false_positive_rate": 0.00028610704197621007
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 1,
+              "false_positive": 2357,
+              "recall": 0.001098901098901099,
+              "false_positive_rate": 0.0013532491184072885
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.023467721417546272,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 26304,
+              "false_positive": 930708,
+              "recall": 0.08752478937351098,
+              "false_positive_rate": 0.07204719728206278
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 11,
+              "false_positive": 9074,
+              "recall": 0.003346516580468512,
+              "false_positive_rate": 0.002326286110118396
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 44,
+              "false_positive": 64539,
+              "recall": 0.04835164835164835,
+              "false_positive_rate": 0.03705445263168773
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  },
+  {
+    "name": "voxel-study-v1-context-20260922",
+    "car": {
+      "frames": 768,
+      "calibration": {
+        "slope": 1.342282711316668,
+        "bias": -4.613511614438808
+      },
+      "metrics": {
+        "overall": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8616210076444247,
+          "roc_auc": 0.9971870510267442,
+          "brier_score": 0.0022656100336232807,
+          "threshold": 0.6395296454429626,
+          "true_positive": 57776,
+          "false_positive": 17437,
+          "true_negative": 9780249,
+          "false_negative": 9241,
+          "precision": 0.7681650778455852,
+          "recall": 0.8621096139785428,
+          "f1": 0.812430570203192,
+          "false_positive_rate": 0.0017797059428113944
+        },
+        "car_ros2": {
+          "points": 9864703,
+          "positives": 67017,
+          "prevalence": 0.006793615580722502,
+          "average_precision": 0.8616210076444247,
+          "roc_auc": 0.9971870510267442,
+          "brier_score": 0.0022656100336232807,
+          "threshold": 0.6395296454429626,
+          "true_positive": 57776,
+          "false_positive": 17437,
+          "true_negative": 9780249,
+          "false_negative": 9241,
+          "precision": 0.7681650778455852,
+          "recall": 0.8621096139785428,
+          "f1": 0.812430570203192,
+          "false_positive_rate": 0.0017797059428113944
+        }
+      },
+      "partition": "test"
+    },
+    "stationary": {
+      "frames": 1472,
+      "car_selection_achieved_fpr": 0.009999849745455142,
+      "operating_points": [
+        {
+          "operating_point": "saved",
+          "threshold": 0.6395296454429626,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 13940,
+              "false_positive": 571012,
+              "recall": 0.046384411643352455,
+              "false_positive_rate": 0.0442027082763071
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 0,
+              "false_positive": 2142,
+              "recall": 0.0,
+              "false_positive_rate": 0.0005491409354059515
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 1,
+              "false_positive": 2700,
+              "recall": 0.001098901098901099,
+              "false_positive_rate": 0.0015501793040728377
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        },
+        {
+          "operating_point": "car_selection_fpr_1pct",
+          "threshold": 0.01854286901652813,
+          "ranges": [
+            {
+              "range_m": "0-3",
+              "positives": 300532,
+              "negatives": 12918032,
+              "true_positive": 26583,
+              "false_positive": 985799,
+              "recall": 0.08845314309291523,
+              "false_positive_rate": 0.07631185617128058
+            },
+            {
+              "range_m": "3-5",
+              "positives": 3287,
+              "negatives": 3900638,
+              "true_positive": 12,
+              "false_positive": 10598,
+              "recall": 0.0036507453605111044,
+              "false_positive_rate": 0.0027169914255052636
+            },
+            {
+              "range_m": "5-8",
+              "positives": 910,
+              "negatives": 1741734,
+              "true_positive": 44,
+              "false_positive": 64203,
+              "recall": 0.04835164835164835,
+              "false_positive_rate": 0.036861541429403115
+            },
+            {
+              "range_m": "8-12",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            },
+            {
+              "range_m": "12+",
+              "positives": 0,
+              "negatives": 0,
+              "true_positive": 0,
+              "false_positive": 0,
+              "recall": null,
+              "false_positive_rate": null
+            }
+          ]
+        }
+      ],
+      "usage": "Stationary development diagnostic; thresholds derived exclusively from car selection"
+    }
+  }
+]
