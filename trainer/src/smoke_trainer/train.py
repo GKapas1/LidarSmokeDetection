@@ -24,6 +24,7 @@ from .data import (
     UnifiedDataset,
     create_split_plan,
     iter_frames,
+    iter_interleaved_frames,
     iter_temporal_windows,
     load_split_plan,
 )
@@ -126,6 +127,11 @@ def train_model(
     frame_augmentation = config.get("augmentation", {})
     validate_augmentation(frame_augmentation, config["model"]["name"])
     step_limit = training.get("max_optimizer_steps_per_epoch")
+    sampling = training.get("frame_sampling", "chunk_shuffle")
+    if sampling not in {"chunk_shuffle", "interleaved"}:
+        raise ValueError("unknown frame_sampling")
+    if sampling == "interleaved" and (step_limit is None or config["model"]["name"] == "global_temporal_pointnet"):
+        raise ValueError("interleaved sampling requires a step limit and a single-scan model")
     if step_limit is not None and int(step_limit) <= 0:
         raise ValueError("max_optimizer_steps_per_epoch must be positive")
     seed = int(training["seed"])
@@ -188,6 +194,8 @@ def train_model(
         if not checkpoint_path.is_file() or not history_path.is_file():
             raise FileNotFoundError("resume run requires last.pt and history.json")
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+        if checkpoint["config"]["training"].get("frame_sampling", "chunk_shuffle") != sampling:
+            raise ValueError("resume checkpoint frame sampling differs from the configuration")
         if checkpoint["config"].get("augmentation", {}) != frame_augmentation:
             raise ValueError("resume checkpoint augmentation differs from the configuration")
         if checkpoint["config"]["training"].get("max_optimizer_steps_per_epoch") != step_limit:
@@ -243,6 +251,9 @@ def train_model(
             max_frames=max_train_frames,
         )
         augmentation_rng = np.random.default_rng(seed + epoch)
+        if sampling == "interleaved":
+            frames = iter_interleaved_frames(dataset, split, seed=seed + epoch,
+                steps=int(step_limit), max_frames=max_train_frames)
         frame_rng = np.random.default_rng(seed + epoch + 100_000)
         for frame in frames:
             frame, counts = augment_training_frame(frame, frame_augmentation, frame_rng)

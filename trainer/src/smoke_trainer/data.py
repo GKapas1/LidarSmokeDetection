@@ -462,3 +462,43 @@ def split_summary(dataset: UnifiedDataset, plan: dict) -> dict[str, dict[str, in
                 counts[role]["ignore"] += int(np.count_nonzero(frame_labels == 255))
     summary.update(counts)
     return summary
+
+
+def iter_interleaved_frames(
+    dataset: UnifiedDataset, plan: dict, *, seed: int, steps: int,
+    max_frames: int | None = None,
+) -> Iterator[Frame]:
+    """Interleave fixed quotas per car recording and one pooled ARC-5 source.
+
+    Smoke recordings receive half the updates, clean car recordings 35%, and
+    clean GrandTour 15%. Sampling within each group uses replacement.
+    """
+    groups: dict[str, list[FrameRef]] = defaultdict(list)
+    weights: dict[str, float] = {}
+    for ref in frame_refs(plan, "train"):
+        chunk = dataset.chunks[ref.chunk_index]
+        key = "grandtour_clean" if chunk.source_domain == "grandtour_ros1" else chunk.recording_id
+        groups[key].append(ref)
+        weights[key] = 0.15 if key == "grandtour_clean" else (0.5 if chunk.condition == "smoke" else 0.35)
+    if not groups or steps <= 0:
+        raise ValueError("interleaved sampling requires training frames and positive steps")
+    # Divide each category's weight equally across its recordings.
+    categories = {key: ("arc" if key == "grandtour_clean" else
+                       ("smoke" if weights[key] == 0.5 else "clean")) for key in groups}
+    for key in weights:
+        weights[key] /= sum(category == categories[key] for category in categories.values())
+    keys = sorted(groups)
+    probabilities = np.asarray([weights[key] for key in keys])
+    probabilities /= probabilities.sum()
+    quotas = np.floor(probabilities * steps).astype(int)
+    for i in np.argsort(-(probabilities * steps - quotas))[:steps - int(quotas.sum())]:
+        quotas[i] += 1
+    schedule = [key for key, quota in zip(keys, quotas) for _ in range(int(quota))]
+    rng = random.Random(seed)
+    rng.shuffle(schedule)
+    cache: dict[int, dict[str, np.ndarray]] = {}
+    for key in schedule[:max_frames]:
+        ref = rng.choice(groups[key])
+        if ref.chunk_index not in cache:
+            cache[ref.chunk_index] = dataset.load_chunk(ref.chunk_index)
+        yield dataset.frame(dataset.chunks[ref.chunk_index], cache[ref.chunk_index], ref.frame_index)

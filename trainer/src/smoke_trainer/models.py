@@ -186,6 +186,44 @@ class VoxelPointNet(nn.Module):
         return self.head(pooled).squeeze(-1)[inverse]
 
 
+class ContextVoxelPointNet(nn.Module):
+    """Label each central voxel using its own and its 26 neighbors' embeddings."""
+
+    def __init__(self, input_features: int, point_widths: Sequence[int], head_widths: Sequence[int]):
+        super().__init__()
+        if input_features != 7:
+            raise ValueError("context voxel model requires local XYZ, intensity and grid XYZ")
+        widths = _positive_widths("point_widths", point_widths)
+        self.encoder = _mlp(4, widths)
+        self.head = _mlp(2 * widths[-1], _positive_widths("head_widths", head_widths), final_width=1)
+        self.register_buffer("offsets", torch.cartesian_prod(*(torch.arange(-1, 2) for _ in range(3))))
+
+    def forward(self, features: torch.Tensor) -> torch.Tensor:
+        if features.ndim != 2 or features.shape[1] != 7:
+            raise ValueError("context voxel model expects N x 7 features")
+        if not len(features):
+            return features.new_empty(0)
+        coordinates, inverse = torch.unique(features[:, 4:].long(), dim=0, return_inverse=True)
+        embeddings = self.encoder(features[:, :4])
+        pooled = embeddings.new_full((len(coordinates), embeddings.shape[1]), -torch.inf)
+        pooled = pooled.scatter_reduce(0, inverse[:, None].expand_as(embeddings), embeddings, reduce="amax", include_self=True)
+        # Shift into a padded positive grid to avoid collisions at grid edges.
+        origin = coordinates.min(dim=0).values - 1
+        extent = coordinates.max(dim=0).values - origin + 2
+        if float(extent.double().prod()) >= 2**63:
+            raise ValueError("voxel grid is too large for integer lookup")
+        strides = torch.stack((extent[1] * extent[2], extent[2], extent.new_ones(())))
+        keys = ((coordinates - origin) * strides).sum(dim=1)
+        sorted_keys, order = keys.sort()
+        neighbor_keys = ((coordinates[:, None, :] + self.offsets - origin) * strides).sum(dim=2)
+        positions = torch.searchsorted(sorted_keys, neighbor_keys)
+        bounded = positions.clamp(max=len(keys) - 1)
+        present = (positions < len(keys)) & (sorted_keys[bounded] == neighbor_keys)
+        neighbors = pooled[order[bounded]].masked_fill(~present[:, :, None], -torch.inf)
+        context = neighbors.max(dim=1).values
+        return self.head(torch.cat((pooled, context), dim=1)).squeeze(-1)[inverse]
+
+
 class GlobalTemporalPointNet(nn.Module):
     """Five-scan global context model that predicts points in the current scan."""
 
@@ -285,6 +323,8 @@ def create_model(name: str, input_features: int, parameters: dict) -> nn.Module:
         return LocalMLP(input_features, tuple(int(v) for v in parameters["hidden_widths"]))
     if name == "voxel_pointnet":
         return VoxelPointNet(input_features, parameters["point_widths"], parameters["head_widths"])
+    if name == "context_voxel_pointnet":
+        return ContextVoxelPointNet(input_features, parameters["point_widths"], parameters["head_widths"])
     if name == "global_pointnet":
         return GlobalPointNet(
             input_features,

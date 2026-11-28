@@ -224,6 +224,30 @@ class VoxelPointAdapter:
         return {"voxel_size_m": float(data_config["voxel_size_m"]), "point_validity": "finite_xyz_and_intensity"}
 
 
+class ContextVoxelAdapter(VoxelPointAdapter):
+    """Local point features with integer grid coordinates for neighbor lookup."""
+
+    name = "context_voxel_points"
+
+    @property
+    def feature_names(self) -> tuple[str, ...]:
+        return VOXEL_POINT_FEATURE_NAMES[:4] + ("grid_x", "grid_y", "grid_z")
+
+    def prepare(self, frame: Frame, data_config: dict) -> PreparedFrame:
+        prepared = super().prepare(frame, data_config)
+        coordinates = np.floor(frame.xyz[prepared.valid].astype(np.float64) / float(data_config["voxel_size_m"]))
+        if np.any(np.abs(coordinates) > 2**24):
+            raise ValueError("grid coordinates exceed exact float32 integer range")
+        return replace(prepared, features=np.column_stack((prepared.features[:, :4], coordinates)).astype(np.float32))
+
+    def fit_normalizer(self, frames: Iterable[Frame], data_config: dict) -> FeatureNormalizer:
+        normalizer = fit_feature_normalizer(
+            (self.prepare(frame, data_config).features for frame in frames), self.feature_names)
+        mean, scale = normalizer.mean.copy(), normalizer.scale.copy()
+        mean[4:], scale[4:] = 0.0, 1.0
+        return FeatureNormalizer(normalizer.feature_names, mean, scale, normalizer.count)
+
+
 class GlobalPointAdapter:
     """Direct point features for a PointNet-style whole-scan model."""
 
@@ -342,6 +366,7 @@ class GlobalTemporalAdapter(GlobalPointAdapter):
 _ADAPTERS = {
     LocalVoxelAdapter.name: LocalVoxelAdapter,
     VoxelPointAdapter.name: VoxelPointAdapter,
+    ContextVoxelAdapter.name: ContextVoxelAdapter,
     GlobalPointAdapter.name: GlobalPointAdapter,
     GlobalTemporalAdapter.name: GlobalTemporalAdapter,
 }

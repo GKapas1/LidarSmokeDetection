@@ -306,3 +306,46 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest trainer/tests -q
 
 Disabling external pytest plugins keeps a sourced ROS installation from injecting
 its launch-testing plugins into this independent environment.
+
+## Nine-run voxel study
+
+Run the three voxel variants with seeds 20260920, 20260921, and 20260922 on
+Windows CUDA:
+
+```powershell
+.\trainer\scripts\train_voxel_study_windows.ps1 -RunPrefix voxel-study-v1
+```
+
+Copy the current `trainer/` code to Windows first. The workflow uses both
+`data/training/car_training_options_v1/` and `data/training/unified_v1/`,
+including their manifests and chunks. It verifies dataset checksums and prepares
+nine configurations under `runs/<RunPrefix>-setup/`. Add `-PrepareOnly` to
+generate configurations without training.
+
+The baseline uses the existing voxel PointNet and chunk-based shuffling.
+The interleaved variant assigns 50% of updates to smoke car recordings, 35% to
+clean car recordings, and 15% to clean ARC-5, dividing each category equally
+among its recordings. It samples frames with replacement and shuffles the
+complete update schedule. Each epoch has 1,400 updates. Its chunk cache retains
+the active training chunks in RAM.
+
+The context variant uses the same interleaved schedule and combines each
+central cell's embedding with max-pooled embeddings from its 26 neighboring
+cells. Predictions remain on the 10 cm grid. The complete neighborhood spans
+30 cm along each axis. Grid coordinates are used for neighbor lookup, while
+the neural encoder consumes centroid-relative XYZ and intensity. All variants
+use clean ARC-5 and hold augmentation fixed with yaw rotations only.
+
+Each run saves its bundle, car test report, and `stationary_diagnostic.json`.
+The diagnostic uses the stationary recordings in `unified_v1` and reports
+recall and false-positive rate by distance at the saved threshold and at a
+threshold derived from a 1% false-positive-rate target on car selection
+negatives. It reports the achieved car selection rate because tied scores can
+make it lower than the target. The stationary recordings serve as development
+diagnostics for this study. Their sparse 5–8 m smoke observations cover
+approximately 5.0–5.9 m. Repeated review of ARC-6 results makes subsequent ARC-6
+comparisons exploratory.
+
+Rerun the same command to resume checkpointed training and complete missing
+evaluations. Completed bundles and reports are reused. A final
+`comparison.json` under the setup directory collects all nine reports.
